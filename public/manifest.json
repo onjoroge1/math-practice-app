@@ -1,0 +1,19 @@
+{
+  "name": "Math Practice",
+  "short_name": "MathPractice",
+  "description": "Adaptive math practice for grades 1-4 with Vedic tricks, timed drills, and mastery tracking.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#eef2ff",
+  "theme_color": "#4f46e5",
+  "orientation": "portrait-primary",
+  "categories": ["education", "kids"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

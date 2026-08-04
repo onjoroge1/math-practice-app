@@ -27,3 +27,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# OS files
+.DS_Store
+
+# local tooling (machine-specific run config)
+.claude/

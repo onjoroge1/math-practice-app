@@ -1,6 +1,6 @@
 // Core data types for the math practice app
 
-export type Grade = 1 | 2 | 3 | 4
+export type Grade = 1 | 2 | 3 | 4 | 5
 
 export type SkillCategory =
   | "counting"
@@ -10,6 +10,7 @@ export type SkillCategory =
   | "division"
   | "place-value"
   | "fractions"
+  | "decimals"
   | "geometry"
   | "operations-algebraic"
   | "number-place-value"

@@ -1,13 +1,14 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { getStudentAction } from "@/lib/actions"
 import { trackTopicsSelected, trackPracticeStarted } from "@/lib/analytics"
 import type { Grade, SkillCategory } from "@/lib/types"
-import { CheckCircle2, Circle, Clock, Sparkles } from "lucide-react"
+import { CheckCircle2, Circle, Clock, Sparkles, ArrowRight } from "lucide-react"
 
 interface Topic {
   id: string
@@ -60,6 +61,14 @@ const TOPICS_BY_GRADE: Record<Grade, Topic[]> = {
     { id: "grade4-measurement-data", name: "Measurement & Data Reasoning", description: "Units, conversions, perimeter, area, and data", icon: "📊", category: "measurement" },
     { id: "grade4-geometric-spatial", name: "Geometric & Spatial Reasoning", description: "Properties of shapes, angles, and symmetry", icon: "🔶", category: "geometry" },
   ],
+  5: [
+    { id: "g5-place-value", name: "Place Value & Powers of 10", description: "Read, round, and scale large numbers by powers of 10", icon: "🔢", category: "place-value" },
+    { id: "g5-operations", name: "Multiplication & Division", description: "Multi-digit multiplication and long division", icon: "✖️", category: "multiplication" },
+    { id: "g5-decimals", name: "Decimals", description: "Add, subtract, multiply, and round decimals", icon: "🔟", category: "decimals" },
+    { id: "g5-fractions", name: "Fractions", description: "Add, subtract, multiply, and divide fractions", icon: "🍰", category: "fractions" },
+    { id: "g5-expressions", name: "Expressions & Order of Operations", description: "Evaluate expressions using order of operations", icon: "🧮", category: "operations-algebraic" },
+    { id: "g5-measurement", name: "Measurement, Volume & Data", description: "Unit conversions, volume, and reading data", icon: "📊", category: "measurement" },
+  ],
 }
 
 export default function TopicSelectPage() {
@@ -108,8 +117,10 @@ export default function TopicSelectPage() {
         else router.push("/grade1-mode-select")
       } else if (grade === 2) {
         if (selectedTopics.includes("add-sub-100")) router.push("/grade2-addition-drill")
-        else if (selectedTopics.includes("skip-counting")) router.push("/grade2-addition-drill")
-        else router.push("/grade2-addition-drill")
+        else if (selectedTopics.includes("place-value-1000")) router.push("/grade2-place-value-drill")
+        else if (selectedTopics.includes("skip-counting")) router.push("/grade2-skip-counting-drill")
+        // measurement / time / money are concept topics → adaptive practice
+        else router.push("/practice")
       } else if (grade === 3) {
         if (selectedTopics.includes("multiplication")) router.push("/grade3-multiplication-drill")
         else if (selectedTopics.includes("division")) router.push("/grade3-division-drill")
@@ -122,6 +133,10 @@ export default function TopicSelectPage() {
         else if (selectedTopics.includes("multiplication")) router.push("/multiplication-drill")
         else if (selectedTopics.includes("division")) router.push("/division-drill")
         else router.push("/multiplication-drill")
+      } else if (grade === 5) {
+        if (selectedTopics.includes("g5-decimals")) router.push("/grade5-decimals-drill")
+        else if (selectedTopics.includes("g5-fractions")) router.push("/grade5-fractions-drill")
+        else router.push("/grade5-operations-drill")
       }
     } else {
       router.push("/practice")
@@ -168,6 +183,23 @@ export default function TopicSelectPage() {
             )}
           </div>
         </div>
+
+        {grade === 5 && (
+          <Link href="/iowa" className="block">
+            <Card className="p-5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white cursor-pointer hover:shadow-xl transition-all border-0">
+              <div className="flex items-center gap-4">
+                <div className="text-4xl flex-shrink-0">🦉</div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-lg">Iowa Practice Battery</h3>
+                  <p className="text-sm text-indigo-100">
+                    10 units · about 25 questions each · fresh questions every time with progress tracking
+                  </p>
+                </div>
+                <ArrowRight className="w-6 h-6 flex-shrink-0" />
+              </div>
+            </Card>
+          </Link>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {topics.map((topic) => {

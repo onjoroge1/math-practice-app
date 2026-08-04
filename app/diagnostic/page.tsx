@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { getSkillsForTopics, getItemsForSkill, MATH_ITEMS } from "@/lib/mock-data"
 import { getStudentAction, updateMasteryAction, getMasteryAction } from "@/lib/actions"
-import type { MathItem } from "@/lib/types"
+import type { MathItem, Grade } from "@/lib/types"
 
 export default function DiagnosticPage() {
   const router = useRouter()
@@ -35,7 +35,7 @@ export default function DiagnosticPage() {
         return
       }
 
-      const grade = student.grade as 1 | 2 | 3 | 4
+      const grade = student.grade as Grade
       setStudentGrade(grade)
 
       const selectedTopicsStr = localStorage.getItem("selectedTopics")

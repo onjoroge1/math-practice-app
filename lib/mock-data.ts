@@ -151,6 +151,55 @@ export const SKILLS: Skill[] = [
     description: "Count by 2s, 5s, and 10s",
     prerequisites: [],
   },
+  // Grade 2 — standards-aligned core
+  {
+    id: "g2-add-100",
+    name: "Add within 100",
+    category: "addition",
+    grade: 2,
+    description: "Add two-digit numbers within 100 using place-value strategies",
+    prerequisites: ["add-sub-within-20"],
+  },
+  {
+    id: "g2-sub-100",
+    name: "Subtract within 100",
+    category: "subtraction",
+    grade: 2,
+    description: "Subtract two-digit numbers within 100, including regrouping",
+    prerequisites: ["add-sub-within-20"],
+  },
+  {
+    id: "g2-place-value-1000",
+    name: "Place Value to 1000",
+    category: "place-value",
+    grade: 2,
+    description: "Understand hundreds, tens, and ones; compare numbers to 1000",
+    prerequisites: ["number-sense-120"],
+  },
+  {
+    id: "g2-measurement",
+    name: "Measurement & Length",
+    category: "measurement",
+    grade: 2,
+    description: "Measure and compare lengths in standard units",
+    prerequisites: ["measurement-length"],
+  },
+  {
+    id: "g2-time",
+    name: "Time to 5 Minutes",
+    category: "time",
+    grade: 2,
+    description: "Tell and write time to the nearest five minutes",
+    prerequisites: ["time-telling"],
+  },
+  {
+    id: "g2-money",
+    name: "Money & Making Change",
+    category: "money",
+    grade: 2,
+    description: "Count coins and make change within a dollar",
+    prerequisites: ["money-coins"],
+  },
   // Grade 3 Skills
   {
     id: "multiply-by-11",
@@ -280,6 +329,72 @@ export const SKILLS: Skill[] = [
     grade: 4,
     description: "Classify shapes, measure angles",
     prerequisites: [],
+  },
+
+  // ========== GRADE 5: Common Core Aligned ==========
+  {
+    id: "g5-place-value",
+    name: "Place Value & Powers of 10",
+    category: "place-value",
+    grade: 5,
+    description: "Read, write, and round large numbers; multiply and divide by powers of 10",
+    prerequisites: ["place-value"],
+  },
+  {
+    id: "g5-mult",
+    name: "Multi-Digit Multiplication",
+    category: "multiplication",
+    grade: 5,
+    description: "Fluently multiply multi-digit whole numbers",
+    prerequisites: ["multiply-multi-digit"],
+  },
+  {
+    id: "g5-division",
+    name: "Multi-Digit Division",
+    category: "division",
+    grade: 5,
+    description: "Divide up to 4-digit dividends by 2-digit divisors",
+    prerequisites: ["divide-multi-digit"],
+  },
+  {
+    id: "g5-decimals",
+    name: "Decimal Operations",
+    category: "decimals",
+    grade: 5,
+    description: "Add, subtract, multiply, and round decimals to the hundredths",
+    prerequisites: ["fractions-decimals"],
+  },
+  {
+    id: "g5-add-sub-fractions",
+    name: "Add & Subtract Fractions",
+    category: "fractions",
+    grade: 5,
+    description: "Add and subtract fractions with unlike denominators",
+    prerequisites: ["equivalent-fractions"],
+  },
+  {
+    id: "g5-mult-fractions",
+    name: "Multiply & Divide Fractions",
+    category: "fractions",
+    grade: 5,
+    description: "Multiply fractions and divide with unit fractions",
+    prerequisites: ["g5-add-sub-fractions"],
+  },
+  {
+    id: "g5-expressions",
+    name: "Expressions & Order of Operations",
+    category: "operations-algebraic",
+    grade: 5,
+    description: "Evaluate numerical expressions using order of operations",
+    prerequisites: [],
+  },
+  {
+    id: "g5-measurement",
+    name: "Measurement, Volume & Data",
+    category: "measurement",
+    grade: 5,
+    description: "Convert units, find volume of rectangular prisms, and interpret data",
+    prerequisites: ["measurement"],
   },
 ]
 
@@ -3034,6 +3149,92 @@ export const MATH_ITEMS: MathItem[] = [
       steps: ["1 vertical line", "1 horizontal line", "2 diagonal lines", "Total: 4"],
     },
   },
+
+  // ========== GRADE 5 ITEMS ==========
+  // Place Value & Powers of 10
+  { id: "g5-pv-1", skillId: "g5-place-value", difficulty: 1, question: "In 3,472,168, what is the value of the digit 4?", answer: 400000, choices: [4000, 40000, 400000, 4000000], explanation: "The 4 is in the hundred-thousands place: 400,000." },
+  { id: "g5-pv-2", skillId: "g5-place-value", difficulty: 1, question: "45 × 1,000 =", answer: 45000, choices: [450, 4500, 45000, 450000], explanation: "Multiplying by 1,000 adds three zeros." },
+  { id: "g5-pv-3", skillId: "g5-place-value", difficulty: 2, question: "6,300 ÷ 100 =", answer: 63, choices: [6, 63, 630, 6300], explanation: "Dividing by 100 removes two zeros." },
+  { id: "g5-pv-4", skillId: "g5-place-value", difficulty: 2, question: "Round 48,671 to the nearest thousand.", answer: 49000, choices: [48000, 48700, 49000, 50000], explanation: "671 rounds up, so 48,671 → 49,000." },
+
+  // Multi-Digit Multiplication
+  { id: "g5-mult-1", skillId: "g5-mult", difficulty: 1, question: "324 × 6 =", answer: 1944, choices: [1844, 1944, 1924, 2044], explanation: "324 × 6 = 1,944." },
+  { id: "g5-mult-2", skillId: "g5-mult", difficulty: 2, question: "45 × 23 =", answer: 1035, choices: [935, 1025, 1035, 1135], explanation: "45 × 23 = 1,035." },
+  { id: "g5-mult-3", skillId: "g5-mult", difficulty: 2, question: "128 × 40 =", answer: 5120, choices: [512, 5120, 5220, 5012], explanation: "128 × 4 = 512, then add a zero: 5,120." },
+  { id: "g5-mult-4", skillId: "g5-mult", difficulty: 3, question: "213 × 15 =", answer: 3195, choices: [3095, 3195, 3215, 3185], explanation: "213 × 15 = 3,195." },
+
+  // Multi-Digit Division
+  { id: "g5-div-1", skillId: "g5-division", difficulty: 1, question: "144 ÷ 12 =", answer: 12, choices: [11, 12, 13, 14], explanation: "12 × 12 = 144." },
+  { id: "g5-div-2", skillId: "g5-division", difficulty: 2, question: "805 ÷ 5 =", answer: 161, choices: [151, 160, 161, 175], explanation: "805 ÷ 5 = 161." },
+  { id: "g5-div-3", skillId: "g5-division", difficulty: 2, question: "672 ÷ 21 =", answer: 32, choices: [28, 31, 32, 34], explanation: "21 × 32 = 672." },
+  { id: "g5-div-4", skillId: "g5-division", difficulty: 3, question: "936 ÷ 8 =", answer: 117, choices: [107, 117, 118, 127], explanation: "8 × 117 = 936." },
+
+  // Decimal Operations
+  { id: "g5-dec-1", skillId: "g5-decimals", difficulty: 1, question: "0.6 + 0.25 =", answer: 0.85, choices: [0.31, 0.65, 0.85, 0.9], explanation: "0.60 + 0.25 = 0.85." },
+  { id: "g5-dec-2", skillId: "g5-decimals", difficulty: 2, question: "3.4 − 1.7 =", answer: 1.7, choices: [1.3, 1.7, 2.3, 2.7], explanation: "3.4 − 1.7 = 1.7." },
+  { id: "g5-dec-3", skillId: "g5-decimals", difficulty: 2, question: "0.5 × 4 =", answer: 2, choices: [0.2, 0.9, 2, 20], explanation: "0.5 × 4 = 2." },
+  { id: "g5-dec-4", skillId: "g5-decimals", difficulty: 2, question: "Round 7.38 to the nearest tenth.", answer: 7.4, choices: [7.3, 7.4, 7.0, 8.0], explanation: "The hundredths digit 8 rounds the tenths up: 7.4." },
+
+  // Add & Subtract Fractions
+  { id: "g5-asf-1", skillId: "g5-add-sub-fractions", difficulty: 1, question: "1/2 + 1/4 =", answer: "3/4", choices: ["2/6", "3/4", "1/4", "2/4"], explanation: "1/2 = 2/4, so 2/4 + 1/4 = 3/4." },
+  { id: "g5-asf-2", skillId: "g5-add-sub-fractions", difficulty: 2, question: "2/3 + 1/6 =", answer: "5/6", choices: ["3/9", "5/6", "1/2", "3/6"], explanation: "2/3 = 4/6, so 4/6 + 1/6 = 5/6." },
+  { id: "g5-asf-3", skillId: "g5-add-sub-fractions", difficulty: 2, question: "3/4 − 1/2 =", answer: "1/4", choices: ["1/4", "2/2", "1/2", "2/4"], explanation: "1/2 = 2/4, so 3/4 − 2/4 = 1/4." },
+  { id: "g5-asf-4", skillId: "g5-add-sub-fractions", difficulty: 3, question: "5/6 − 1/3 =", answer: "1/2", choices: ["4/3", "1/2", "1/3", "4/6"], explanation: "1/3 = 2/6, so 5/6 − 2/6 = 3/6 = 1/2." },
+
+  // Multiply & Divide Fractions
+  { id: "g5-mf-1", skillId: "g5-mult-fractions", difficulty: 1, question: "1/2 × 1/3 =", answer: "1/6", choices: ["1/6", "2/5", "1/5", "2/6"], explanation: "Multiply across: (1×1)/(2×3) = 1/6." },
+  { id: "g5-mf-2", skillId: "g5-mult-fractions", difficulty: 2, question: "2/3 × 3/4 =", answer: "1/2", choices: ["6/7", "1/2", "5/12", "6/12"], explanation: "6/12 simplifies to 1/2." },
+  { id: "g5-mf-3", skillId: "g5-mult-fractions", difficulty: 2, question: "1/4 × 8 =", answer: 2, choices: [2, 4, 12, 32], explanation: "8 ÷ 4 = 2." },
+  { id: "g5-mf-4", skillId: "g5-mult-fractions", difficulty: 3, question: "3 ÷ 1/2 =", answer: 6, choices: [1.5, 3, 6, 9], explanation: "Dividing by 1/2 is the same as multiplying by 2: 3 × 2 = 6." },
+
+  // Expressions & Order of Operations
+  { id: "g5-exp-1", skillId: "g5-expressions", difficulty: 1, question: "8 + 2 × 5 =", answer: 18, choices: [18, 50, 20, 26], explanation: "Multiply first: 2 × 5 = 10, then 8 + 10 = 18." },
+  { id: "g5-exp-2", skillId: "g5-expressions", difficulty: 2, question: "(6 + 4) × 3 =", answer: 30, choices: [18, 24, 30, 42], explanation: "Parentheses first: 10 × 3 = 30." },
+  { id: "g5-exp-3", skillId: "g5-expressions", difficulty: 2, question: "20 − 3 × 4 =", answer: 8, choices: [8, 68, 12, 17], explanation: "Multiply first: 3 × 4 = 12, then 20 − 12 = 8." },
+  { id: "g5-exp-4", skillId: "g5-expressions", difficulty: 3, question: "24 ÷ (2 + 4) =", answer: 4, choices: [4, 8, 16, 12], explanation: "Parentheses first: 2 + 4 = 6, then 24 ÷ 6 = 4." },
+
+  // Measurement, Volume & Data
+  { id: "g5-meas-1", skillId: "g5-measurement", difficulty: 1, question: "How many centimeters are in 3 meters?", answer: 300, choices: [30, 300, 3000, 3], explanation: "1 m = 100 cm, so 3 m = 300 cm." },
+  { id: "g5-meas-2", skillId: "g5-measurement", difficulty: 2, question: "A box is 4 cm by 3 cm by 2 cm. What is its volume in cubic cm?", answer: 24, choices: [9, 18, 24, 48], explanation: "Volume = length × width × height = 4 × 3 × 2 = 24." },
+  { id: "g5-meas-3", skillId: "g5-measurement", difficulty: 1, question: "How many minutes are in 4 hours?", answer: 240, choices: [40, 120, 240, 400], explanation: "1 hour = 60 minutes, so 4 × 60 = 240." },
+  { id: "g5-meas-4", skillId: "g5-measurement", difficulty: 2, question: "Convert 5 kilograms to grams.", answer: 5000, choices: [50, 500, 5000, 50000], explanation: "1 kg = 1,000 g, so 5 kg = 5,000 g." },
+
+  // ========== GRADE 2 ITEMS (standards-aligned) ==========
+  // Add within 100
+  { id: "g2-add-1", skillId: "g2-add-100", difficulty: 1, question: "37 + 45 =", answer: 82, choices: [72, 82, 83, 92], explanation: "37 + 45 = 82." },
+  { id: "g2-add-2", skillId: "g2-add-100", difficulty: 1, question: "58 + 26 =", answer: 84, choices: [74, 82, 84, 86], explanation: "58 + 26 = 84." },
+  { id: "g2-add-3", skillId: "g2-add-100", difficulty: 2, question: "63 + 19 =", answer: 82, choices: [72, 81, 82, 92], explanation: "63 + 19 = 82." },
+  { id: "g2-add-4", skillId: "g2-add-100", difficulty: 1, question: "40 + 55 =", answer: 95, choices: [85, 90, 95, 105], explanation: "40 + 55 = 95." },
+
+  // Subtract within 100
+  { id: "g2-sub-1", skillId: "g2-sub-100", difficulty: 1, question: "82 − 47 =", answer: 35, choices: [35, 45, 36, 25], explanation: "82 − 47 = 35." },
+  { id: "g2-sub-2", skillId: "g2-sub-100", difficulty: 1, question: "70 − 26 =", answer: 44, choices: [44, 54, 46, 34], explanation: "70 − 26 = 44." },
+  { id: "g2-sub-3", skillId: "g2-sub-100", difficulty: 2, question: "55 − 18 =", answer: 37, choices: [37, 43, 47, 33], explanation: "55 − 18 = 37." },
+  { id: "g2-sub-4", skillId: "g2-sub-100", difficulty: 1, question: "91 − 40 =", answer: 51, choices: [41, 51, 61, 50], explanation: "91 − 40 = 51." },
+
+  // Place Value to 1000
+  { id: "g2-pv-1", skillId: "g2-place-value-1000", difficulty: 1, question: "What is the value of the digit 7 in 728?", answer: 700, choices: [7, 70, 700, 728], explanation: "The 7 is in the hundreds place: 700." },
+  { id: "g2-pv-2", skillId: "g2-place-value-1000", difficulty: 1, question: "400 + 50 + 3 =", answer: 453, choices: [435, 453, 400, 543], explanation: "400 + 50 + 3 = 453." },
+  { id: "g2-pv-3", skillId: "g2-place-value-1000", difficulty: 2, question: "What number is 10 more than 235?", answer: 245, choices: [236, 245, 335, 225], explanation: "235 + 10 = 245." },
+  { id: "g2-pv-4", skillId: "g2-place-value-1000", difficulty: 2, question: "How many tens are in 260?", answer: 26, choices: [2, 6, 26, 260], explanation: "260 = 26 tens." },
+
+  // Measurement & Length
+  { id: "g2-meas-1", skillId: "g2-measurement", difficulty: 1, question: "How many centimeters are in 1 meter?", answer: 100, choices: [10, 100, 1000, 12], explanation: "1 meter = 100 centimeters." },
+  { id: "g2-meas-2", skillId: "g2-measurement", difficulty: 2, question: "A pencil is 15 cm and a crayon is 8 cm. How much longer is the pencil?", answer: 7, choices: [7, 8, 23, 6], explanation: "15 − 8 = 7 cm." },
+  { id: "g2-meas-3", skillId: "g2-measurement", difficulty: 1, question: "How many inches are in 1 foot?", answer: 12, choices: [10, 12, 100, 3], explanation: "1 foot = 12 inches." },
+  { id: "g2-meas-4", skillId: "g2-measurement", difficulty: 2, question: "A 24 cm ribbon is cut into 2 equal pieces. How long is each piece?", answer: 12, choices: [8, 12, 22, 48], explanation: "24 ÷ 2 = 12 cm." },
+
+  // Time to 5 Minutes
+  { id: "g2-time-1", skillId: "g2-time", difficulty: 1, question: "How many minutes are in 1 hour?", answer: 60, choices: [30, 60, 100, 12], explanation: "1 hour = 60 minutes." },
+  { id: "g2-time-2", skillId: "g2-time", difficulty: 1, question: "How many minutes are in a half hour?", answer: 30, choices: [15, 30, 45, 60], explanation: "Half of 60 is 30." },
+  { id: "g2-time-3", skillId: "g2-time", difficulty: 2, question: "How many minutes is it from 2:00 to 2:45?", answer: 45, choices: [15, 30, 45, 60], explanation: "From :00 to :45 is 45 minutes." },
+  { id: "g2-time-4", skillId: "g2-time", difficulty: 1, question: "How many minutes are in a quarter hour?", answer: 15, choices: [15, 20, 25, 30], explanation: "A quarter of 60 is 15." },
+
+  // Money & Making Change
+  { id: "g2-money-1", skillId: "g2-money", difficulty: 1, question: "How many cents are in a quarter?", answer: 25, choices: [5, 10, 25, 50], explanation: "A quarter = 25 cents." },
+  { id: "g2-money-2", skillId: "g2-money", difficulty: 2, question: "2 dimes and 1 nickel = ? cents", answer: 25, choices: [15, 20, 25, 30], explanation: "10 + 10 + 5 = 25 cents." },
+  { id: "g2-money-3", skillId: "g2-money", difficulty: 2, question: "How many cents are in 3 quarters?", answer: 75, choices: [50, 60, 75, 100], explanation: "3 × 25 = 75 cents." },
+  { id: "g2-money-4", skillId: "g2-money", difficulty: 2, question: "You have 50 cents and spend 35 cents. How many cents are left?", answer: 15, choices: [15, 25, 20, 85], explanation: "50 − 35 = 15 cents." },
 ]
 
 // Mock student data (will be created during onboarding)
@@ -3129,6 +3330,13 @@ const TOPIC_TO_CATEGORY_MAP: Record<string, string[]> = {
   "grade4-patterning": ["operations-algebraic", "multiplication"],
   "grade4-measurement-data": ["measurement"],
   "grade4-geometric-spatial": ["geometry"],
+  // Grade 5
+  "g5-place-value": ["place-value"],
+  "g5-operations": ["multiplication", "division"],
+  "g5-decimals": ["decimals"],
+  "g5-fractions": ["fractions"],
+  "g5-expressions": ["operations-algebraic"],
+  "g5-measurement": ["measurement", "geometry"],
 }
 
 export function getSkillsForTopics(grade: Grade, topicIds: string[]): Skill[] {

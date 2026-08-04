@@ -14,7 +14,7 @@ describe("Data integrity: SKILLS array", () => {
       expect(skill.id).toBeTruthy()
       expect(skill.name).toBeTruthy()
       expect(skill.category).toBeTruthy()
-      expect([1, 2, 3, 4]).toContain(skill.grade)
+      expect([1, 2, 3, 4, 5]).toContain(skill.grade)
       expect(skill.description).toBeTruthy()
       expect(Array.isArray(skill.prerequisites)).toBe(true)
     })
@@ -30,7 +30,7 @@ describe("Data integrity: SKILLS array", () => {
   })
 
   it("has skills for every grade 1-4", () => {
-    for (const grade of [1, 2, 3, 4] as Grade[]) {
+    for (const grade of [1, 2, 3, 4, 5] as Grade[]) {
       const gradeSkills = SKILLS.filter((s) => s.grade === grade)
       expect(gradeSkills.length).toBeGreaterThan(0)
     }
@@ -90,7 +90,7 @@ describe("Data integrity: AVATARS", () => {
 
 describe("getSkillsForGrade", () => {
   it("returns only skills for the requested grade", () => {
-    for (const grade of [1, 2, 3, 4] as Grade[]) {
+    for (const grade of [1, 2, 3, 4, 5] as Grade[]) {
       const skills = getSkillsForGrade(grade)
       expect(skills.length).toBeGreaterThan(0)
       skills.forEach((s) => expect(s.grade).toBe(grade))

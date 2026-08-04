@@ -1,4 +1,4 @@
-import type { Skill, MathItem } from "./types"
+import type { Skill, MathItem, Grade } from "./types"
 import { getMastery, getSkillsForGrade, getRandomItem, getSkillsForTopics } from "./mock-data"
 
 // Adaptive difficulty engine
@@ -11,10 +11,10 @@ export class AdaptiveEngine {
 
     if (selectedTopicsJson) {
       const selectedTopics = JSON.parse(selectedTopicsJson) as string[]
-      gradeSkills = getSkillsForTopics(grade as 1 | 2 | 3 | 4, selectedTopics)
+      gradeSkills = getSkillsForTopics(grade as Grade, selectedTopics)
     } else {
       // Fallback: use all skills for the grade
-      gradeSkills = getSkillsForGrade(grade as 1 | 2 | 3 | 4)
+      gradeSkills = getSkillsForGrade(grade as Grade)
     }
 
     // Sort skills by mastery level (prioritize lower mastery)

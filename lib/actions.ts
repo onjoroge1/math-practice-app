@@ -61,7 +61,7 @@ export async function createStudentAction(
   avatar: string,
 ) {
   if (!name.trim()) throw new Error("Name is required")
-  if (grade < 1 || grade > 4) throw new Error("Grade must be between 1 and 4")
+  if (grade < 1 || grade > 5) throw new Error("Grade must be between 1 and 5")
 
   const parentId = await getAuthParentId()
   const student = await dbCreateStudent(name.trim(), grade, avatar, parentId ?? undefined)

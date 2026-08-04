@@ -86,7 +86,7 @@ export default function OnboardingPage() {
               <p className="text-slate-600">This helps us find the right problems for you</p>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              {[1, 2, 3, 4].map((g) => (
+              {[1, 2, 3, 4, 5].map((g) => (
                 <button
                   key={g}
                   onClick={() => setGrade(g as Grade)}

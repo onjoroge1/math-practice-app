@@ -8,7 +8,8 @@ import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { AVATARS, SKILLS } from "@/lib/mock-data"
-import { getStudentsForParentAction, getMasteryAction } from "@/lib/actions"
+import { getStudentsForParentAction, getMasteryAction, getOrCreateProfileStudentAction } from "@/lib/actions"
+import { PROFILES } from "@/lib/profiles"
 
 interface StudentRow {
   id: string
@@ -37,11 +38,23 @@ export default function ParentDashboard() {
   useEffect(() => {
     async function load() {
       try {
+        // Both boys should appear in the portal whether or not they have
+        // practiced yet, so provision their rows before listing.
+        await Promise.all(
+          PROFILES.map((p) => getOrCreateProfileStudentAction(p.name, p.grade, p.avatar)),
+        )
         const rows = await getStudentsForParentAction()
         const mapped = (rows as StudentRow[]) ?? []
-        setStudents(mapped)
-        if (mapped.length > 0) {
-          setSelectedStudent(mapped[0])
+        // Amir first, then Aden; any legacy rows sort after them.
+        const order = PROFILES.map((p) => p.name.toLowerCase())
+        const rank = (n: string) => {
+          const i = order.indexOf(n.toLowerCase())
+          return i === -1 ? order.length : i
+        }
+        const sorted = [...mapped].sort((a, b) => rank(a.name) - rank(b.name))
+        setStudents(sorted)
+        if (sorted.length > 0) {
+          setSelectedStudent(sorted[0])
         }
       } catch {
         setStudents([])
@@ -76,11 +89,14 @@ export default function ParentDashboard() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
         <Card className="p-8 text-center max-w-md">
-          <div className="text-6xl mb-4">👨‍👩‍👧‍👦</div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">No Students Yet</h2>
-          <p className="text-gray-600 mb-6">Have your child complete the onboarding to get started!</p>
-          <Link href="/onboarding">
-            <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">Start Onboarding</Button>
+          <div className="text-6xl mb-4">👨‍👩‍👦</div>
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">No Progress Yet</h2>
+          <p className="text-gray-600 mb-6">
+            {PROFILES.map((p) => p.name).join(" and ")} haven&apos;t practiced yet — or the database is
+            unreachable. Progress appears here after their first session.
+          </p>
+          <Link href="/">
+            <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">Go to Practice</Button>
           </Link>
         </Card>
       </div>

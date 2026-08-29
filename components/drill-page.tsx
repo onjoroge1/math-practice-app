@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import { useRouter } from "next/navigation"
-import { createSessionAction, completeSessionAction, updateStudentStatsAction } from "@/lib/actions"
+import { saveDrillResult, type DrillResult } from "@/lib/drill-results"
 import { trackDrillCompleted } from "@/lib/analytics"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -22,56 +22,6 @@ export interface DrillConfig {
   generateQuestions: () => DrillQuestion[]
   totalTime?: number
   questionCount?: number
-}
-
-interface DrillResult {
-  topic: string
-  subject: string
-  correct: number
-  total: number
-  answered: number
-  accuracy: number
-  completedAt: string
-}
-
-// ─── Helpers ──────────────────────────────────────────────────────────────────
-
-function saveDrillResultLocal(result: DrillResult) {
-  if (typeof window === "undefined") return
-  const studentId = localStorage.getItem("currentStudentId") || "guest"
-  const key = `drillResults_${studentId}`
-  const existing: DrillResult[] = JSON.parse(localStorage.getItem(key) || "[]")
-  existing.unshift(result)
-  localStorage.setItem(key, JSON.stringify(existing.slice(0, 200)))
-}
-
-async function saveDrillResultToDB(result: DrillResult, startTime: number) {
-  if (typeof window === "undefined") return
-  const studentId = localStorage.getItem("currentStudentId")
-  if (!studentId || studentId === "guest") return
-
-  const gradeStr = localStorage.getItem("currentStudentGrade")
-  const grade = gradeStr ? parseInt(gradeStr, 10) : 1
-
-  try {
-    const session = await createSessionAction(studentId, "speed-drill", grade)
-    const durationSeconds = Math.floor((Date.now() - startTime) / 1000)
-
-    await completeSessionAction(session.id, {
-      totalQuestions: result.total,
-      correctAnswers: result.correct,
-      incorrectAnswers: result.answered - result.correct,
-      hintsUsed: 0,
-      coinsEarned: Math.floor(result.correct * 0.5),
-      durationSeconds,
-      topicsCovered: [result.topic],
-      skillsPracticed: [],
-    })
-
-    await updateStudentStatsAction(studentId, Math.floor(result.correct * 0.5))
-  } catch {
-    // DB save failed — local backup already saved above
-  }
 }
 
 const COLOR_MAP: Record<string, { bg: string; text: string; border: string; light: string; timer: string }> = {
@@ -424,8 +374,7 @@ export default function DrillPage({ config }: { config: DrillConfig }) {
       completedAt: new Date().toISOString(),
     }
 
-    saveDrillResultLocal(result)
-    saveDrillResultToDB(result, drillStartTime)
+    saveDrillResult(result, drillStartTime)
     trackDrillCompleted(
       config.title,
       parseInt(localStorage.getItem("currentStudentGrade") ?? "1", 10),

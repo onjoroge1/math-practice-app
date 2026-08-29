@@ -47,16 +47,48 @@ See `.env.example` for all required variables.
 | `DATABASE_URL` | Yes (for persistence) | Neon PostgreSQL connection string |
 | `NEXT_PUBLIC_APP_URL` | No | App base URL (defaults to localhost:3000) |
 
+### Kid profiles
+
+Profiles are defined in `lib/profiles.ts` and seeded into the database. To add them to an
+existing database without wiping progress:
+
+```bash
+pnpm db:seed-profiles
+```
+
+`pnpm db:migrate` reruns `schema.sql`, which **drops every table** — use it only for a fresh setup.
+
 ## App Flow
 
-1. **Home** (`/`) — Landing page with Start Learning and Parent Dashboard CTAs
-2. **Onboarding** (`/onboarding`) — Student enters name, grade (1-4), and picks an avatar
-3. **Topic Select** (`/topic-select`) — Choose math topics and practice mode (adaptive or speed drill)
-4. **Diagnostic** (`/diagnostic`) — Quick assessment to gauge current level
-5. **Practice** (`/practice`) — Adaptive practice with hints, explanations, and Vedic tricks
-6. **Speed Drills** (`/timed-drill`, `/grade2-addition-drill`, etc.) — 50 questions in 5 minutes
-7. **Summary** (`/practice/summary`) — Student progress dashboard with streaks, coins, skills
-8. **Parent Dashboard** (`/parent`) — Parent view of student progress and recommendations
+1. **Home** (`/`) — Profile picker: tap **Amir** (Grade 5) or **Aden** (Grade 2). There is no
+   sign-up or onboarding; each name maps to a fixed `students` row, so all progress accumulates
+   under that name and shows up in the parent portal.
+2. **Topic Select** (`/topic-select`) — Choose math topics and practice mode (adaptive or speed drill)
+3. **Diagnostic** (`/diagnostic`) — Quick assessment to gauge current level
+4. **Practice** (`/practice`) — Adaptive practice with hints, explanations, and Vedic tricks
+5. **Speed Drills** (`/timed-drill`, `/grade2-addition-drill`, etc.) — 50 questions in 5 minutes
+
+### Adaptive Quizzes (Grades 2–5)
+
+`/mental-math-quiz`, `/times-tables-quiz`, and `/division-quiz` share
+`components/mental-math-quiz.tsx` and are offered on every grade from 2 to 5. Each opens on a
+settings screen where the number ranges, times tables (individually or via presets like
+*Easy (2, 5, 10)* and *Mix (2–9)*), question count, and timer are all adjustable. Logic lives in
+`lib/adaptive-quiz.ts` and adapts in two independent ways:
+
+- **Difficulty ladder** — 6 levels, stored per student per quiz. Level 1 stays on the easy tables
+  with small factors; level 6 is the full range the student selected. A run at 85%+ moves up a
+  level, below 60% moves down, and runs shorter than 5 answered questions never move it. The
+  ladder only ever *narrows* the chosen settings, so it can't exceed the configured ceiling.
+  Turn it off with **Start easy and build up**.
+- **Missed-fact review** — every individual fact (e.g. `7 × 8`) is scored per student. Facts the
+  student gets wrong are ranked by miss rate and re-drawn in later quizzes, filling up to 40% of
+  the next run. Turn it off with **Practice missed facts more often**.
+
+Starting ranges scale with the student's grade (`defaultSettingsForGrade`): Grade 2 opens on the
+2/5/10 tables to 10, Grade 5 on all tables to 12.
+6. **Summary** (`/practice/summary`) — Student progress dashboard with streaks, coins, skills
+7. **Parent Dashboard** (`/parent`) — Parent view of student progress and recommendations
 
 ## Project Structure
 

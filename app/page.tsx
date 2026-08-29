@@ -1,74 +1,86 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { auth } from "@/lib/auth"
+"use client"
 
-export default async function HomePage() {
-  const session = await auth()
-  const isLoggedIn = !!session?.user
+import { useState } from "react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { Card } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { PROFILES, type KidProfile } from "@/lib/profiles"
+import { getOrCreateProfileStudentAction } from "@/lib/actions"
+
+export default function HomePage() {
+  const router = useRouter()
+  const [loadingKey, setLoadingKey] = useState<string | null>(null)
+
+  async function pickProfile(profile: KidProfile) {
+    if (loadingKey) return
+    setLoadingKey(profile.key)
+
+    // Resolve the profile to its students row. If the DB is unreachable we fall
+    // back to a stable local id so practice still works offline.
+    const student = await getOrCreateProfileStudentAction(
+      profile.name,
+      profile.grade,
+      profile.avatar,
+    )
+
+    localStorage.setItem("currentStudentId", student?.id ?? `local-${profile.key}`)
+    localStorage.setItem("currentStudentGrade", String(profile.grade))
+    localStorage.setItem("currentProfileKey", profile.key)
+    localStorage.setItem("currentStudentName", profile.name)
+
+    router.push("/topic-select")
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 flex items-center justify-center p-4">
-      <div className="max-w-2xl w-full text-center space-y-8">
-        <div className="space-y-4">
-          <div className="text-7xl">🎓</div>
-          <h1 className="text-5xl font-bold text-indigo-600">Math Practice</h1>
-          <p className="text-xl text-slate-600">Learn math at your own pace with fun, adaptive practice!</p>
+      <div className="max-w-3xl w-full space-y-10">
+        <div className="text-center space-y-3">
+          <div className="text-6xl">🎓</div>
+          <h1 className="text-4xl sm:text-5xl font-bold text-indigo-600">Math Practice</h1>
+          <p className="text-xl text-slate-600">Who&apos;s practicing today?</p>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Link href="/onboarding">
-            <Button
-              size="lg"
-              className="text-lg px-8 py-6 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl shadow-lg hover:shadow-xl transition-all"
-            >
-              Start Learning
-            </Button>
-          </Link>
+        <div className="grid sm:grid-cols-2 gap-6">
+          {PROFILES.map((profile) => {
+            const isLoading = loadingKey === profile.key
+            return (
+              <Card
+                key={profile.key}
+                role="button"
+                tabIndex={0}
+                aria-label={`Practice as ${profile.name}, Grade ${profile.grade}`}
+                onClick={() => pickProfile(profile)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault()
+                    pickProfile(profile)
+                  }
+                }}
+                className={`bg-gradient-to-br ${profile.cardClass} text-white border-0 p-10 rounded-3xl cursor-pointer shadow-lg
+                  transition-all hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-4 ${profile.ringClass}
+                  ${loadingKey && !isLoading ? "opacity-50" : ""}`}
+              >
+                <div className="flex flex-col items-center gap-3 text-center">
+                  <div className="text-7xl">{profile.emoji}</div>
+                  <h2 className="text-4xl font-bold">{profile.name}</h2>
+                  <p className="text-lg opacity-90">Grade {profile.grade}</p>
+                  {isLoading && <p className="text-sm opacity-80 animate-pulse">Getting things ready…</p>}
+                </div>
+              </Card>
+            )
+          })}
+        </div>
+
+        <div className="text-center">
           <Link href="/parent">
             <Button
-              size="lg"
               variant="outline"
-              className="text-lg px-8 py-6 border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 rounded-2xl bg-transparent"
+              className="px-8 py-6 text-base rounded-2xl border-2 border-slate-300 text-slate-600 hover:bg-white bg-transparent"
             >
-              Parent Dashboard
+              👨‍👩‍👦 Parent Portal
             </Button>
           </Link>
-        </div>
-
-        {!isLoggedIn && (
-          <div className="flex gap-3 justify-center text-sm">
-            <Link href="/login" className="text-indigo-600 hover:text-indigo-800 font-medium">
-              Parent Login
-            </Link>
-            <span className="text-slate-400">|</span>
-            <Link href="/signup" className="text-indigo-600 hover:text-indigo-800 font-medium">
-              Create Parent Account
-            </Link>
-          </div>
-        )}
-
-        {isLoggedIn && (
-          <p className="text-sm text-slate-500">
-            Signed in as <span className="font-medium text-slate-700">{session.user.name}</span>
-          </p>
-        )}
-
-        <div className="grid sm:grid-cols-3 gap-6 mt-12">
-          <div className="bg-white/80 backdrop-blur p-6 rounded-2xl shadow-md">
-            <div className="text-4xl mb-3">🎯</div>
-            <h3 className="font-bold text-lg text-slate-800 mb-2">Adaptive Learning</h3>
-            <p className="text-sm text-slate-600">Problems adjust to your level</p>
-          </div>
-          <div className="bg-white/80 backdrop-blur p-6 rounded-2xl shadow-md">
-            <div className="text-4xl mb-3">⭐</div>
-            <h3 className="font-bold text-lg text-slate-800 mb-2">Earn Rewards</h3>
-            <p className="text-sm text-slate-600">Collect coins and build streaks</p>
-          </div>
-          <div className="bg-white/80 backdrop-blur p-6 rounded-2xl shadow-md">
-            <div className="text-4xl mb-3">📊</div>
-            <h3 className="font-bold text-lg text-slate-800 mb-2">Track Progress</h3>
-            <p className="text-sm text-slate-600">See your mastery grow</p>
-          </div>
         </div>
       </div>
     </div>

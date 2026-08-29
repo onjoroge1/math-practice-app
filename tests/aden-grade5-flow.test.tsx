@@ -1,9 +1,10 @@
-import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react"
+import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import HomePage from "@/app/page"
 import TopicSelectPage from "@/app/topic-select/page"
+import IowaHubPage from "@/app/iowa/page"
 import IowaUnitPage from "@/app/iowa/[unitId]/page"
-import { getAttemptDraft, getUnitProgress } from "@/lib/iowa-progress"
+import { getAttemptDraft, getUnitProgress, recordAttempt } from "@/lib/iowa-progress"
 
 const mocks = vi.hoisted(() => ({
   push: vi.fn(),
@@ -15,8 +16,10 @@ const mocks = vi.hoisted(() => ({
   trackDrillCompleted: vi.fn(),
 }))
 
+const router = { push: mocks.push, replace: mocks.replace }
+
 vi.mock("next/navigation", () => ({
-  useRouter: () => ({ push: mocks.push, replace: mocks.replace }),
+  useRouter: () => router,
   useParams: () => ({ unitId: "mathematics" }),
 }))
 vi.mock("@/lib/actions", () => ({
@@ -83,6 +86,18 @@ describe("Aden's Grade 5 journey", () => {
     render(<IowaUnitPage />)
     expect(await screen.findByText(/Continuing where you left off/i)).toBeInTheDocument()
     expect(screen.getByText(/Question 2 of 25/)).toBeInTheDocument()
+  })
+
+  it("shows Aden's best, latest, and attempt count for each completed unit", async () => {
+    setAden()
+    recordAttempt("aden-row", "mathematics", 88, [1, 2, 3])
+    recordAttempt("aden-row", "mathematics", 72, [4, 5, 6])
+    render(<IowaHubPage />)
+
+    expect(await screen.findByText("Best 88%")).toBeInTheDocument()
+    expect(within(screen.getByText("Best score").parentElement!).getByText("88%")).toBeInTheDocument()
+    expect(within(screen.getByText("Latest score").parentElement!).getByText("72%")).toBeInTheDocument()
+    expect(within(screen.getByText("Attempts").parentElement!).getByText("2")).toBeInTheDocument()
   })
 
   it("requires every answer, records one result, and clears the draft", async () => {

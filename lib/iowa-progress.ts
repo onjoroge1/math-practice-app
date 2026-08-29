@@ -13,11 +13,37 @@ export interface UnitProgress {
 
 export type ProgressStore = Record<string, UnitProgress>
 
+export interface AttemptDraft {
+  unitId: string
+  questionNumbers: number[]
+  answers: Record<number, string>
+  index: number
+  startedAt: number
+  elapsedMs: number
+  updatedAt: number
+}
+
+export type DraftStore = Record<string, AttemptDraft>
+
 const key = (studentId: string) => `iowa:v1:${studentId}`
+const draftKey = (studentId: string) => `iowa:drafts:v1:${studentId}`
+
+export interface CurrentStudentContext {
+  id: string
+  grade: number
+}
 
 export function currentStudentId(): string {
   if (typeof window === "undefined") return "guest"
   return localStorage.getItem("currentStudentId") || "guest"
+}
+
+export function currentStudentContext(): CurrentStudentContext | null {
+  if (typeof window === "undefined") return null
+  const id = localStorage.getItem("currentStudentId")
+  const grade = Number(localStorage.getItem("currentStudentGrade"))
+  if (!id || id === "guest" || !Number.isInteger(grade)) return null
+  return { id, grade }
 }
 
 function read(studentId: string): ProgressStore {
@@ -38,12 +64,73 @@ function write(studentId: string, store: ProgressStore): void {
   }
 }
 
+function isAttemptDraft(value: unknown): value is AttemptDraft {
+  if (!value || typeof value !== "object") return false
+  const draft = value as Partial<AttemptDraft>
+  return (
+    typeof draft.unitId === "string" &&
+    Array.isArray(draft.questionNumbers) &&
+    draft.questionNumbers.every(Number.isInteger) &&
+    !!draft.answers &&
+    typeof draft.answers === "object" &&
+    Number.isInteger(draft.index) &&
+    typeof draft.startedAt === "number" &&
+    typeof draft.elapsedMs === "number" &&
+    typeof draft.updatedAt === "number"
+  )
+}
+
+function readDrafts(studentId: string): DraftStore {
+  if (typeof window === "undefined") return {}
+  try {
+    const parsed = JSON.parse(localStorage.getItem(draftKey(studentId)) || "{}") as Record<string, unknown>
+    return Object.fromEntries(Object.entries(parsed).filter((entry): entry is [string, AttemptDraft] => isAttemptDraft(entry[1])))
+  } catch {
+    return {}
+  }
+}
+
+function writeDrafts(studentId: string, store: DraftStore): void {
+  if (typeof window === "undefined") return
+  try {
+    localStorage.setItem(draftKey(studentId), JSON.stringify(store))
+  } catch {
+    /* storage full / unavailable — non-fatal */
+  }
+}
+
 export function getAllProgress(studentId: string): ProgressStore {
   return read(studentId)
 }
 
 export function getUnitProgress(studentId: string, unitId: string): UnitProgress | null {
   return read(studentId)[unitId] ?? null
+}
+
+export function getAllAttemptDrafts(studentId: string): DraftStore {
+  return readDrafts(studentId)
+}
+
+export function getAttemptDraft(studentId: string, unitId: string): AttemptDraft | null {
+  return readDrafts(studentId)[unitId] ?? null
+}
+
+export function saveAttemptDraft(
+  studentId: string,
+  draft: Omit<AttemptDraft, "updatedAt">,
+): AttemptDraft {
+  const store = readDrafts(studentId)
+  const next = { ...draft, updatedAt: Date.now() }
+  store[draft.unitId] = next
+  writeDrafts(studentId, store)
+  return next
+}
+
+export function clearAttemptDraft(studentId: string, unitId: string): void {
+  const store = readDrafts(studentId)
+  if (!(unitId in store)) return
+  delete store[unitId]
+  writeDrafts(studentId, store)
 }
 
 export function recordAttempt(

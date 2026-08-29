@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -8,13 +8,22 @@ import {
   getIowaUnit,
   sampleUnit,
   stimulusFor,
-  bandFor,
+  scoreIowaAttempt,
   IOWA_TARGET,
   type IowaQuestion,
   type IowaUnit,
 } from "@/lib/iowa-grade5"
-import { currentStudentId, getUnitProgress, recordAttempt } from "@/lib/iowa-progress"
-import { ArrowLeft, ArrowRight, CheckCircle2, XCircle, RotateCcw } from "lucide-react"
+import {
+  clearAttemptDraft,
+  currentStudentContext,
+  getAttemptDraft,
+  getUnitProgress,
+  recordAttempt,
+  saveAttemptDraft,
+} from "@/lib/iowa-progress"
+import { saveDrillResult } from "@/lib/drill-results"
+import { trackDrillCompleted, trackDrillStarted } from "@/lib/analytics"
+import { ArrowLeft, ArrowRight, CheckCircle2, XCircle, RotateCcw, Save } from "lucide-react"
 
 const TONE_TEXT: Record<string, string> = {
   emerald: "text-emerald-600",
@@ -28,13 +37,6 @@ const TONE_CHIP: Record<string, string> = {
   amber: "bg-amber-100 text-amber-700 border-amber-200",
   rose: "bg-rose-100 text-rose-700 border-rose-200",
 }
-const TONE_BAR: Record<string, string> = {
-  emerald: "bg-emerald-500",
-  sky: "bg-sky-500",
-  amber: "bg-amber-500",
-  rose: "bg-rose-500",
-}
-
 function Stimulus({ unit, q }: { unit: IowaUnit; q: IowaQuestion }) {
   const s = stimulusFor(unit, q)
   if (!s) return null
@@ -58,43 +60,78 @@ export default function IowaUnitPage() {
   const [finished, setFinished] = useState(false)
   const [showReview, setShowReview] = useState(false)
   const [attemptKey, setAttemptKey] = useState(0)
+  const [resumed, setResumed] = useState(false)
+  const [result, setResult] = useState<ReturnType<typeof scoreIowaAttempt> | null>(null)
+  const studentIdRef = useRef("")
+  const startedAtRef = useRef(0)
+  const elapsedMsRef = useRef(0)
+  const activeSinceRef = useRef(0)
+  const completedRef = useRef(false)
+  const launchKeyRef = useRef("")
 
   const startAttempt = useCallback(() => {
     if (!unit) return
-    const prev = getUnitProgress(currentStudentId(), unit.id)
+    const student = currentStudentContext()
+    if (!student || student.grade !== 5) {
+      router.replace("/topic-select")
+      return
+    }
+
+    studentIdRef.current = student.id
+    completedRef.current = false
+    const prev = getUnitProgress(student.id, unit.id)
     const seen = new Set<number>(prev?.seen ?? [])
-    setQuestions(sampleUnit(unit, IOWA_TARGET, seen))
-    setIndex(0)
-    setAnswers({})
+    const draft = getAttemptDraft(student.id, unit.id)
+    const byNumber = new Map(unit.questions.map((question) => [question.number, question]))
+    const savedQuestions = draft?.questionNumbers.map((number) => byNumber.get(number)) ?? []
+    const canResume = Boolean(
+      draft &&
+      draft.questionNumbers.length > 0 &&
+      savedQuestions.every((question): question is IowaQuestion => Boolean(question)),
+    )
+
+    if (draft && canResume) {
+      const restored = savedQuestions as IowaQuestion[]
+      setQuestions(restored)
+      setIndex(Math.min(Math.max(0, draft.index), restored.length - 1))
+      setAnswers(draft.answers)
+      startedAtRef.current = draft.startedAt
+      elapsedMsRef.current = draft.elapsedMs
+      activeSinceRef.current = Date.now()
+      setResumed(true)
+    } else {
+      const freshQuestions = sampleUnit(unit, IOWA_TARGET, seen)
+      const startedAt = Date.now()
+      setQuestions(freshQuestions)
+      setIndex(0)
+      setAnswers({})
+      startedAtRef.current = startedAt
+      elapsedMsRef.current = 0
+      activeSinceRef.current = startedAt
+      setResumed(false)
+      saveAttemptDraft(student.id, {
+        unitId: unit.id,
+        questionNumbers: freshQuestions.map((question) => question.number),
+        answers: {},
+        index: 0,
+        startedAt,
+        elapsedMs: 0,
+      })
+      trackDrillStarted(`Iowa ${unit.name}`, 5)
+    }
+
     setFinished(false)
     setShowReview(false)
+    setResult(null)
     setLoaded(true)
-  }, [unit])
+  }, [router, unit])
 
   useEffect(() => {
+    const launchKey = `${params.unitId}:${attemptKey}`
+    if (launchKeyRef.current === launchKey) return
+    launchKeyRef.current = launchKey
     startAttempt()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params.unitId, attemptKey])
-
-  const result = useMemo(() => {
-    if (!finished || !unit) return null
-    const total = questions.length
-    const correct = questions.filter((q) => answers[q.number] === q.answer).length
-    const percent = total ? Math.round((correct / total) * 100) : 0
-    return { total, correct, percent, band: bandFor(percent) }
-  }, [finished, questions, answers, unit])
-
-  useEffect(() => {
-    if (finished && result && unit) {
-      recordAttempt(
-        currentStudentId(),
-        unit.id,
-        result.percent,
-        questions.map((q) => q.number),
-      )
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [finished])
+  }, [attemptKey, params.unitId, startAttempt])
 
   if (!unit) {
     return (
@@ -200,13 +237,75 @@ export default function IowaUnitPage() {
   const pct = Math.round(((index + 1) / questions.length) * 100)
   const isLast = index === questions.length - 1
 
-  const select = (label: string) => setAnswers((a) => ({ ...a, [q.number]: label }))
-  const goNext = () => (isLast ? setFinished(true) : setIndex((i) => i + 1))
-  const goPrev = () => setIndex((i) => Math.max(0, i - 1))
+  const persistDraft = (nextAnswers: Record<number, string>, nextIndex: number) => {
+    const now = Date.now()
+    elapsedMsRef.current += Math.max(0, now - activeSinceRef.current)
+    activeSinceRef.current = now
+    saveAttemptDraft(studentIdRef.current, {
+      unitId: unit.id,
+      questionNumbers: questions.map((question) => question.number),
+      answers: nextAnswers,
+      index: nextIndex,
+      startedAt: startedAtRef.current,
+      elapsedMs: elapsedMsRef.current,
+    })
+  }
+
+  const select = (label: string) => {
+    const next = { ...answers, [q.number]: label }
+    setAnswers(next)
+    persistDraft(next, index)
+  }
+
+  const finishAttempt = () => {
+    if (!chosen || completedRef.current) return
+    completedRef.current = true
+    const completedAt = Date.now()
+    const totalElapsedMs = elapsedMsRef.current + Math.max(0, completedAt - activeSinceRef.current)
+    const outcome = scoreIowaAttempt(questions, answers)
+    recordAttempt(studentIdRef.current, unit.id, outcome.percent, questions.map((question) => question.number))
+    clearAttemptDraft(studentIdRef.current, unit.id)
+    saveDrillResult(
+      {
+        topic: `Iowa ${unit.name}`,
+        subject: "Grade 5 • Iowa Practice",
+        correct: outcome.correct,
+        total: outcome.total,
+        answered: outcome.answered,
+        accuracy: outcome.percent,
+        completedAt: new Date(completedAt).toISOString(),
+      },
+      completedAt - totalElapsedMs,
+    )
+    trackDrillCompleted(`Iowa ${unit.name}`, 5, outcome.percent, outcome.correct, outcome.total)
+    setResult(outcome)
+    setFinished(true)
+  }
+
+  const goNext = () => {
+    if (!chosen) return
+    if (isLast) {
+      finishAttempt()
+      return
+    }
+    const nextIndex = index + 1
+    setIndex(nextIndex)
+    persistDraft(answers, nextIndex)
+  }
+  const goPrev = () => {
+    const nextIndex = Math.max(0, index - 1)
+    setIndex(nextIndex)
+    persistDraft(answers, nextIndex)
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 p-4 py-8">
       <div className="max-w-2xl mx-auto space-y-5">
+        {resumed && (
+          <div className="flex items-center gap-2 rounded-xl border border-indigo-200 bg-indigo-50 px-4 py-3 text-sm font-semibold text-indigo-700">
+            <Save className="h-4 w-4" aria-hidden="true" /> Continuing where you left off — your answers were saved.
+          </div>
+        )}
         <div className="flex items-center justify-between">
           <Button
             variant="ghost"
@@ -273,9 +372,10 @@ export default function IowaUnitPage() {
           </Button>
           <Button
             onClick={goNext}
+            disabled={!chosen}
             className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white"
           >
-            {isLast ? "Finish" : "Next"}
+            {!chosen ? "Choose an answer" : isLast ? "Finish" : "Next"}
             {!isLast && <ArrowRight className="w-4 h-4 ml-2" />}
           </Button>
         </div>

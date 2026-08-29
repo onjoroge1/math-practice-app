@@ -18,11 +18,7 @@ interface Topic {
   category: SkillCategory
 }
 
-/**
- * The three adaptive quizzes. They read the student's grade to pick their
- * starting ranges and then ramp with the student, so the same three entries
- * serve Grade 2 through Grade 5.
- */
+/** Adaptive quizzes for students in Grades 3–5. */
 const ADAPTIVE_QUIZZES: Topic[] = [
   { id: "mental-math-quiz", name: "Mental Math Quiz", description: "Adding and subtracting in your head — you pick the numbers", icon: "🧠", category: "addition" },
   { id: "multiplication-quiz", name: "Times Tables Quiz", description: "Choose your tables or mix them — starts easy and levels up", icon: "✖️", category: "multiplication" },
@@ -30,6 +26,10 @@ const ADAPTIVE_QUIZZES: Topic[] = [
 ]
 
 const QUIZ_ROUTES: Record<string, string> = {
+  "g2-addition-test": "/grade2-addition-test",
+  "g2-subtraction-test": "/grade2-subtraction-test",
+  "g2-multiplication-test": "/grade2-multiplication-test",
+  "g2-division-test": "/grade2-division-test",
   "mental-math-quiz": "/mental-math-quiz",
   "multiplication-quiz": "/times-tables-quiz",
   "division-quiz": "/division-quiz",
@@ -50,7 +50,10 @@ const TOPICS_BY_GRADE: Record<Grade, Topic[]> = {
     { id: "word-problems", name: "Word Problems", description: "Story problems with addition, subtraction, and mixed operations", icon: "📖", category: "operations-algebraic" },
   ],
   2: [
-    ...ADAPTIVE_QUIZZES,
+    { id: "g2-addition-test", name: "Addition Test", description: "50 facts to 20 in a 3-minute worksheet", icon: "➕", category: "addition" },
+    { id: "g2-subtraction-test", name: "Subtraction Test", description: "50 facts to 20 in a 3-minute worksheet", icon: "➖", category: "subtraction" },
+    { id: "g2-multiplication-test", name: "Multiplication Test", description: "50 facts from the 2, 5, and 10 times tables", icon: "✖️", category: "multiplication" },
+    { id: "g2-division-test", name: "Division Test", description: "50 exact division facts using 2, 5, and 10", icon: "➗", category: "division" },
     { id: "add-sub-100", name: "Addition & Subtraction to 100", description: "Add and subtract within 100 with strategies", icon: "➕", category: "addition" },
     { id: "place-value-1000", name: "Place Value to 1000", description: "Understand hundreds, tens, and ones", icon: "🔢", category: "place-value" },
     { id: "skip-counting", name: "Skip Counting & Multiplication Intro", description: "Count by 2s, 5s, and 10s", icon: "🔄", category: "multiplication" },

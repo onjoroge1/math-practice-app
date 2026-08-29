@@ -1,6 +1,6 @@
 // Non-destructive: adds the fixed kid profiles to an existing database.
-// Unlike `db:migrate` (which reruns schema.sql and DROPs every table), this
-// only relaxes the parent_id constraint and inserts the two students.
+// This is retained as an idempotent convenience command. Normal deployments
+// should use `pnpm db:migrate`, which applies the same reconciliation safely.
 
 import { Pool } from "@neondatabase/serverless"
 import { readFileSync } from "fs"

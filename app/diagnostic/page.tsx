@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { getSkillsForTopics, getItemsForSkill, MATH_ITEMS } from "@/lib/mock-data"
-import { getStudentAction, updateMasteryAction, getMasteryAction } from "@/lib/actions"
+import { getStudentAction, updateMasteryAction } from "@/lib/actions"
 import type { MathItem, Grade } from "@/lib/types"
 
 export default function DiagnosticPage() {
@@ -85,16 +85,10 @@ export default function DiagnosticPage() {
 
     if (studentId) {
       try {
-        const mastery = await getMasteryAction(studentId)
-        const existing = mastery.find(
-          (m: Record<string, unknown>) => m.skill_id === currentItem.skillId,
-        )
         await updateMasteryAction(
           studentId,
           currentItem.skillId,
           correct,
-          existing?.attempts_count ?? 0,
-          existing?.correct_count ?? 0,
         )
       } catch {
         // DB not available — gracefully degrade

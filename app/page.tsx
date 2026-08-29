@@ -11,25 +11,32 @@ import { getOrCreateProfileStudentAction } from "@/lib/actions"
 export default function HomePage() {
   const router = useRouter()
   const [loadingKey, setLoadingKey] = useState<string | null>(null)
+  const [error, setError] = useState("")
 
   async function pickProfile(profile: KidProfile) {
     if (loadingKey) return
     setLoadingKey(profile.key)
+    setError("")
 
-    // Resolve the profile to its students row. If the DB is unreachable we fall
-    // back to a stable local id so practice still works offline.
-    const student = await getOrCreateProfileStudentAction(
-      profile.name,
-      profile.grade,
-      profile.avatar,
-    )
+    try {
+      const student = await getOrCreateProfileStudentAction(profile.key)
 
-    localStorage.setItem("currentStudentId", student?.id ?? `local-${profile.key}`)
-    localStorage.setItem("currentStudentGrade", String(profile.grade))
-    localStorage.setItem("currentProfileKey", profile.key)
-    localStorage.setItem("currentStudentName", profile.name)
+      if (!student) {
+        setError("We couldn't load this profile. Check the connection and try again.")
+        return
+      }
 
-    router.push("/topic-select")
+      localStorage.setItem("currentStudentId", student.id)
+      localStorage.setItem("currentStudentGrade", String(student.grade))
+      localStorage.setItem("currentProfileKey", profile.key)
+      localStorage.setItem("currentStudentName", student.name)
+
+      router.push("/topic-select")
+    } catch {
+      setError("We couldn't load this profile. Check the connection and try again.")
+    } finally {
+      setLoadingKey(null)
+    }
   }
 
   return (
@@ -71,6 +78,12 @@ export default function HomePage() {
             )
           })}
         </div>
+
+        {error && (
+          <div role="alert" className="rounded-2xl border border-red-200 bg-red-50 px-5 py-4 text-center text-red-700">
+            {error}
+          </div>
+        )}
 
         <div className="text-center">
           <Link href="/parent">

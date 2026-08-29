@@ -1,10 +1,22 @@
 import type { Skill, MathItem, Grade } from "./types"
-import { getMastery, getSkillsForGrade, getRandomItem, getSkillsForTopics } from "./mock-data"
+import { getSkillsForGrade, getRandomItem, getSkillsForTopics } from "./mock-data"
+
+export interface MasterySnapshot {
+  skillId: string
+  level: number
+  attempts: number
+  correctCount: number
+  lastPracticed?: string | null
+}
 
 // Adaptive difficulty engine
 export class AdaptiveEngine {
   // Determine which skills to practice based on mastery levels and selected topics
-  static selectSkillsForPractice(studentId: string, grade: number, count = 3): Skill[] {
+  static selectSkillsForPractice(
+    grade: number,
+    count = 3,
+    mastery: MasterySnapshot[] = [],
+  ): Skill[] {
     // Get selected topics from localStorage
     const selectedTopicsJson = localStorage.getItem("selectedTopics")
     let gradeSkills: Skill[]
@@ -18,12 +30,15 @@ export class AdaptiveEngine {
     }
 
     // Sort skills by mastery level (prioritize lower mastery)
+    const masteryBySkill = new Map(mastery.map((row) => [row.skillId, row]))
     const skillsWithMastery = gradeSkills.map((skill) => {
-      const mastery = getMastery(studentId, skill.id)
+      const skillMastery = masteryBySkill.get(skill.id)
       return {
         skill,
-        masteryLevel: mastery?.level ?? 0,
-        lastPracticed: mastery?.lastPracticed,
+        masteryLevel: skillMastery?.level ?? 0,
+        lastPracticed: skillMastery?.lastPracticed
+          ? new Date(skillMastery.lastPracticed).getTime()
+          : null,
       }
     })
 
@@ -33,17 +48,17 @@ export class AdaptiveEngine {
         return a.masteryLevel - b.masteryLevel
       }
       // If same mastery, prioritize least recently practiced
-      if (!a.lastPracticed) return -1
-      if (!b.lastPracticed) return 1
-      return a.lastPracticed.getTime() - b.lastPracticed.getTime()
+      if (a.lastPracticed === null) return -1
+      if (b.lastPracticed === null) return 1
+      return a.lastPracticed - b.lastPracticed
     })
 
     return skillsWithMastery.slice(0, count).map((s) => s.skill)
   }
 
   // Determine difficulty level for a skill based on student's mastery
-  static getDifficultyForSkill(studentId: string, skillId: string): number {
-    const mastery = getMastery(studentId, skillId)
+  static getDifficultyForSkill(skillId: string, snapshots: MasterySnapshot[] = []): number {
+    const mastery = snapshots.find((row) => row.skillId === skillId)
 
     if (!mastery || mastery.level === 0) {
       return 1 // Start with easiest
@@ -62,15 +77,21 @@ export class AdaptiveEngine {
   }
 
   // Generate a practice session (list of items)
-  static generatePracticeSession(studentId: string, grade: number, itemCount = 10): MathItem[] {
-    const skills = this.selectSkillsForPractice(studentId, grade, 3)
+  static generatePracticeSession(
+    grade: number,
+    itemCount = 10,
+    mastery: MasterySnapshot[] = [],
+  ): MathItem[] {
+    const skills = this.selectSkillsForPractice(grade, 3, mastery)
     const items: MathItem[] = []
+
+    if (skills.length === 0) return items
 
     // Distribute items across selected skills
     const itemsPerSkill = Math.ceil(itemCount / skills.length)
 
     for (const skill of skills) {
-      const difficulty = this.getDifficultyForSkill(studentId, skill.id)
+      const difficulty = this.getDifficultyForSkill(skill.id, mastery)
 
       for (let i = 0; i < itemsPerSkill && items.length < itemCount; i++) {
         const item = getRandomItem(skill.id, difficulty)

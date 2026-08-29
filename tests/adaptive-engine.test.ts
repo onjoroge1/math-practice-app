@@ -25,15 +25,22 @@ describe("AdaptiveEngine.calculateCoins", () => {
 
 describe("AdaptiveEngine.getDifficultyForSkill", () => {
   it("returns 1 for a student with no mastery data", () => {
-    const difficulty = AdaptiveEngine.getDifficultyForSkill("nonexistent-student", "add-sub-within-10")
+    const difficulty = AdaptiveEngine.getDifficultyForSkill("add-sub-within-10")
     expect(difficulty).toBe(1)
+  })
+
+  it("uses the persisted mastery snapshot", () => {
+    const difficulty = AdaptiveEngine.getDifficultyForSkill("g5-mult", [
+      { skillId: "g5-mult", level: 3, attempts: 10, correctCount: 9 },
+    ])
+    expect(difficulty).toBe(4)
   })
 })
 
 describe("AdaptiveEngine.selectSkillsForPractice", () => {
   it("returns skills for a given grade", () => {
     localStorage.removeItem("selectedTopics")
-    const skills = AdaptiveEngine.selectSkillsForPractice("test-student", 1, 3)
+    const skills = AdaptiveEngine.selectSkillsForPractice(1, 3)
     expect(skills.length).toBeLessThanOrEqual(3)
     expect(skills.length).toBeGreaterThan(0)
     skills.forEach((skill) => {
@@ -43,7 +50,7 @@ describe("AdaptiveEngine.selectSkillsForPractice", () => {
 
   it("respects topic selection from localStorage", () => {
     localStorage.setItem("selectedTopics", JSON.stringify(["addition-subtraction"]))
-    const skills = AdaptiveEngine.selectSkillsForPractice("test-student", 1, 5)
+    const skills = AdaptiveEngine.selectSkillsForPractice(1, 5)
     expect(skills.length).toBeGreaterThan(0)
     skills.forEach((skill) => {
       expect(skill.grade).toBe(1)
@@ -53,7 +60,7 @@ describe("AdaptiveEngine.selectSkillsForPractice", () => {
 
   it("returns requested count or fewer", () => {
     localStorage.removeItem("selectedTopics")
-    const skills = AdaptiveEngine.selectSkillsForPractice("test-student", 2, 2)
+    const skills = AdaptiveEngine.selectSkillsForPractice(2, 2)
     expect(skills.length).toBeLessThanOrEqual(2)
   })
 })
@@ -61,14 +68,14 @@ describe("AdaptiveEngine.selectSkillsForPractice", () => {
 describe("AdaptiveEngine.generatePracticeSession", () => {
   it("generates the requested number of items", () => {
     localStorage.removeItem("selectedTopics")
-    const items = AdaptiveEngine.generatePracticeSession("test-student", 1, 5)
+    const items = AdaptiveEngine.generatePracticeSession(1, 5)
     expect(items.length).toBeLessThanOrEqual(5)
     expect(items.length).toBeGreaterThan(0)
   })
 
   it("each item has required properties", () => {
     localStorage.removeItem("selectedTopics")
-    const items = AdaptiveEngine.generatePracticeSession("test-student", 2, 3)
+    const items = AdaptiveEngine.generatePracticeSession(2, 3)
     items.forEach((item) => {
       expect(item).toHaveProperty("id")
       expect(item).toHaveProperty("skillId")
@@ -76,5 +83,11 @@ describe("AdaptiveEngine.generatePracticeSession", () => {
       expect(item).toHaveProperty("question")
       expect(item).toHaveProperty("answer")
     })
+  })
+
+  it("returns an empty session instead of dividing by zero when a topic has no skills", () => {
+    localStorage.setItem("selectedTopics", JSON.stringify(["unknown-topic"]))
+    expect(AdaptiveEngine.generatePracticeSession(2, 10)).toEqual([])
+    localStorage.removeItem("selectedTopics")
   })
 })

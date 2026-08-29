@@ -97,9 +97,12 @@ export default function TopicSelectPage() {
   const [grade, setGrade] = useState<Grade | null>(null)
   const [selectedTopics, setSelectedTopics] = useState<string[]>([])
   const [practiceMode, setPracticeMode] = useState<"adaptive" | "speed-drill">("adaptive")
+  const [loadError, setLoadError] = useState("")
+  const [reloadToken, setReloadToken] = useState(0)
 
   useEffect(() => {
     async function loadStudent() {
+      setLoadError("")
       const studentId = localStorage.getItem("currentStudentId")
       if (!studentId) {
         router.push("/")
@@ -110,11 +113,11 @@ export default function TopicSelectPage() {
         setGrade(student.grade as Grade)
         localStorage.setItem("currentStudentGrade", String(student.grade))
       } else {
-        router.push("/")
+        setLoadError("We couldn't load this profile. Please check the connection and try again.")
       }
     }
     loadStudent()
-  }, [router])
+  }, [router, reloadToken])
 
   const toggleTopic = (topicId: string) => {
     setSelectedTopics((prev) => (prev.includes(topicId) ? prev.filter((id) => id !== topicId) : [...prev, topicId]))
@@ -181,7 +184,19 @@ export default function TopicSelectPage() {
   if (!grade) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 flex items-center justify-center">
-        <div className="text-2xl text-slate-600">Loading...</div>
+        {loadError ? (
+          <Card className="mx-4 max-w-md space-y-4 rounded-3xl p-8 text-center shadow-xl">
+            <div className="text-5xl">🔌</div>
+            <h1 className="text-2xl font-bold text-slate-800">Profile unavailable</h1>
+            <p role="alert" className="text-slate-600">{loadError}</p>
+            <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <Button onClick={() => setReloadToken((value) => value + 1)}>Try Again</Button>
+              <Button variant="outline" onClick={() => router.push("/")}>Choose Profile</Button>
+            </div>
+          </Card>
+        ) : (
+          <div className="text-2xl text-slate-600">Loading...</div>
+        )}
       </div>
     )
   }

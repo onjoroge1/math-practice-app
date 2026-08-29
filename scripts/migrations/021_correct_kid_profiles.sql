@@ -1,17 +1,5 @@
--- Fixed kid profiles.
---
--- The onboarding wizard was removed: this app serves two named kids, and their
--- progress accumulates under those names. Earlier migrations declared
--- students.parent_id NOT NULL, which blocks creating a student before a parent
--- account exists, so relax it first.
-
+-- Correct the fixed child identities without replacing their rows or progress.
 ALTER TABLE students ALTER COLUMN parent_id DROP NOT NULL;
-
--- One active row per name, so repeated profile lookups can never fork progress
--- across duplicate students.
-CREATE UNIQUE INDEX IF NOT EXISTS idx_students_unique_active_name
-  ON students (LOWER(name))
-  WHERE is_active = true;
 
 UPDATE students
 SET grade = 2, avatar = 'rocket', updated_at = CURRENT_TIMESTAMP

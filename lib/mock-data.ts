@@ -1,4 +1,4 @@
-import type { Skill, MathItem, Student, Mastery, Grade } from "./types"
+import type { Skill, MathItem, Grade } from "./types"
 
 // Avatar options
 export const AVATARS = [
@@ -3236,71 +3236,6 @@ export const MATH_ITEMS: MathItem[] = [
   { id: "g2-money-3", skillId: "g2-money", difficulty: 2, question: "How many cents are in 3 quarters?", answer: 75, choices: [50, 60, 75, 100], explanation: "3 × 25 = 75 cents." },
   { id: "g2-money-4", skillId: "g2-money", difficulty: 2, question: "You have 50 cents and spend 35 cents. How many cents are left?", answer: 15, choices: [15, 25, 20, 85], explanation: "50 − 35 = 15 cents." },
 ]
-
-// Mock student data (will be created during onboarding)
-export const STUDENTS: Student[] = []
-export const MASTERY_DATA: Mastery[] = []
-
-// Helper functions for mock data management
-export function createStudent(name: string, grade: Grade, avatarId: string): Student {
-  const student: Student = {
-    id: `student-${Date.now()}`,
-    name,
-    grade,
-    avatarId,
-    coins: 0,
-    streak: 0,
-    createdAt: new Date(),
-  }
-  STUDENTS.push(student)
-  return student
-}
-
-export function getStudent(id: string): Student | undefined {
-  return STUDENTS.find((s) => s.id === id)
-}
-
-export function updateStudent(id: string, updates: Partial<Student>): void {
-  const index = STUDENTS.findIndex((s) => s.id === id)
-  if (index !== -1) {
-    STUDENTS[index] = { ...STUDENTS[index], ...updates }
-  }
-}
-
-export function getMastery(studentId: string, skillId: string): Mastery | undefined {
-  return MASTERY_DATA.find((m) => m.studentId === studentId && m.skillId === skillId)
-}
-
-export function updateMastery(studentId: string, skillId: string, correct: boolean): void {
-  let mastery = getMastery(studentId, skillId)
-
-  if (!mastery) {
-    mastery = {
-      id: `mastery-${Date.now()}-${Math.random()}`,
-      studentId,
-      skillId,
-      level: 0,
-      attempts: 0,
-      correctCount: 0,
-      updatedAt: new Date(),
-    }
-    MASTERY_DATA.push(mastery)
-  }
-
-  mastery.attempts++
-  if (correct) mastery.correctCount++
-  mastery.lastPracticed = new Date()
-  mastery.updatedAt = new Date()
-
-  // Calculate mastery level (0-5) based on accuracy and attempts
-  const accuracy = mastery.correctCount / mastery.attempts
-  if (mastery.attempts >= 10 && accuracy >= 0.95) mastery.level = 5
-  else if (mastery.attempts >= 8 && accuracy >= 0.9) mastery.level = 4
-  else if (mastery.attempts >= 6 && accuracy >= 0.8) mastery.level = 3
-  else if (mastery.attempts >= 4 && accuracy >= 0.7) mastery.level = 2
-  else if (mastery.attempts >= 2 && accuracy >= 0.6) mastery.level = 1
-  else mastery.level = 0
-}
 
 const TOPIC_TO_CATEGORY_MAP: Record<string, string[]> = {
   // Grade 1

@@ -1,6 +1,6 @@
 # Math Practice App
 
-An adaptive math practice application for grades 1-4, featuring timed drills, Vedic math tricks, mastery tracking, and a parent dashboard.
+An adaptive math practice application for grades 1-5, featuring timed drills, Vedic math tricks, mastery tracking, and a parent dashboard.
 
 ## Tech Stack
 
@@ -15,7 +15,7 @@ An adaptive math practice application for grades 1-4, featuring timed drills, Ve
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 20.9+
 - pnpm (`npm install -g pnpm`)
 - A [Neon](https://neon.tech) PostgreSQL database (for persistence)
 
@@ -29,14 +29,25 @@ pnpm install
 cp .env.example .env.local
 # Edit .env.local with your DATABASE_URL
 
-# Run database migrations (requires DATABASE_URL)
-# node scripts/run-migrations.js
+# Existing database: apply non-destructive migrations (requires DATABASE_URL)
+pnpm db:migrate
 
 # Start dev server
 pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
+
+For a brand-new disposable database, initialize the schema and then record the
+incremental migrations:
+
+```bash
+ALLOW_DB_RESET=1 pnpm db:reset
+pnpm db:migrate
+```
+
+`db:reset` deletes existing application data and refuses to run unless
+`ALLOW_DB_RESET=1` is set. Routine deployments should use only `db:migrate`.
 
 ### Environment Variables
 
@@ -56,11 +67,13 @@ existing database without wiping progress:
 pnpm db:seed-profiles
 ```
 
-`pnpm db:migrate` reruns `schema.sql`, which **drops every table** — use it only for a fresh setup.
+`pnpm db:migrate` applies each file in `scripts/migrations` once and verifies that applied
+migrations have not been edited. For a disposable fresh database only, run
+`ALLOW_DB_RESET=1 pnpm db:reset`; the reset command drops every application table.
 
 ## App Flow
 
-1. **Home** (`/`) — Profile picker: tap **Amir** (Grade 5) or **Aden** (Grade 2). There is no
+1. **Home** (`/`) — Profile picker: tap **Amir** (Grade 2) or **Aden** (Grade 5). There is no
    sign-up or onboarding; each name maps to a fixed `students` row, so all progress accumulates
    under that name and shows up in the parent portal.
 2. **Topic Select** (`/topic-select`) — Choose math topics and practice mode (adaptive or speed drill)
@@ -100,8 +113,8 @@ components/       # Shared components
 hooks/            # Custom React hooks
 lib/              # Core logic
   adaptive-engine.ts  # Adaptive difficulty engine
-  db.ts              # Neon database operations (not yet wired)
-  mock-data.ts       # In-memory data + question bank
+  db.ts              # Neon database operations
+  mock-data.ts       # Static skills and question bank
   types.ts           # TypeScript types
   utils.ts           # Tailwind cn() helper
 scripts/          # SQL migrations

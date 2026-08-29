@@ -40,9 +40,7 @@ export default function ParentDashboard() {
       try {
         // Both boys should appear in the portal whether or not they have
         // practiced yet, so provision their rows before listing.
-        await Promise.all(
-          PROFILES.map((p) => getOrCreateProfileStudentAction(p.name, p.grade, p.avatar)),
-        )
+        await Promise.all(PROFILES.map((p) => getOrCreateProfileStudentAction(p.key)))
         const rows = await getStudentsForParentAction()
         const mapped = (rows as StudentRow[]) ?? []
         // Amir first, then Aden; any legacy rows sort after them.

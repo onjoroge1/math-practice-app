@@ -22,7 +22,7 @@ export const PROFILES: KidProfile[] = [
   {
     key: "amir",
     name: "Amir",
-    grade: 5,
+    grade: 2,
     avatar: "rocket",
     emoji: "🚀",
     cardClass: "from-indigo-500 to-purple-600",
@@ -31,7 +31,7 @@ export const PROFILES: KidProfile[] = [
   {
     key: "aden",
     name: "Aden",
-    grade: 2,
+    grade: 5,
     avatar: "dragon",
     emoji: "🐉",
     cardClass: "from-emerald-500 to-teal-600",

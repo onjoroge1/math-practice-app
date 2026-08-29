@@ -11,6 +11,7 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "db:migrate": "node --env-file=.env.local scripts/run-migrations.js",
+    "db:reset": "node --env-file=.env.local scripts/reset-database.js",
     "db:seed-profiles": "node --env-file=.env.local scripts/seed-profiles.js"
   },
   "dependencies": {

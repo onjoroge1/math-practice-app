@@ -83,6 +83,26 @@ export async function getStudentByName(name: string) {
   return result[0]
 }
 
+/** Reconcile a fixed profile without replacing its progress-bearing row. */
+export async function updateStudentProfile(
+  studentId: string,
+  grade: number,
+  avatar: string,
+  parentId?: string,
+) {
+  const result = await sql`
+    UPDATE students
+    SET
+      grade = ${grade},
+      avatar = ${avatar},
+      parent_id = COALESCE(parent_id, ${parentId ?? null}),
+      updated_at = CURRENT_TIMESTAMP
+    WHERE id = ${studentId} AND is_active = true
+    RETURNING *
+  `
+  return result[0]
+}
+
 export async function getStudentsByParentId(parentId: string) {
   const result = await sql`
     SELECT * FROM students
@@ -139,7 +159,6 @@ export async function getMasteryForStudent(studentId: string) {
 export async function updateMastery(
   studentId: string,
   skillId: string,
-  masteryLevel: number,
   isCorrect: boolean,
 ) {
   const result = await sql`
@@ -147,7 +166,7 @@ export async function updateMastery(
     VALUES (
       ${studentId},
       ${skillId},
-      ${masteryLevel},
+      0,
       1,
       ${isCorrect ? 1 : 0},
       ${isCorrect ? 0 : 1},
@@ -155,7 +174,24 @@ export async function updateMastery(
     )
     ON CONFLICT (student_id, skill_id)
     DO UPDATE SET
-      mastery_level = ${masteryLevel},
+      mastery_level = CASE
+        WHEN mastery_tracking.attempts_count + 1 >= 10
+          AND (mastery_tracking.correct_count + ${isCorrect ? 1 : 0})::FLOAT
+            / (mastery_tracking.attempts_count + 1) >= 0.95 THEN 5
+        WHEN mastery_tracking.attempts_count + 1 >= 8
+          AND (mastery_tracking.correct_count + ${isCorrect ? 1 : 0})::FLOAT
+            / (mastery_tracking.attempts_count + 1) >= 0.90 THEN 4
+        WHEN mastery_tracking.attempts_count + 1 >= 6
+          AND (mastery_tracking.correct_count + ${isCorrect ? 1 : 0})::FLOAT
+            / (mastery_tracking.attempts_count + 1) >= 0.80 THEN 3
+        WHEN mastery_tracking.attempts_count + 1 >= 4
+          AND (mastery_tracking.correct_count + ${isCorrect ? 1 : 0})::FLOAT
+            / (mastery_tracking.attempts_count + 1) >= 0.70 THEN 2
+        WHEN mastery_tracking.attempts_count + 1 >= 2
+          AND (mastery_tracking.correct_count + ${isCorrect ? 1 : 0})::FLOAT
+            / (mastery_tracking.attempts_count + 1) >= 0.60 THEN 1
+        ELSE 0
+      END,
       attempts_count = mastery_tracking.attempts_count + 1,
       correct_count = mastery_tracking.correct_count + ${isCorrect ? 1 : 0},
       incorrect_count = mastery_tracking.incorrect_count + ${isCorrect ? 0 : 1},

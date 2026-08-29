@@ -5,13 +5,36 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import { getStudent, updateStudent, updateMastery, AVATARS } from "@/lib/mock-data"
-import { AdaptiveEngine } from "@/lib/adaptive-engine"
-import type { MathItem, Student } from "@/lib/types"
+import { AVATARS } from "@/lib/mock-data"
+import { AdaptiveEngine, type MasterySnapshot } from "@/lib/adaptive-engine"
+import {
+  getMasteryAction,
+  getStudentAction,
+  updateMasteryAction,
+  updateStudentStatsAction,
+} from "@/lib/actions"
+import type { Grade, MathItem } from "@/lib/types"
+
+interface PracticeStudent {
+  id: string
+  name: string
+  grade: Grade
+  avatar: string | null
+  total_coins: number | null
+  current_streak: number | null
+}
+
+interface MasteryRow {
+  skill_id: string
+  mastery_level: number
+  attempts_count: number
+  correct_count: number
+  last_practiced_at?: string | null
+}
 
 export default function PracticePage() {
   const router = useRouter()
-  const [student, setStudent] = useState<Student | null>(null)
+  const [student, setStudent] = useState<PracticeStudent | null>(null)
   const [items, setItems] = useState<MathItem[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState<string | number | null>(null)
@@ -23,32 +46,65 @@ export default function PracticePage() {
   const [sessionCoins, setSessionCoins] = useState(0)
   const [sessionCorrect, setSessionCorrect] = useState(0)
   const [showCelebration, setShowCelebration] = useState(false)
+  const [loadError, setLoadError] = useState("")
+  const [reloadToken, setReloadToken] = useState(0)
+  const [finishing, setFinishing] = useState(false)
+  const [saveError, setSaveError] = useState("")
 
   useEffect(() => {
-    const id = localStorage.getItem("currentStudentId")
-    if (!id) {
-      router.push("/")
-      return
+    let cancelled = false
+
+    async function loadPractice() {
+      setLoadError("")
+      const id = localStorage.getItem("currentStudentId")
+      if (!id) {
+        router.replace("/")
+        return
+      }
+
+      const [studentData, masteryData] = await Promise.all([
+        getStudentAction(id),
+        getMasteryAction(id),
+      ])
+      if (cancelled) return
+
+      if (!studentData) {
+        setLoadError("We couldn't load this profile. Please check the connection and try again.")
+        return
+      }
+
+      const resolvedStudent = studentData as PracticeStudent
+      const snapshots: MasterySnapshot[] = ((masteryData as MasteryRow[]) ?? []).map((row) => ({
+        skillId: row.skill_id,
+        level: row.mastery_level,
+        attempts: row.attempts_count,
+        correctCount: row.correct_count,
+        lastPracticed: row.last_practiced_at,
+      }))
+      const practiceItems = AdaptiveEngine.generatePracticeSession(
+        resolvedStudent.grade,
+        10,
+        snapshots,
+      )
+
+      if (practiceItems.length === 0) {
+        setLoadError("No questions are available for these topics yet. Choose another topic and try again.")
+        return
+      }
+
+      setStudent(resolvedStudent)
+      setItems(practiceItems)
     }
 
-    const studentData = getStudent(id)
-    if (!studentData) {
-      router.push("/")
-      return
+    void loadPractice()
+    return () => {
+      cancelled = true
     }
-
-    setStudent(studentData)
-
-    const practiceItems = AdaptiveEngine.generatePracticeSession(id, studentData.grade, 10)
-
-    console.log("[v0] Practice items loaded:", practiceItems.length, "items")
-
-    setItems(practiceItems)
-  }, [router])
+  }, [router, reloadToken])
 
   const currentItem = items[currentIndex]
-  const progress = ((currentIndex + 1) / items.length) * 100
-  const avatar = AVATARS.find((a) => a.id === student?.avatarId)
+  const progress = items.length > 0 ? ((currentIndex + 1) / items.length) * 100 : 0
+  const avatar = AVATARS.find((a) => a.id === student?.avatar)
 
   const handleAnswer = (answer: string | number) => {
     if (!student || !currentItem) return
@@ -61,21 +117,16 @@ export default function PracticePage() {
     // Calculate time spent
     const timeSpent = Math.floor((Date.now() - startTime) / 1000)
 
-    // Update mastery
-    updateMastery(student.id, currentItem.skillId, correct)
+    // Persist mastery without blocking the next question.
+    void updateMasteryAction(student.id, currentItem.skillId, correct).catch(() => undefined)
 
     // Calculate coins earned
     const coinsEarned = AdaptiveEngine.calculateCoins(correct, hintsUsed, timeSpent)
-    setSessionCoins(sessionCoins + coinsEarned)
+    setSessionCoins((coins) => coins + coinsEarned)
 
     if (correct) {
-      setSessionCorrect(sessionCorrect + 1)
+      setSessionCorrect((count) => count + 1)
     }
-
-    // Update student coins
-    updateStudent(student.id, {
-      coins: student.coins + coinsEarned,
-    })
   }
 
   const handleNext = () => {
@@ -92,20 +143,33 @@ export default function PracticePage() {
     }
   }
 
-  const handleFinish = () => {
+  const handleFinish = async () => {
     if (!student) return
+    setFinishing(true)
+    setSaveError("")
+    try {
+      await updateStudentStatsAction(student.id, sessionCoins)
+      router.push("/practice/summary")
+    } catch {
+      setSaveError("We couldn't save this session yet. Please try again.")
+      setFinishing(false)
+    }
+  }
 
-    // Update streak
-    const today = new Date().toDateString()
-    const lastPractice = student.lastPracticeDate?.toDateString()
-    const newStreak = lastPractice === today ? student.streak : student.streak + 1
-
-    updateStudent(student.id, {
-      lastPracticeDate: new Date(),
-      streak: newStreak,
-    })
-
-    router.push("/practice/summary")
+  if (loadError) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 flex items-center justify-center p-4">
+        <Card className="max-w-md space-y-4 rounded-3xl p-8 text-center shadow-xl">
+          <div className="text-5xl">🔌</div>
+          <h1 className="text-2xl font-bold text-slate-800">Practice unavailable</h1>
+          <p role="alert" className="text-slate-600">{loadError}</p>
+          <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <Button onClick={() => setReloadToken((value) => value + 1)}>Try Again</Button>
+            <Button variant="outline" onClick={() => router.push("/topic-select")}>Choose Topics</Button>
+          </div>
+        </Card>
+      </div>
+    )
   }
 
   if (!currentItem || !student) {
@@ -149,11 +213,13 @@ export default function PracticePage() {
 
           <Button
             onClick={handleFinish}
+            disabled={finishing}
             className="w-full py-6 text-lg bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl"
             size="lg"
           >
-            Continue
+            {finishing ? "Saving…" : "Continue"}
           </Button>
+          {saveError && <p role="alert" className="text-sm text-red-600">{saveError}</p>}
         </Card>
       </div>
     )
@@ -174,11 +240,11 @@ export default function PracticePage() {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2 bg-pink-100 px-4 py-2 rounded-xl">
               <span className="text-2xl">🪙</span>
-              <span className="font-bold text-pink-600">{student.coins + sessionCoins}</span>
+              <span className="font-bold text-pink-600">{(student.total_coins ?? 0) + sessionCoins}</span>
             </div>
             <div className="flex items-center gap-2 bg-orange-100 px-4 py-2 rounded-xl">
               <span className="text-2xl">🔥</span>
-              <span className="font-bold text-orange-600">{student.streak}</span>
+              <span className="font-bold text-orange-600">{student.current_streak ?? 0}</span>
             </div>
           </div>
         </div>

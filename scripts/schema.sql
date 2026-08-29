@@ -1,8 +1,9 @@
--- Authoritative schema for math-practice-app
--- This is the single source of truth. Matches lib/db.ts expectations exactly.
--- Run against a Neon PostgreSQL database.
+-- Authoritative reset schema for math-practice-app.
+-- DESTRUCTIVE: this drops all application data. Use only through `pnpm db:reset`
+-- with ALLOW_DB_RESET=1. Normal database changes belong in scripts/migrations.
 
 -- Drop everything in dependency order
+DROP TABLE IF EXISTS schema_migrations CASCADE;
 DROP VIEW IF EXISTS parent_dashboard_stats CASCADE;
 DROP VIEW IF EXISTS student_progress_summary CASCADE;
 DROP TABLE IF EXISTS achievements CASCADE;
@@ -233,6 +234,6 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_students_unique_active_name
   WHERE is_active = true;
 
 INSERT INTO students (name, grade, avatar) VALUES
-  ('Amir', 5, 'rocket'),
-  ('Aden', 2, 'dragon')
+  ('Amir', 2, 'rocket'),
+  ('Aden', 5, 'dragon')
 ON CONFLICT DO NOTHING;

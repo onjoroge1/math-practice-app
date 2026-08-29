@@ -26,8 +26,7 @@ export function saveDrillResultLocal(result: DrillResult) {
 export async function saveDrillResultToDB(result: DrillResult, startTime: number) {
   if (typeof window === "undefined") return
   const studentId = localStorage.getItem("currentStudentId")
-  // `local-*` ids are the offline fallback from the profile picker — nothing to
-  // sync them to.
+  // Ignore stale offline-profile ids that may remain in a returning browser.
   if (!studentId || studentId === "guest" || studentId.startsWith("local-")) return
 
   const gradeStr = localStorage.getItem("currentStudentGrade")

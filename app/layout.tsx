@@ -16,11 +16,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Math Practice — Adaptive Learning for Grades 1-4",
+    default: "Math Practice — Adaptive Learning for Grades 1-5",
     template: "%s | Math Practice",
   },
   description:
-    "Fun, adaptive math practice for grades 1-4. Timed drills, Vedic math tricks, mastery tracking, and a parent dashboard to monitor progress.",
+    "Fun, adaptive math practice for grades 1-5. Timed drills, Vedic math tricks, mastery tracking, and a parent dashboard to monitor progress.",
   keywords: [
     "math practice",
     "adaptive learning",
@@ -28,6 +28,7 @@ export const metadata: Metadata = {
     "grade 2 math",
     "grade 3 math",
     "grade 4 math",
+    "grade 5 math",
     "Vedic math",
     "timed drills",
     "math for kids",
@@ -38,13 +39,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "Math Practice",
-    title: "Math Practice — Adaptive Learning for Grades 1-4",
+    title: "Math Practice — Adaptive Learning for Grades 1-5",
     description:
       "Fun, adaptive math practice with Vedic tricks, timed drills, and mastery tracking.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Math Practice — Adaptive Learning for Grades 1-4",
+    title: "Math Practice — Adaptive Learning for Grades 1-5",
     description:
       "Fun, adaptive math practice with Vedic tricks, timed drills, and mastery tracking.",
   },

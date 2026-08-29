@@ -7,6 +7,7 @@ import {
   createStudent as dbCreateStudent,
   getStudentById as dbGetStudentById,
   getStudentByName as dbGetStudentByName,
+  updateStudentProfile as dbUpdateStudentProfile,
   getAllStudents as dbGetAllStudents,
   getStudentsByParentId as dbGetStudentsByParentId,
   updateStudentStats as dbUpdateStudentStats,
@@ -20,6 +21,7 @@ import {
   getParentDashboard as dbGetParentDashboard,
 } from "./db"
 import { auth } from "./auth"
+import { getProfileByKey } from "./profiles"
 
 // ─── Auth actions ─────────────────────────────────────────────────────────────
 
@@ -92,24 +94,32 @@ export async function getAllStudentsAction() {
  * maps to the same student, so progress accumulates under that name across
  * devices and shows up in the parent dashboard.
  *
- * Returns null if the database is unreachable — callers fall back to
- * local-only progress rather than blocking practice.
+ * Returns null if the database is unreachable so callers can show a retry
+ * state without creating an id that cannot be resolved on the next page.
  */
-export async function getOrCreateProfileStudentAction(
-  name: string,
-  grade: number,
-  avatar: string,
-) {
-  const profileName = name.trim()
-  if (!profileName) throw new Error("Name is required")
-  if (grade < 1 || grade > 5) throw new Error("Grade must be between 1 and 5")
+export async function getOrCreateProfileStudentAction(profileKey: string) {
+  const profile = getProfileByKey(profileKey)
+  if (!profile) throw new Error("Unknown kid profile")
 
   try {
-    const existing = await dbGetStudentByName(profileName)
-    if (existing) return existing
-
+    const existing = await dbGetStudentByName(profile.name)
     const parentId = await getAuthParentId()
-    return await dbCreateStudent(profileName, grade, avatar, parentId ?? undefined)
+
+    if (existing) {
+      return await dbUpdateStudentProfile(
+        existing.id,
+        profile.grade,
+        profile.avatar,
+        parentId ?? undefined,
+      )
+    }
+
+    return await dbCreateStudent(
+      profile.name,
+      profile.grade,
+      profile.avatar,
+      parentId ?? undefined,
+    )
   } catch {
     return null
   }
@@ -130,21 +140,8 @@ export async function updateMasteryAction(
   studentId: string,
   skillId: string,
   isCorrect: boolean,
-  currentAttempts: number,
-  currentCorrect: number,
 ) {
-  const totalAttempts = currentAttempts + 1
-  const totalCorrect = currentCorrect + (isCorrect ? 1 : 0)
-  const accuracy = totalCorrect / totalAttempts
-
-  let masteryLevel = 0
-  if (totalAttempts >= 10 && accuracy >= 0.95) masteryLevel = 5
-  else if (totalAttempts >= 8 && accuracy >= 0.9) masteryLevel = 4
-  else if (totalAttempts >= 6 && accuracy >= 0.8) masteryLevel = 3
-  else if (totalAttempts >= 4 && accuracy >= 0.7) masteryLevel = 2
-  else if (totalAttempts >= 2 && accuracy >= 0.6) masteryLevel = 1
-
-  return await dbUpdateMastery(studentId, skillId, masteryLevel, isCorrect)
+  return await dbUpdateMastery(studentId, skillId, isCorrect)
 }
 
 // ─── Session actions ──────────────────────────────────────────────────────────

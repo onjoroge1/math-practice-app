@@ -223,3 +223,16 @@ COMMENT ON TABLE mastery_tracking IS 'Tracks student mastery level per skill';
 COMMENT ON TABLE practice_sessions IS 'Individual practice session records';
 COMMENT ON TABLE practice_attempts IS 'Individual question attempts within sessions';
 COMMENT ON TABLE achievements IS 'Student achievements and milestones';
+
+-- ─── Fixed kid profiles ───────────────────────────────────────────────────────
+-- This app has no sign-up flow: two named kids own all progress. One active row
+-- per name keeps repeated profile lookups from forking progress across dupes.
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_students_unique_active_name
+  ON students (LOWER(name))
+  WHERE is_active = true;
+
+INSERT INTO students (name, grade, avatar) VALUES
+  ('Amir', 5, 'rocket'),
+  ('Aden', 2, 'dragon')
+ON CONFLICT DO NOTHING;

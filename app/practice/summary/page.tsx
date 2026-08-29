@@ -34,13 +34,13 @@ export default function SummaryPage() {
     async function load() {
       const id = localStorage.getItem("currentStudentId")
       if (!id) {
-        router.push("/onboarding")
+        router.push("/")
         return
       }
 
       const data = await getStudentAction(id)
       if (!data) {
-        router.push("/onboarding")
+        router.push("/")
         return
       }
 

@@ -18,6 +18,23 @@ interface Topic {
   category: SkillCategory
 }
 
+/**
+ * The three adaptive quizzes. They read the student's grade to pick their
+ * starting ranges and then ramp with the student, so the same three entries
+ * serve Grade 2 through Grade 5.
+ */
+const ADAPTIVE_QUIZZES: Topic[] = [
+  { id: "mental-math-quiz", name: "Mental Math Quiz", description: "Adding and subtracting in your head — you pick the numbers", icon: "🧠", category: "addition" },
+  { id: "multiplication-quiz", name: "Times Tables Quiz", description: "Choose your tables or mix them — starts easy and levels up", icon: "✖️", category: "multiplication" },
+  { id: "division-quiz", name: "Division Quiz", description: "Sharing into equal groups — starts easy and levels up", icon: "➗", category: "division" },
+]
+
+const QUIZ_ROUTES: Record<string, string> = {
+  "mental-math-quiz": "/mental-math-quiz",
+  "multiplication-quiz": "/times-tables-quiz",
+  "division-quiz": "/division-quiz",
+}
+
 const TOPICS_BY_GRADE: Record<Grade, Topic[]> = {
   1: [
     { id: "addition-subtraction", name: "Addition & Subtraction", description: "Add and subtract within 20", icon: "➕", category: "operations-algebraic" },
@@ -33,6 +50,7 @@ const TOPICS_BY_GRADE: Record<Grade, Topic[]> = {
     { id: "word-problems", name: "Word Problems", description: "Story problems with addition, subtraction, and mixed operations", icon: "📖", category: "operations-algebraic" },
   ],
   2: [
+    ...ADAPTIVE_QUIZZES,
     { id: "add-sub-100", name: "Addition & Subtraction to 100", description: "Add and subtract within 100 with strategies", icon: "➕", category: "addition" },
     { id: "place-value-1000", name: "Place Value to 1000", description: "Understand hundreds, tens, and ones", icon: "🔢", category: "place-value" },
     { id: "skip-counting", name: "Skip Counting & Multiplication Intro", description: "Count by 2s, 5s, and 10s", icon: "🔄", category: "multiplication" },
@@ -41,6 +59,7 @@ const TOPICS_BY_GRADE: Record<Grade, Topic[]> = {
     { id: "money", name: "Money & Making Change", description: "Count money and make change", icon: "💵", category: "money" },
   ],
   3: [
+    ...ADAPTIVE_QUIZZES,
     { id: "multiplication", name: "Multiplication", description: "Master multiplication facts and strategies", icon: "✖️", category: "multiplication" },
     { id: "division", name: "Division", description: "Understand division and fact families", icon: "➗", category: "division" },
     { id: "fractions", name: "Fractions", description: "Understand unit fractions and equivalence", icon: "🍕", category: "fractions" },
@@ -49,6 +68,7 @@ const TOPICS_BY_GRADE: Record<Grade, Topic[]> = {
     { id: "geometry", name: "Geometry & Perimeter", description: "Explore shapes and perimeter", icon: "🔷", category: "geometry" },
   ],
   4: [
+    ...ADAPTIVE_QUIZZES,
     { id: "multiplication", name: "Multiplication", description: "Master multiplication facts and multi-digit multiplication", icon: "✖️", category: "multiplication" },
     { id: "division", name: "Division", description: "Master division facts and multi-digit division", icon: "➗", category: "division" },
     { id: "multi-digit", name: "Multi-Digit Operations", description: "Advanced operations with large numbers", icon: "🔢", category: "multiplication" },
@@ -62,6 +82,7 @@ const TOPICS_BY_GRADE: Record<Grade, Topic[]> = {
     { id: "grade4-geometric-spatial", name: "Geometric & Spatial Reasoning", description: "Properties of shapes, angles, and symmetry", icon: "🔶", category: "geometry" },
   ],
   5: [
+    ...ADAPTIVE_QUIZZES,
     { id: "g5-place-value", name: "Place Value & Powers of 10", description: "Read, round, and scale large numbers by powers of 10", icon: "🔢", category: "place-value" },
     { id: "g5-operations", name: "Multiplication & Division", description: "Multi-digit multiplication and long division", icon: "✖️", category: "multiplication" },
     { id: "g5-decimals", name: "Decimals", description: "Add, subtract, multiply, and round decimals", icon: "🔟", category: "decimals" },
@@ -89,7 +110,7 @@ export default function TopicSelectPage() {
         setGrade(student.grade as Grade)
         localStorage.setItem("currentStudentGrade", String(student.grade))
       } else {
-        router.push("/onboarding")
+        router.push("/")
       }
     }
     loadStudent()
@@ -104,6 +125,14 @@ export default function TopicSelectPage() {
     if (grade) {
       trackTopicsSelected(selectedTopics, grade)
       trackPracticeStarted(grade, practiceMode)
+    }
+
+    // The adaptive quizzes carry their own settings screen and difficulty
+    // ladder, so they run the same way in either practice mode, for any grade.
+    const quizTopic = selectedTopics.find((t) => t in QUIZ_ROUTES)
+    if (quizTopic) {
+      router.push(QUIZ_ROUTES[quizTopic])
+      return
     }
 
     if (practiceMode === "speed-drill") {

@@ -24,14 +24,14 @@ export default function DiagnosticPage() {
     async function init() {
       const id = localStorage.getItem("currentStudentId")
       if (!id) {
-        router.push("/onboarding")
+        router.push("/")
         return
       }
       setStudentId(id)
 
       const student = await getStudentAction(id)
       if (!student) {
-        router.push("/onboarding")
+        router.push("/")
         return
       }
 

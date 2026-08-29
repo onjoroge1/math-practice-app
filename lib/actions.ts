@@ -6,6 +6,7 @@ import {
   getParentByEmail as dbGetParentByEmail,
   createStudent as dbCreateStudent,
   getStudentById as dbGetStudentById,
+  getStudentByName as dbGetStudentByName,
   getAllStudents as dbGetAllStudents,
   getStudentsByParentId as dbGetStudentsByParentId,
   updateStudentStats as dbUpdateStudentStats,
@@ -82,6 +83,35 @@ export async function getAllStudentsAction() {
     return await dbGetAllStudents()
   } catch {
     return []
+  }
+}
+
+/**
+ * Resolve a fixed kid profile (Amir / Aden) to its `students` row, creating the
+ * row on first use. This replaces the old onboarding flow: the same name always
+ * maps to the same student, so progress accumulates under that name across
+ * devices and shows up in the parent dashboard.
+ *
+ * Returns null if the database is unreachable — callers fall back to
+ * local-only progress rather than blocking practice.
+ */
+export async function getOrCreateProfileStudentAction(
+  name: string,
+  grade: number,
+  avatar: string,
+) {
+  const profileName = name.trim()
+  if (!profileName) throw new Error("Name is required")
+  if (grade < 1 || grade > 5) throw new Error("Grade must be between 1 and 5")
+
+  try {
+    const existing = await dbGetStudentByName(profileName)
+    if (existing) return existing
+
+    const parentId = await getAuthParentId()
+    return await dbCreateStudent(profileName, grade, avatar, parentId ?? undefined)
+  } catch {
+    return null
   }
 }
 

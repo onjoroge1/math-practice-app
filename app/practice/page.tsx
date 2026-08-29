@@ -27,13 +27,13 @@ export default function PracticePage() {
   useEffect(() => {
     const id = localStorage.getItem("currentStudentId")
     if (!id) {
-      router.push("/onboarding")
+      router.push("/")
       return
     }
 
     const studentData = getStudent(id)
     if (!studentData) {
-      router.push("/onboarding")
+      router.push("/")
       return
     }
 

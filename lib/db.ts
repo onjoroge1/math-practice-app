@@ -72,6 +72,17 @@ export async function getStudentById(studentId: string) {
   return result[0]
 }
 
+/** Look up a student by name (case-insensitive). Used by the fixed kid profiles. */
+export async function getStudentByName(name: string) {
+  const result = await sql`
+    SELECT * FROM students
+    WHERE LOWER(name) = LOWER(${name}) AND is_active = true
+    ORDER BY created_at ASC
+    LIMIT 1
+  `
+  return result[0]
+}
+
 export async function getStudentsByParentId(parentId: string) {
   const result = await sql`
     SELECT * FROM students

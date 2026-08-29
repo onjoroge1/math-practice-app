@@ -6,7 +6,13 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { IOWA_UNITS, IOWA_TARGET, bandFor } from "@/lib/iowa-grade5"
-import { currentStudentId, getAllProgress, type ProgressStore } from "@/lib/iowa-progress"
+import {
+  currentStudentContext,
+  getAllAttemptDrafts,
+  getAllProgress,
+  type DraftStore,
+  type ProgressStore,
+} from "@/lib/iowa-progress"
 import { ArrowLeft, CheckCircle2 } from "lucide-react"
 
 const UNIT_ICON: Record<string, string> = {
@@ -32,18 +38,33 @@ const TONE_CHIP: Record<string, string> = {
 export default function IowaHubPage() {
   const router = useRouter()
   const [progress, setProgress] = useState<ProgressStore>({})
+  const [drafts, setDrafts] = useState<DraftStore>({})
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    setProgress(getAllProgress(currentStudentId()))
+    const student = currentStudentContext()
+    if (!student || student.grade !== 5) {
+      router.replace("/topic-select")
+      return
+    }
+    setProgress(getAllProgress(student.id))
+    setDrafts(getAllAttemptDrafts(student.id))
     setReady(true)
-  }, [])
+  }, [router])
 
   const attempted = Object.keys(progress).length
   const avgBest =
     attempted > 0
       ? Math.round(Object.values(progress).reduce((s, p) => s + p.best, 0) / attempted)
       : 0
+
+  if (!ready) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 flex items-center justify-center">
+        <div className="text-xl font-medium text-slate-600">Loading Aden&apos;s Grade 5 practice…</div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 p-4 py-10">
@@ -80,6 +101,7 @@ export default function IowaHubPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {IOWA_UNITS.map((unit) => {
             const p = progress[unit.id]
+            const draft = drafts[unit.id]
             const band = p ? bandFor(p.best) : null
             const target = Math.min(IOWA_TARGET, unit.poolSize)
             return (
@@ -112,6 +134,11 @@ export default function IowaHubPage() {
                           {p.attempts === 1 ? "try" : "tries"}
                         </span>
                       )}
+                      {draft && (
+                        <span className="font-semibold text-indigo-600">
+                          Question {Math.min(draft.index + 1, draft.questionNumbers.length)} of {draft.questionNumbers.length} saved
+                        </span>
+                      )}
                     </div>
                     <div className="mt-3">
                       <Link href={`/iowa/${unit.id}`}>
@@ -119,7 +146,7 @@ export default function IowaHubPage() {
                           size="sm"
                           className="rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white"
                         >
-                          {p ? "Practice again" : "Start"}
+                          {draft ? "Resume" : p ? "Practice again" : "Start"}
                         </Button>
                       </Link>
                     </div>

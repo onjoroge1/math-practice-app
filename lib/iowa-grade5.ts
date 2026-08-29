@@ -53,6 +53,14 @@ export function stimulusFor(unit: IowaUnit, q: IowaQuestion): IowaStimulus | und
   return unit.stimuli.find((s) => s.id === q.stimulusId)
 }
 
+export function scoreIowaAttempt(questions: IowaQuestion[], answers: Record<number, string>) {
+  const total = questions.length
+  const answered = questions.filter((question) => Boolean(answers[question.number])).length
+  const correct = questions.filter((question) => answers[question.number] === question.answer).length
+  const percent = total > 0 ? Math.round((correct / total) * 100) : 0
+  return { total, answered, correct, percent, band: bandFor(percent) }
+}
+
 function shuffle<T>(arr: T[], rng: () => number): T[] {
   const a = [...arr]
   for (let i = a.length - 1; i > 0; i--) {

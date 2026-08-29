@@ -1,31 +1,28 @@
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
-import bcrypt from "bcryptjs"
-import { getParentByEmail } from "./db"
+import {
+  FAMILY_ADMIN_ID,
+  FAMILY_ADMIN_NAME,
+  verifyAdminCredentials,
+} from "./admin-auth"
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     Credentials({
       credentials: {
-        email: { label: "Email", type: "email" },
+        username: { label: "Username", type: "text" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) return null
-
-        const email = credentials.email as string
-        const password = credentials.password as string
-
-        const parent = await getParentByEmail(email)
-        if (!parent) return null
-
-        const valid = await bcrypt.compare(password, parent.password_hash)
-        if (!valid) return null
+        if (typeof credentials?.username !== "string") return null
+        if (typeof credentials?.password !== "string") return null
+        if (!verifyAdminCredentials(credentials.username, credentials.password)) return null
 
         return {
-          id: parent.id,
-          email: parent.email,
-          name: parent.full_name,
+          id: FAMILY_ADMIN_ID,
+          email: "admin@math-practice.local",
+          name: FAMILY_ADMIN_NAME,
+          role: "admin",
         }
       },
     }),
@@ -37,12 +34,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     jwt({ token, user }) {
       if (user) {
         token.id = user.id
+        token.role = user.role
       }
       return token
     },
     session({ session, token }) {
       if (session.user && token.id) {
         session.user.id = token.id as string
+        session.user.role = token.role === "admin" ? "admin" : "parent"
       }
       return session
     },

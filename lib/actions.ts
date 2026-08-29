@@ -1,9 +1,6 @@
 "use server"
 
-import bcrypt from "bcryptjs"
 import {
-  createParent as dbCreateParent,
-  getParentByEmail as dbGetParentByEmail,
   createStudent as dbCreateStudent,
   getStudentById as dbGetStudentById,
   getStudentByName as dbGetStudentByName,
@@ -23,33 +20,11 @@ import {
 import { auth } from "./auth"
 import { getProfileByKey } from "./profiles"
 
-// ─── Auth actions ─────────────────────────────────────────────────────────────
-
-export async function signupAction(
-  fullName: string,
-  email: string,
-  password: string,
-): Promise<{ error?: string }> {
-  if (!fullName.trim()) return { error: "Name is required" }
-  if (!email.trim()) return { error: "Email is required" }
-  if (password.length < 8) return { error: "Password must be at least 8 characters" }
-
-  try {
-    const existing = await dbGetParentByEmail(email)
-    if (existing) return { error: "An account with this email already exists" }
-
-    const hash = await bcrypt.hash(password, 12)
-    await dbCreateParent(email.trim().toLowerCase(), hash, fullName.trim())
-    return {}
-  } catch {
-    return { error: "Something went wrong. Please try again." }
-  }
-}
-
 /** Get the current authenticated parent ID, or null. */
 async function getAuthParentId(): Promise<string | null> {
   try {
     const session = await auth()
+    if (session?.user?.role === "admin") return null
     return session?.user?.id ?? null
   } catch {
     return null
@@ -58,33 +33,12 @@ async function getAuthParentId(): Promise<string | null> {
 
 // ─── Student actions ──────────────────────────────────────────────────────────
 
-export async function createStudentAction(
-  name: string,
-  grade: number,
-  avatar: string,
-) {
-  if (!name.trim()) throw new Error("Name is required")
-  if (grade < 1 || grade > 5) throw new Error("Grade must be between 1 and 5")
-
-  const parentId = await getAuthParentId()
-  const student = await dbCreateStudent(name.trim(), grade, avatar, parentId ?? undefined)
-  return student
-}
-
 export async function getStudentAction(studentId: string) {
   if (!studentId) return null
   try {
     return await dbGetStudentById(studentId)
   } catch {
     return null
-  }
-}
-
-export async function getAllStudentsAction() {
-  try {
-    return await dbGetAllStudents()
-  } catch {
-    return []
   }
 }
 
@@ -213,11 +167,10 @@ export async function recordAttemptAction(
 
 export async function getDashboardDataAction() {
   try {
-    const parentId = await getAuthParentId()
-    if (parentId) {
-      return await dbGetParentDashboard(parentId)
-    }
-    return await dbGetAllStudentProgress()
+    const session = await auth()
+    if (!session?.user?.id) return []
+    if (session.user.role === "admin") return await dbGetAllStudentProgress()
+    return await dbGetParentDashboard(session.user.id)
   } catch {
     return []
   }
@@ -225,11 +178,10 @@ export async function getDashboardDataAction() {
 
 export async function getStudentsForParentAction() {
   try {
-    const parentId = await getAuthParentId()
-    if (parentId) {
-      return await dbGetStudentsByParentId(parentId)
-    }
-    return await dbGetAllStudents()
+    const session = await auth()
+    if (!session?.user?.id) return []
+    if (session.user.role === "admin") return await dbGetAllStudents()
+    return await dbGetStudentsByParentId(session.user.id)
   } catch {
     return []
   }

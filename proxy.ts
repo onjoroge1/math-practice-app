@@ -3,8 +3,7 @@ import { NextResponse } from "next/server"
 
 export default auth((req) => {
   const { pathname } = req.nextUrl
-
-  const isAuth = !!req.auth
+  const isAuth = Boolean(req.auth)
 
   if (pathname === "/parent" && !isAuth) {
     const loginUrl = new URL("/login", req.url)
@@ -12,7 +11,11 @@ export default auth((req) => {
     return NextResponse.redirect(loginUrl)
   }
 
-  if ((pathname === "/login" || pathname === "/signup") && isAuth) {
+  if (pathname === "/signup") {
+    return NextResponse.redirect(new URL(isAuth ? "/parent" : "/login", req.url))
+  }
+
+  if (pathname === "/login" && isAuth) {
     return NextResponse.redirect(new URL("/parent", req.url))
   }
 

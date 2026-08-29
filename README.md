@@ -57,6 +57,14 @@ See `.env.example` for all required variables.
 |----------|----------|-------------|
 | `DATABASE_URL` | Yes (for persistence) | Neon PostgreSQL connection string |
 | `NEXT_PUBLIC_APP_URL` | No | App base URL (defaults to localhost:3000) |
+| `AUTH_SECRET` | Yes | Auth.js session signing secret |
+| `AUTH_TRUST_HOST` | Local/proxy | Set to `true` only when the app is behind a trusted proxy; Vercel sets it automatically |
+| `PARENT_ADMIN_USERNAME` | No | Parent portal username (defaults to `admin`) |
+| `PARENT_ADMIN_PASSWORD` | Yes | Private parent password, at least 12 characters; never commit it |
+
+The parent portal is a single-family admin area. Public signup is disabled. Set
+the credential only through local or deployment environment variables, then
+sign in at `/login`.
 
 ### Kid profiles
 

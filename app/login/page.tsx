@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label"
 
 export default function LoginPage() {
   const router = useRouter()
-  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("admin")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
@@ -21,18 +21,24 @@ export default function LoginPage() {
     setError("")
     setLoading(true)
 
-    const result = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    })
+    try {
+      const result = await signIn("credentials", {
+        username,
+        password,
+        redirect: false,
+      })
 
-    if (result?.error) {
-      setError("Invalid email or password")
-      setLoading(false)
-    } else {
-      router.push("/parent")
+      if (result?.error) {
+        setError("Invalid username or password")
+        return
+      }
+
+      router.replace("/parent")
       router.refresh()
+    } catch {
+      setError("We couldn't sign you in. Please try again.")
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -47,15 +53,17 @@ export default function LoginPage() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-sm font-medium text-slate-700">Email</Label>
+            <Label htmlFor="username" className="text-sm font-medium text-slate-700">Username</Label>
             <Input
-              id="email"
-              type="email"
-              placeholder="parent@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              id="username"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
-              autoComplete="email"
+              autoComplete="username"
+              autoCapitalize="none"
+              spellCheck={false}
+              maxLength={50}
               className="p-3 rounded-xl border-2 focus:border-indigo-600"
             />
           </div>
@@ -70,13 +78,13 @@ export default function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
               autoComplete="current-password"
-              minLength={8}
+              minLength={12}
               className="p-3 rounded-xl border-2 focus:border-indigo-600"
             />
           </div>
 
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">
+            <div role="alert" className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">
               {error}
             </div>
           )}
@@ -91,14 +99,7 @@ export default function LoginPage() {
           </Button>
         </form>
 
-        <div className="mt-6 text-center text-sm text-slate-600">
-          Don&apos;t have an account?{" "}
-          <Link href="/signup" className="text-indigo-600 hover:text-indigo-800 font-semibold">
-            Sign Up
-          </Link>
-        </div>
-
-        <div className="mt-4 text-center">
+        <div className="mt-6 text-center">
           <Link href="/" className="text-sm text-slate-500 hover:text-slate-700">
             ← Back to Home
           </Link>

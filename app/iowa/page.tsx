@@ -118,11 +118,27 @@ export default function IowaHubPage() {
                         <span
                           className={`text-xs font-semibold px-2 py-0.5 rounded-full border ${TONE_CHIP[band.tone]}`}
                         >
-                          {p!.best}%
+                          Best {p!.best}%
                         </span>
                       )}
                     </div>
                     <p className="text-sm text-slate-500 mt-0.5">{unit.primarySkills}</p>
+                    {p && (
+                      <div className="mt-3 grid grid-cols-3 gap-2 rounded-xl bg-slate-50 p-3 text-center">
+                        <div>
+                          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Best score</p>
+                          <p className="text-lg font-extrabold text-indigo-700">{p.best}%</p>
+                        </div>
+                        <div>
+                          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Latest score</p>
+                          <p className="text-lg font-extrabold text-slate-700">{p.last}%</p>
+                        </div>
+                        <div>
+                          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">Attempts</p>
+                          <p className="text-lg font-extrabold text-slate-700">{p.attempts}</p>
+                        </div>
+                      </div>
+                    )}
                     <div className="flex items-center gap-3 mt-2 text-xs text-slate-500">
                       <span>
                         {target} of {unit.poolSize} questions
@@ -130,8 +146,7 @@ export default function IowaHubPage() {
                       {p && (
                         <span className="flex items-center gap-1 text-emerald-600">
                           <CheckCircle2 className="w-3.5 h-3.5" />
-                          {p.seen.length}/{unit.poolSize} seen · {p.attempts}{" "}
-                          {p.attempts === 1 ? "try" : "tries"}
+                          {p.seen.length}/{unit.poolSize} questions seen
                         </span>
                       )}
                       {draft && (

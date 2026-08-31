@@ -127,6 +127,12 @@ export async function completeSessionAction(
 export async function getRecentSessionsAction(studentId: string) {
   if (!studentId) return []
   try {
+    const session = await auth()
+    if (!session?.user?.id) return []
+    if (session.user.role !== "admin") {
+      const students = await dbGetStudentsByParentId(session.user.id)
+      if (!students.some((student) => student.id === studentId)) return []
+    }
     return await dbGetRecentSessions(studentId)
   } catch {
     return []

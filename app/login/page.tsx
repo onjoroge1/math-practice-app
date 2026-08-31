@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { signIn } from "next-auth/react"
@@ -15,6 +15,22 @@ export default function LoginPage() {
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
+  const [portalConfigured, setPortalConfigured] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    let active = true
+    fetch("/api/auth/setup-status", { cache: "no-store" })
+      .then((response) => response.json())
+      .then((data: { configured?: boolean }) => {
+        if (active) setPortalConfigured(data.configured === true)
+      })
+      .catch(() => {
+        if (active) setPortalConfigured(null)
+      })
+    return () => {
+      active = false
+    }
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -29,7 +45,9 @@ export default function LoginPage() {
       })
 
       if (result?.error) {
-        setError("Invalid username or password")
+        setError(portalConfigured === false
+          ? "The parent portal still needs its Vercel secrets. Add AUTH_SECRET and PARENT_ADMIN_PASSWORD, then redeploy."
+          : "Invalid username or password")
         return
       }
 
@@ -52,6 +70,11 @@ export default function LoginPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
+          {portalConfigured === false && (
+            <div role="alert" className="rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+              <strong>One-time setup needed:</strong> this deployment is missing <code>AUTH_SECRET</code> or a 12+ character <code>PARENT_ADMIN_PASSWORD</code>. Add both in Vercel and redeploy.
+            </div>
+          )}
           <div className="space-y-2">
             <Label htmlFor="username" className="text-sm font-medium text-slate-700">Username</Label>
             <Input

@@ -8,7 +8,7 @@ import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { AVATARS, SKILLS } from "@/lib/mock-data"
-import { getStudentsForParentAction, getMasteryAction, getOrCreateProfileStudentAction } from "@/lib/actions"
+import { getStudentsForParentAction, getMasteryAction, getOrCreateProfileStudentAction, getRecentSessionsAction } from "@/lib/actions"
 import { PROFILES } from "@/lib/profiles"
 
 interface StudentRow {
@@ -28,11 +28,21 @@ interface MasteryRow {
   correct_count: number
 }
 
+interface RecentSessionRow {
+  id: string
+  completed_at: string
+  total_questions: number
+  correct_answers: number
+  accuracy_percentage: number | string
+  topics_covered: string[] | null
+}
+
 export default function ParentDashboard() {
   const { data: session } = useSession()
   const [students, setStudents] = useState<StudentRow[]>([])
   const [selectedStudent, setSelectedStudent] = useState<StudentRow | null>(null)
   const [studentMastery, setStudentMastery] = useState<MasteryRow[]>([])
+  const [recentSessions, setRecentSessions] = useState<RecentSessionRow[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -66,10 +76,15 @@ export default function ParentDashboard() {
     if (!selectedStudent) return
     async function loadMastery() {
       try {
-        const data = await getMasteryAction(selectedStudent!.id)
-        setStudentMastery((data as MasteryRow[]) ?? [])
+        const [masteryData, sessionData] = await Promise.all([
+          getMasteryAction(selectedStudent!.id),
+          getRecentSessionsAction(selectedStudent!.id),
+        ])
+        setStudentMastery((masteryData as MasteryRow[]) ?? [])
+        setRecentSessions((sessionData as RecentSessionRow[]) ?? [])
       } catch {
         setStudentMastery([])
+        setRecentSessions([])
       }
     }
     loadMastery()
@@ -124,6 +139,9 @@ export default function ParentDashboard() {
       return acc
     },
     {} as Record<string, typeof gradeSkills>,
+  )
+  const socialStudiesSessions = recentSessions.filter((practiceSession) =>
+    practiceSession.topics_covered?.some((topic) => topic.startsWith("Social Studies:")),
   )
 
   return (
@@ -201,6 +219,37 @@ export default function ParentDashboard() {
           <Card className="p-6 bg-white shadow-md"><div className="text-center"><div className="text-3xl mb-2">⭐</div><div className="text-3xl font-bold text-yellow-600">{masteredSkills}</div><div className="text-sm text-gray-600">Skills Mastered</div></div></Card>
           <Card className="p-6 bg-white shadow-md"><div className="text-center"><div className="text-3xl mb-2">📚</div><div className="text-3xl font-bold text-blue-600">{inProgressSkills}</div><div className="text-sm text-gray-600">Skills In Progress</div></div></Card>
         </div>
+
+        {student.grade === 5 && (
+          <Card className="border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 p-6 shadow-md">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-orange-600">Wednesday exam prep</p>
+                <h2 className="mt-1 text-2xl font-bold text-slate-900">Aden&apos;s Social Studies Tests</h2>
+                <p className="mt-1 text-sm text-slate-600">Recent Chapter 7, Chapter 8, and final-review results saved from his student page.</p>
+              </div>
+              <Link href="/">
+                <Button variant="outline" className="border-orange-300 bg-white text-orange-700 hover:bg-orange-100">Open student picker</Button>
+              </Link>
+            </div>
+
+            {socialStudiesSessions.length > 0 ? (
+              <div className="mt-5 grid gap-3 md:grid-cols-3">
+                {socialStudiesSessions.slice(0, 3).map((practiceSession) => (
+                  <div key={practiceSession.id} className="rounded-2xl border border-amber-200 bg-white p-4">
+                    <p className="text-sm font-bold text-slate-900">{practiceSession.topics_covered?.[0]?.replace("Social Studies: ", "") ?? "Social Studies"}</p>
+                    <p className="mt-1 text-3xl font-black text-emerald-700">{Math.round(Number(practiceSession.accuracy_percentage) || 0)}%</p>
+                    <p className="text-xs text-slate-500">{practiceSession.correct_answers}/{practiceSession.total_questions} correct · {new Date(practiceSession.completed_at).toLocaleDateString()}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="mt-5 rounded-2xl border border-dashed border-amber-300 bg-white/70 p-5 text-center text-sm font-medium text-slate-600">
+                No Social Studies test has been completed yet. Results will appear here automatically after Aden submits one.
+              </div>
+            )}
+          </Card>
+        )}
 
         <Card className="p-6 bg-white shadow-md">
           <Tabs defaultValue="skills" className="w-full">

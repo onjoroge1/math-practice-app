@@ -232,20 +232,33 @@ export default function TopicSelectPage() {
         </div>
 
         {grade === 5 && (
-          <Link href="/iowa" className="block">
-            <Card className="p-5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white cursor-pointer hover:shadow-xl transition-all border-0">
-              <div className="flex items-center gap-4">
-                <div className="text-4xl flex-shrink-0">🦉</div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-bold text-lg">Iowa Practice Battery</h3>
-                  <p className="text-sm text-indigo-100">
-                    10 units · about 25 questions each · fresh questions every time with progress tracking
-                  </p>
+          <div className="space-y-4">
+            <Link href="/grade5-social-studies" className="block">
+              <Card className="p-5 bg-gradient-to-r from-amber-500 to-orange-500 text-white cursor-pointer hover:shadow-xl transition-all border-0">
+                <div className="flex items-center gap-4">
+                  <div className="text-4xl flex-shrink-0">📚</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="mb-1 inline-flex rounded-full bg-white/20 px-2 py-0.5 text-[10px] font-black uppercase tracking-wide">New • Exam Wednesday</div>
+                    <h3 className="font-bold text-lg">Social Studies Exam Prep</h3>
+                    <p className="text-sm text-orange-50">Chapter 7, Chapter 8, and a mixed final review built from Aden&apos;s class materials</p>
+                  </div>
+                  <ArrowRight className="w-6 h-6 flex-shrink-0" />
                 </div>
-                <ArrowRight className="w-6 h-6 flex-shrink-0" />
-              </div>
-            </Card>
-          </Link>
+              </Card>
+            </Link>
+            <Link href="/iowa" className="block">
+              <Card className="p-5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white cursor-pointer hover:shadow-xl transition-all border-0">
+                <div className="flex items-center gap-4">
+                  <div className="text-4xl flex-shrink-0">🦉</div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-bold text-lg">Iowa Practice Battery</h3>
+                    <p className="text-sm text-indigo-100">10 units · about 25 questions each · fresh questions every time with progress tracking</p>
+                  </div>
+                  <ArrowRight className="w-6 h-6 flex-shrink-0" />
+                </div>
+              </Card>
+            </Link>
+          </div>
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

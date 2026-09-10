@@ -112,6 +112,8 @@ describe("Aden's Grade 5 journey", () => {
     }
 
     expect(await screen.findByText("Mathematics results")).toBeInTheDocument()
+    expect(screen.getByRole("region", { name: "Iowa learning review" })).toBeInTheDocument()
+    expect(screen.getAllByRole("region", { name: "Step-by-step explanation" })).toHaveLength(1)
     expect(getUnitProgress("aden-row", "mathematics")).toMatchObject({ attempts: 1 })
     expect(getAttemptDraft("aden-row", "mathematics")).toBeNull()
     expect(mocks.saveDrillResult).toHaveBeenCalledTimes(1)

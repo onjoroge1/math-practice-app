@@ -23,9 +23,11 @@ import {
 import { saveDrillResult } from "@/lib/drill-results"
 import { syncIowaProgress, IOWA_SAVE_MESSAGES, type IowaSaveStatus } from "@/lib/iowa-sync"
 import { readIowaAttempts, type IowaAttempt } from "@/lib/iowa-attempts"
+import { IowaAttemptReview } from "@/components/iowa-attempt-review"
+import Link from "next/link"
 import { IowaScoreHistory } from "@/components/iowa-score-history"
 import { trackDrillCompleted, trackDrillStarted } from "@/lib/analytics"
-import { ArrowLeft, ArrowRight, CheckCircle2, XCircle, RotateCcw, Save } from "lucide-react"
+import { ArrowLeft, ArrowRight, RotateCcw, Save } from "lucide-react"
 
 const TONE_TEXT: Record<string, string> = {
   emerald: "text-emerald-600",
@@ -213,45 +215,9 @@ export default function IowaUnitPage() {
             </div>
           </Card>
 
+          <Link href="/todays-practice" className="block rounded-xl bg-indigo-600 p-4 text-center font-bold text-white">☀️ Today’s practice — learn, then try</Link>
           <IowaScoreHistory attempts={history} />
-          {showReview && (
-            <div className="space-y-3">
-              {questions.map((q, i) => {
-                const chosen = answers[q.number]
-                const correct = chosen === q.answer
-                return (
-                  <Card key={q.number} className="p-4 bg-white">
-                    <div className="flex items-start gap-2">
-                      {correct ? (
-                        <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                      ) : (
-                        <XCircle className="w-5 h-5 text-rose-500 flex-shrink-0 mt-0.5" />
-                      )}
-                      <div className="flex-1 min-w-0">
-                        <div className="font-medium text-slate-800">
-                          {i + 1}. {q.stem}
-                        </div>
-                        <div className="text-sm mt-1 space-y-0.5">
-                          <div className={correct ? "text-emerald-700" : "text-rose-700"}>
-                            Your answer:{" "}
-                            {chosen
-                              ? `${chosen}. ${q.choices.find((c) => c.label === chosen)?.text ?? ""}`
-                              : "— (skipped)"}
-                          </div>
-                          {!correct && (
-                            <div className="text-emerald-700">
-                              Correct: {q.answer}.{" "}
-                              {q.choices.find((c) => c.label === q.answer)?.text ?? ""}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </Card>
-                )
-              })}
-            </div>
-          )}
+          {showReview && <IowaAttemptReview unit={unit} questions={questions} answers={answers} />}
         </div>
       </div>
     )
@@ -315,6 +281,7 @@ export default function IowaUnitPage() {
     )
     trackDrillCompleted(`Iowa ${unit.name}`, 5, outcome.percent, outcome.correct, outcome.total)
     setResult(outcome)
+    setShowReview(true)
     setFinished(true)
   }
 

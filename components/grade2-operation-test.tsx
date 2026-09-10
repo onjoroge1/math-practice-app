@@ -1,5 +1,7 @@
 "use client"
 
+import { explainArithmetic } from "@/lib/arithmetic-teaching"
+
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { AlertTriangle, CheckCircle2, Clock3, Play, RotateCcw, XCircle } from "lucide-react"
@@ -280,6 +282,12 @@ export default function Grade2OperationTest({ kind }: { kind: Grade2Operation })
                         />
                       </label>
 
+                      {showResult && (kind === "addition" || kind === "subtraction") && <details className="mt-3 text-slate-800">
+                        <summary className="cursor-pointer text-sm font-bold text-indigo-700">Show steps</summary>
+                        <ol className="mt-2 space-y-2 text-xs">
+                          {explainArithmetic(question.question, question.answer)?.steps.map((step, i) => <li key={i}><strong>{i + 1}. {step.from} {kind === "addition" ? "+" : "−"} {step.amount} = {step.to}</strong><br />{step.note}</li>)}
+                        </ol>
+                      </details>}
                       {showResult && (
                         <div className={`mt-2 flex items-center justify-center gap-1 text-xs font-bold ${isCorrect ? "text-green-700" : "text-red-700"}`}>
                           {isCorrect ? (

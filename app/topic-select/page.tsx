@@ -233,6 +233,10 @@ export default function TopicSelectPage() {
           </div>
         </div>
 
+        <Link href="/todays-practice" className="block rounded-2xl bg-gradient-to-r from-indigo-600 to-sky-600 p-6 text-white shadow-md">
+          <h2 className="text-2xl font-black">☀️ Today’s practice</h2>
+          <p className="mt-1">Five small steps. Learn from your mistakes, then try it yourself. No timer.</p>
+        </Link>
         <Link href="/learning-notebook" className="block rounded-2xl border-2 border-sky-200 bg-white p-5 text-slate-800 hover:border-indigo-400">
           <h2 className="text-lg font-bold">📘 My learning notebook</h2>
           <p className="text-sm text-slate-600">See how to solve your addition and subtraction problems, one step at a time.</p>

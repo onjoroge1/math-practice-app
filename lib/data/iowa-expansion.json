@@ -1,0 +1,1583 @@
+{
+  "questions": {
+    "vocabulary": [
+      {
+        "number": 38,
+        "stem": "The word resilient most nearly means —",
+        "choices": [
+          {
+            "label": "A",
+            "text": "easily broken"
+          },
+          {
+            "label": "B",
+            "text": "able to recover after difficulty"
+          },
+          {
+            "label": "C",
+            "text": "always silent"
+          },
+          {
+            "label": "D",
+            "text": "very old"
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Word meaning",
+          "steps": [
+            "Resilient means able to recover after difficulty.",
+            "Check that the chosen meaning fits the whole word, rather than a similar-looking word."
+          ]
+        }
+      },
+      {
+        "number": 39,
+        "stem": "The word infer most nearly means —",
+        "choices": [
+          {
+            "label": "A",
+            "text": "copy every word"
+          },
+          {
+            "label": "B",
+            "text": "reach a conclusion using clues"
+          },
+          {
+            "label": "C",
+            "text": "measure distance"
+          },
+          {
+            "label": "D",
+            "text": "refuse help"
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Word meaning",
+          "steps": [
+            "Infer means reach a conclusion using clues.",
+            "Check that the chosen meaning fits the whole word, rather than a similar-looking word."
+          ]
+        }
+      },
+      {
+        "number": 40,
+        "stem": "The word abundant most nearly means —",
+        "choices": [
+          {
+            "label": "A",
+            "text": "hard to find"
+          },
+          {
+            "label": "B",
+            "text": "available in large amounts"
+          },
+          {
+            "label": "C",
+            "text": "impossible to see"
+          },
+          {
+            "label": "D",
+            "text": "moving slowly"
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Word meaning",
+          "steps": [
+            "Abundant means available in large amounts.",
+            "Check that the chosen meaning fits the whole word, rather than a similar-looking word."
+          ]
+        }
+      },
+      {
+        "number": 41,
+        "stem": "The word transparent most nearly means —",
+        "choices": [
+          {
+            "label": "A",
+            "text": "heavy"
+          },
+          {
+            "label": "B",
+            "text": "allowing light through so objects can be seen"
+          },
+          {
+            "label": "C",
+            "text": "rough"
+          },
+          {
+            "label": "D",
+            "text": "made of wood"
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Word meaning",
+          "steps": [
+            "Transparent means allowing light through so objects can be seen.",
+            "Check that the chosen meaning fits the whole word, rather than a similar-looking word."
+          ]
+        }
+      },
+      {
+        "number": 42,
+        "stem": "The word temporary most nearly means —",
+        "choices": [
+          {
+            "label": "A",
+            "text": "lasting forever"
+          },
+          {
+            "label": "B",
+            "text": "lasting only a limited time"
+          },
+          {
+            "label": "C",
+            "text": "very expensive"
+          },
+          {
+            "label": "D",
+            "text": "carefully hidden"
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Word meaning",
+          "steps": [
+            "Temporary means lasting only a limited time.",
+            "Check that the chosen meaning fits the whole word, rather than a similar-looking word."
+          ]
+        }
+      }
+    ],
+    "reading": [
+      {
+        "number": 44,
+        "stem": "Why does Nora return inside?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "She forgot where the club was."
+          },
+          {
+            "label": "B",
+            "text": "The rain was soaking the box."
+          },
+          {
+            "label": "C",
+            "text": "Her brother called her."
+          },
+          {
+            "label": "D",
+            "text": "The club was closed."
+          }
+        ],
+        "answer": "B",
+        "stimulusId": "reading-extra-rain",
+        "explanation": {
+          "skill": "Reading evidence",
+          "steps": [
+            "The passage says rain began soaking the box before she reached the gate.",
+            "She returns inside to protect the books."
+          ]
+        }
+      },
+      {
+        "number": 45,
+        "stem": "Which detail shows Nora learned from the delivery?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "She owns a cardboard box."
+          },
+          {
+            "label": "B",
+            "text": "Her brother has a trailer."
+          },
+          {
+            "label": "C",
+            "text": "She checks the forecast the next week."
+          },
+          {
+            "label": "D",
+            "text": "A volunteer smiles."
+          }
+        ],
+        "answer": "C",
+        "stimulusId": "reading-extra-rain",
+        "explanation": {
+          "skill": "Reading evidence",
+          "steps": [
+            "Look for a later action that changes because of the problem.",
+            "Checking the forecast helps her prepare for rain next time."
+          ]
+        }
+      },
+      {
+        "number": 46,
+        "stem": "Why does Nora decline the trailer ride?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "The trailer has no cover."
+          },
+          {
+            "label": "B",
+            "text": "She dislikes books."
+          },
+          {
+            "label": "C",
+            "text": "The trailer is full."
+          },
+          {
+            "label": "D",
+            "text": "Her brother cannot ride."
+          }
+        ],
+        "answer": "A",
+        "stimulusId": "reading-extra-rain",
+        "explanation": {
+          "skill": "Reading inference",
+          "steps": [
+            "The books need protection from rain.",
+            "An uncovered trailer would not keep them dry."
+          ]
+        }
+      },
+      {
+        "number": 47,
+        "stem": "Which event happens after Nora dries the covers?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "Clouds gather."
+          },
+          {
+            "label": "B",
+            "text": "She promises to deliver books."
+          },
+          {
+            "label": "C",
+            "text": "Rain soaks the box."
+          },
+          {
+            "label": "D",
+            "text": "She puts books in a waterproof bag."
+          }
+        ],
+        "answer": "D",
+        "stimulusId": "reading-extra-rain",
+        "explanation": {
+          "skill": "Reading sequence",
+          "steps": [
+            "Follow the actions after she returns indoors.",
+            "She dries the covers, then moves the books into a waterproof bag."
+          ]
+        }
+      },
+      {
+        "number": 48,
+        "stem": "Which lesson is best supported?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "Being late is always best."
+          },
+          {
+            "label": "B",
+            "text": "Protecting what matters may require changing a plan."
+          },
+          {
+            "label": "C",
+            "text": "Never accept help."
+          },
+          {
+            "label": "D",
+            "text": "Rain ruins every delivery."
+          }
+        ],
+        "answer": "B",
+        "stimulusId": "reading-extra-rain",
+        "explanation": {
+          "skill": "Reading theme",
+          "steps": [
+            "Nora changes the container and waits for the rain to stop.",
+            "The dry books show that adapting her plan protected what mattered."
+          ]
+        }
+      }
+    ],
+    "written-expression": [
+      {
+        "number": 41,
+        "stem": "Choose the sentence with correct subject–verb agreement.",
+        "choices": [
+          {
+            "label": "A",
+            "text": "The baskets holds fruit."
+          },
+          {
+            "label": "B",
+            "text": "The basket hold fruit."
+          },
+          {
+            "label": "C",
+            "text": "The baskets hold fruit."
+          },
+          {
+            "label": "D",
+            "text": "The baskets holding fruit."
+          }
+        ],
+        "answer": "C",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Subject–verb agreement",
+          "steps": [
+            "Baskets is plural.",
+            "Use the plural verb hold: The baskets hold fruit."
+          ]
+        }
+      },
+      {
+        "number": 42,
+        "stem": "Choose the clearest sentence.",
+        "choices": [
+          {
+            "label": "A",
+            "text": "It did a thing there."
+          },
+          {
+            "label": "B",
+            "text": "Mia planted three bean seeds in the pot."
+          },
+          {
+            "label": "C",
+            "text": "Something was in that."
+          },
+          {
+            "label": "D",
+            "text": "There was stuff."
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Precise writing",
+          "steps": [
+            "Clear writing names the person, action, and objects.",
+            "Mia, planted, three bean seeds, and pot supply those details."
+          ]
+        }
+      },
+      {
+        "number": 43,
+        "stem": "Which sentence does NOT belong in a paragraph about caring for a pet fish?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "Feed it the correct amount."
+          },
+          {
+            "label": "B",
+            "text": "Keep its water clean."
+          },
+          {
+            "label": "C",
+            "text": "Check the tank temperature."
+          },
+          {
+            "label": "D",
+            "text": "My shoes have blue laces."
+          }
+        ],
+        "answer": "D",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Paragraph focus",
+          "steps": [
+            "The topic is fish care.",
+            "Shoe laces do not explain how to care for a fish."
+          ]
+        }
+      },
+      {
+        "number": 44,
+        "stem": "Choose the correct pronoun: Liam and ___ finished the model.",
+        "choices": [
+          {
+            "label": "A",
+            "text": "me"
+          },
+          {
+            "label": "B",
+            "text": "I"
+          },
+          {
+            "label": "C",
+            "text": "my"
+          },
+          {
+            "label": "D",
+            "text": "mine"
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Subject pronouns",
+          "steps": [
+            "The blank names someone doing the action.",
+            "I is a subject pronoun: Liam and I finished the model."
+          ]
+        }
+      },
+      {
+        "number": 45,
+        "stem": "Choose the best transition: We practiced every day. ___, our performance improved.",
+        "choices": [
+          {
+            "label": "A",
+            "text": "As a result"
+          },
+          {
+            "label": "B",
+            "text": "Long before"
+          },
+          {
+            "label": "C",
+            "text": "On the other hand"
+          },
+          {
+            "label": "D",
+            "text": "Instead of"
+          }
+        ],
+        "answer": "A",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Transitions",
+          "steps": [
+            "Practice is the cause; improvement is the result.",
+            "As a result connects those two ideas."
+          ]
+        }
+      }
+    ],
+    "mathematics": [
+      {
+        "number": 61,
+        "stem": "What is 2/3 + 1/4?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "3/7"
+          },
+          {
+            "label": "B",
+            "text": "5/12"
+          },
+          {
+            "label": "C",
+            "text": "11/12"
+          },
+          {
+            "label": "D",
+            "text": "1"
+          }
+        ],
+        "answer": "C",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Fraction addition",
+          "steps": [
+            "Rename 2/3 as 8/12 and 1/4 as 3/12.",
+            "8/12 + 3/12 = 11/12."
+          ]
+        }
+      },
+      {
+        "number": 62,
+        "stem": "A rectangle is 14 cm long and 6 cm wide. What is its perimeter?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "20 cm"
+          },
+          {
+            "label": "B",
+            "text": "40 cm"
+          },
+          {
+            "label": "C",
+            "text": "84 cm"
+          },
+          {
+            "label": "D",
+            "text": "28 cm"
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Perimeter",
+          "steps": [
+            "A perimeter goes around all four sides.",
+            "14 + 6 + 14 + 6 = 40 cm."
+          ]
+        }
+      },
+      {
+        "number": 63,
+        "stem": "What is 9.4 − 2.75?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "6.65"
+          },
+          {
+            "label": "B",
+            "text": "7.35"
+          },
+          {
+            "label": "C",
+            "text": "6.75"
+          },
+          {
+            "label": "D",
+            "text": "7.25"
+          }
+        ],
+        "answer": "A",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Decimal subtraction",
+          "steps": [
+            "Write 9.4 as 9.40 to line up hundredths.",
+            "9.40 − 2.00 = 7.40; − 0.75 = 6.65."
+          ]
+        }
+      },
+      {
+        "number": 64,
+        "stem": "What is 8 + 2 × (9 − 4)?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "50"
+          },
+          {
+            "label": "B",
+            "text": "18"
+          },
+          {
+            "label": "C",
+            "text": "40"
+          },
+          {
+            "label": "D",
+            "text": "26"
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Order of operations",
+          "steps": [
+            "Parentheses first: 9 − 4 = 5.",
+            "Multiply 2 × 5 = 10, then add 8 to get 18."
+          ]
+        }
+      },
+      {
+        "number": 65,
+        "stem": "A bag has 4 red and 6 blue counters. What is the probability of drawing red?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "4/6"
+          },
+          {
+            "label": "B",
+            "text": "3/5"
+          },
+          {
+            "label": "C",
+            "text": "1/4"
+          },
+          {
+            "label": "D",
+            "text": "2/5"
+          }
+        ],
+        "answer": "D",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Probability",
+          "steps": [
+            "There are 10 counters and 4 favorable outcomes.",
+            "4/10 simplifies to 2/5."
+          ]
+        }
+      }
+    ],
+    "science": [
+      {
+        "number": 38,
+        "stem": "In a fair test of fertilizer, what should stay the same?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "The amount of fertilizer being tested"
+          },
+          {
+            "label": "B",
+            "text": "The water given to each plant"
+          },
+          {
+            "label": "C",
+            "text": "The measured growth result"
+          },
+          {
+            "label": "D",
+            "text": "The final leaf count"
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Fair tests",
+          "steps": [
+            "Fertilizer is the variable being changed.",
+            "Keep water and other growing conditions the same to isolate its effect."
+          ]
+        }
+      },
+      {
+        "number": 39,
+        "stem": "Which change is condensation?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "Ice becoming water"
+          },
+          {
+            "label": "B",
+            "text": "A puddle drying"
+          },
+          {
+            "label": "C",
+            "text": "Water droplets forming on a cold glass"
+          },
+          {
+            "label": "D",
+            "text": "Wood burning"
+          }
+        ],
+        "answer": "C",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Water cycle",
+          "steps": [
+            "Condensation changes water vapor into liquid.",
+            "Vapor in nearby air cools and forms droplets on a cold surface."
+          ]
+        }
+      },
+      {
+        "number": 40,
+        "stem": "In grass → rabbit → fox, which organism gets energy directly by eating grass?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "Rabbit"
+          },
+          {
+            "label": "B",
+            "text": "Fox"
+          },
+          {
+            "label": "C",
+            "text": "Sun"
+          },
+          {
+            "label": "D",
+            "text": "Soil"
+          }
+        ],
+        "answer": "A",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Food chains",
+          "steps": [
+            "Follow the arrow from grass to its eater.",
+            "The rabbit eats the grass."
+          ]
+        }
+      },
+      {
+        "number": 41,
+        "stem": "Which object is most likely attracted by a magnet?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "Wooden ruler"
+          },
+          {
+            "label": "B",
+            "text": "Plastic cup"
+          },
+          {
+            "label": "C",
+            "text": "Glass marble"
+          },
+          {
+            "label": "D",
+            "text": "Iron nail"
+          }
+        ],
+        "answer": "D",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Magnetism",
+          "steps": [
+            "Magnets attract certain materials, including iron.",
+            "The iron nail is made of one of those materials."
+          ]
+        }
+      },
+      {
+        "number": 42,
+        "stem": "What is the main source of energy for the water cycle?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "Moonlight"
+          },
+          {
+            "label": "B",
+            "text": "Sunlight"
+          },
+          {
+            "label": "C",
+            "text": "Earthquakes"
+          },
+          {
+            "label": "D",
+            "text": "Ocean salt"
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Water cycle",
+          "steps": [
+            "Evaporation needs energy to turn liquid water into vapor.",
+            "The Sun supplies most of the energy driving this cycle."
+          ]
+        }
+      }
+    ],
+    "social-studies": [
+      {
+        "number": 38,
+        "stem": "A map scale says 1 cm represents 5 km. Two towns are 3 cm apart on the map. How far apart are they?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "8 km"
+          },
+          {
+            "label": "B",
+            "text": "10 km"
+          },
+          {
+            "label": "C",
+            "text": "15 km"
+          },
+          {
+            "label": "D",
+            "text": "20 km"
+          }
+        ],
+        "answer": "C",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Map scale",
+          "steps": [
+            "Each map centimeter represents 5 real kilometers.",
+            "3 × 5 = 15 km."
+          ]
+        }
+      },
+      {
+        "number": 39,
+        "stem": "Which source is a primary source about a school opening?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "A student’s diary entry written that day"
+          },
+          {
+            "label": "B",
+            "text": "A novel written a century later"
+          },
+          {
+            "label": "C",
+            "text": "A modern fictional play"
+          },
+          {
+            "label": "D",
+            "text": "An encyclopedia summary"
+          }
+        ],
+        "answer": "A",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Historical sources",
+          "steps": [
+            "A primary source comes directly from someone at the event or its time.",
+            "The diary is a firsthand record from that day."
+          ]
+        }
+      },
+      {
+        "number": 40,
+        "stem": "A town has money for either a park or a pool. Choosing the park means giving up the pool. The pool is the —",
+        "choices": [
+          {
+            "label": "A",
+            "text": "profit"
+          },
+          {
+            "label": "B",
+            "text": "opportunity cost"
+          },
+          {
+            "label": "C",
+            "text": "income"
+          },
+          {
+            "label": "D",
+            "text": "export"
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Opportunity cost",
+          "steps": [
+            "Choosing one option means giving up the next-best alternative.",
+            "The forgone pool is the opportunity cost."
+          ]
+        }
+      },
+      {
+        "number": 41,
+        "stem": "Which branch of the U.S. federal government includes the President?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "Legislative"
+          },
+          {
+            "label": "B",
+            "text": "Judicial"
+          },
+          {
+            "label": "C",
+            "text": "Executive"
+          },
+          {
+            "label": "D",
+            "text": "Municipal"
+          }
+        ],
+        "answer": "C",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Branches of government",
+          "steps": [
+            "The President leads the executive branch.",
+            "The executive branch carries out federal laws."
+          ]
+        }
+      },
+      {
+        "number": 42,
+        "stem": "Which action conserves a natural resource?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "Leaving taps running"
+          },
+          {
+            "label": "B",
+            "text": "Throwing away unused paper"
+          },
+          {
+            "label": "C",
+            "text": "Keeping empty rooms lit"
+          },
+          {
+            "label": "D",
+            "text": "Reusing paper for drafts"
+          }
+        ],
+        "answer": "D",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Resources",
+          "steps": [
+            "Paper production uses materials such as wood and water.",
+            "Reusing paper reduces the need for new paper."
+          ]
+        }
+      }
+    ],
+    "spelling": [
+      {
+        "number": 31,
+        "stem": "Which spelling is correct for the word meaning most happy?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "happyest"
+          },
+          {
+            "label": "B",
+            "text": "happiest"
+          },
+          {
+            "label": "C",
+            "text": "happieste"
+          },
+          {
+            "label": "D",
+            "text": "happiests"
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Spelling patterns",
+          "steps": [
+            "Change consonant + y to i before est.",
+            "Apply that pattern to get happiest."
+          ]
+        }
+      },
+      {
+        "number": 32,
+        "stem": "Which spelling is correct for the word meaning making a plan?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "planing"
+          },
+          {
+            "label": "B",
+            "text": "planning"
+          },
+          {
+            "label": "C",
+            "text": "planninge"
+          },
+          {
+            "label": "D",
+            "text": "plannings"
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Spelling patterns",
+          "steps": [
+            "Double the final n in plan before ing.",
+            "Apply that pattern to get planning."
+          ]
+        }
+      },
+      {
+        "number": 33,
+        "stem": "Which spelling is correct for the word meaning very pleasing to look at?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "beautifull"
+          },
+          {
+            "label": "B",
+            "text": "beautiful"
+          },
+          {
+            "label": "C",
+            "text": "beautifule"
+          },
+          {
+            "label": "D",
+            "text": "beautifuls"
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Spelling patterns",
+          "steps": [
+            "The suffix ful ends in one l.",
+            "Apply that pattern to get beautiful."
+          ]
+        }
+      },
+      {
+        "number": 34,
+        "stem": "Which spelling is correct for the word meaning strike a door to get attention?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "nock"
+          },
+          {
+            "label": "B",
+            "text": "knock"
+          },
+          {
+            "label": "C",
+            "text": "knocke"
+          },
+          {
+            "label": "D",
+            "text": "knocks"
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Spelling patterns",
+          "steps": [
+            "Knock keeps a silent k at the beginning.",
+            "Apply that pattern to get knock."
+          ]
+        }
+      },
+      {
+        "number": 35,
+        "stem": "Which spelling is correct for the word meaning more than one library?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "librarys"
+          },
+          {
+            "label": "B",
+            "text": "libraries"
+          },
+          {
+            "label": "C",
+            "text": "librariese"
+          },
+          {
+            "label": "D",
+            "text": "librariess"
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Spelling patterns",
+          "steps": [
+            "Change consonant + y to ies in this plural.",
+            "Apply that pattern to get libraries."
+          ]
+        }
+      }
+    ],
+    "capitalization": [
+      {
+        "number": 25,
+        "stem": "Which sentence is capitalized correctly?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "We visited georgia in June."
+          },
+          {
+            "label": "B",
+            "text": "We visited Georgia in June."
+          },
+          {
+            "label": "C",
+            "text": "We Visited Georgia in june."
+          },
+          {
+            "label": "D",
+            "text": "we visited Georgia in June."
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Capitalization rules",
+          "steps": [
+            "Capitalize a sentence opening, a state name, and a month.",
+            "We, Georgia, and June need capitals."
+          ]
+        }
+      },
+      {
+        "number": 26,
+        "stem": "Which word needs a capital: We study french after lunch.",
+        "choices": [
+          {
+            "label": "A",
+            "text": "study"
+          },
+          {
+            "label": "B",
+            "text": "after"
+          },
+          {
+            "label": "C",
+            "text": "french"
+          },
+          {
+            "label": "D",
+            "text": "lunch"
+          }
+        ],
+        "answer": "C",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Capitalization rules",
+          "steps": [
+            "Names of languages are proper nouns.",
+            "Write French."
+          ]
+        }
+      },
+      {
+        "number": 27,
+        "stem": "Choose the correct title capitalization.",
+        "choices": [
+          {
+            "label": "A",
+            "text": "a Trip to the Moon"
+          },
+          {
+            "label": "B",
+            "text": "A trip to the moon"
+          },
+          {
+            "label": "C",
+            "text": "A Trip To The Moon"
+          },
+          {
+            "label": "D",
+            "text": "A Trip to the Moon"
+          }
+        ],
+        "answer": "D",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Capitalization rules",
+          "steps": [
+            "Capitalize the first word and major words in a title.",
+            "The short words to and the stay lowercase here."
+          ]
+        }
+      },
+      {
+        "number": 28,
+        "stem": "Which sentence is capitalized correctly?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "My uncle lives west of town."
+          },
+          {
+            "label": "B",
+            "text": "My Uncle lives West of town."
+          },
+          {
+            "label": "C",
+            "text": "My uncle lives West of Town."
+          },
+          {
+            "label": "D",
+            "text": "my uncle lives west of town."
+          }
+        ],
+        "answer": "A",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Capitalization rules",
+          "steps": [
+            "After my, uncle is a common noun; west is a direction.",
+            "Only My at the sentence beginning needs a capital."
+          ]
+        }
+      },
+      {
+        "number": 29,
+        "stem": "Which phrase names a holiday with correct capitals?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "new Year’s day"
+          },
+          {
+            "label": "B",
+            "text": "New year’s Day"
+          },
+          {
+            "label": "C",
+            "text": "New Year’s Day"
+          },
+          {
+            "label": "D",
+            "text": "New Year’s day"
+          }
+        ],
+        "answer": "C",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Capitalization rules",
+          "steps": [
+            "All three main words form the holiday name.",
+            "Write New Year’s Day."
+          ]
+        }
+      }
+    ],
+    "punctuation": [
+      {
+        "number": 25,
+        "stem": "Which sentence punctuates the question correctly?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "Where is my pencil."
+          },
+          {
+            "label": "B",
+            "text": "Where is my pencil?"
+          },
+          {
+            "label": "C",
+            "text": "Where, is my pencil"
+          },
+          {
+            "label": "D",
+            "text": "Where is my pencil,"
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Punctuation rules",
+          "steps": [
+            "Where is my pencil asks a direct question.",
+            "End it with a question mark."
+          ]
+        }
+      },
+      {
+        "number": 26,
+        "stem": "Which phrase shows a bag belonging to one girl?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "the girls bag"
+          },
+          {
+            "label": "B",
+            "text": "the girls’ bag"
+          },
+          {
+            "label": "C",
+            "text": "the girl’s bag"
+          },
+          {
+            "label": "D",
+            "text": "the girl bag"
+          }
+        ],
+        "answer": "C",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Punctuation rules",
+          "steps": [
+            "One girl is a singular owner.",
+            "Add apostrophe + s: girl’s bag."
+          ]
+        }
+      },
+      {
+        "number": 27,
+        "stem": "Which sentence correctly separates a list?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "Bring socks shoes and a hat."
+          },
+          {
+            "label": "B",
+            "text": "Bring socks, shoes, and a hat."
+          },
+          {
+            "label": "C",
+            "text": "Bring, socks shoes and a hat."
+          },
+          {
+            "label": "D",
+            "text": "Bring socks shoes, and, a hat."
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Punctuation rules",
+          "steps": [
+            "The list contains three items: socks, shoes, and a hat.",
+            "Place commas between the items."
+          ]
+        }
+      },
+      {
+        "number": 28,
+        "stem": "Which sentence uses a comma correctly?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "Because it rained we stayed inside."
+          },
+          {
+            "label": "B",
+            "text": "Because, it rained we stayed inside."
+          },
+          {
+            "label": "C",
+            "text": "Because it rained, we stayed inside."
+          },
+          {
+            "label": "D",
+            "text": "Because it rained we, stayed inside."
+          }
+        ],
+        "answer": "C",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Punctuation rules",
+          "steps": [
+            "Because it rained is an introductory dependent clause.",
+            "Put a comma after that whole clause."
+          ]
+        }
+      },
+      {
+        "number": 29,
+        "stem": "Which date is punctuated correctly?",
+        "choices": [
+          {
+            "label": "A",
+            "text": "May 8 2026"
+          },
+          {
+            "label": "B",
+            "text": "May, 8 2026"
+          },
+          {
+            "label": "C",
+            "text": "May 8, 2026"
+          },
+          {
+            "label": "D",
+            "text": "May 8 2026,"
+          }
+        ],
+        "answer": "C",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Punctuation rules",
+          "steps": [
+            "In a month-day-year date, separate day and year with a comma.",
+            "Write May 8, 2026."
+          ]
+        }
+      }
+    ],
+    "computation": [
+      {
+        "number": 30,
+        "stem": "3,875 + 2,648 =",
+        "choices": [
+          {
+            "label": "A",
+            "text": "6,423"
+          },
+          {
+            "label": "B",
+            "text": "6,523"
+          },
+          {
+            "label": "C",
+            "text": "6,513"
+          },
+          {
+            "label": "D",
+            "text": "5,523"
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Whole-number addition",
+          "steps": [
+            "3,875 + 2,000 = 5,875.",
+            "Add 600, then 48: 6,475 + 48 = 6,523."
+          ]
+        }
+      },
+      {
+        "number": 31,
+        "stem": "8,000 − 3,567 =",
+        "choices": [
+          {
+            "label": "A",
+            "text": "4,533"
+          },
+          {
+            "label": "B",
+            "text": "5,433"
+          },
+          {
+            "label": "C",
+            "text": "4,433"
+          },
+          {
+            "label": "D",
+            "text": "4,443"
+          }
+        ],
+        "answer": "C",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Whole-number subtraction",
+          "steps": [
+            "8,000 − 3,000 = 5,000.",
+            "5,000 − 500 − 67 = 4,433."
+          ]
+        }
+      },
+      {
+        "number": 32,
+        "stem": "48 × 25 =",
+        "choices": [
+          {
+            "label": "A",
+            "text": "1,000"
+          },
+          {
+            "label": "B",
+            "text": "1,100"
+          },
+          {
+            "label": "C",
+            "text": "1,250"
+          },
+          {
+            "label": "D",
+            "text": "1,200"
+          }
+        ],
+        "answer": "D",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Multiplication",
+          "steps": [
+            "25 is 100 ÷ 4.",
+            "48 × 100 ÷ 4 = 4,800 ÷ 4 = 1,200."
+          ]
+        }
+      },
+      {
+        "number": 33,
+        "stem": "3/4 − 1/6 =",
+        "choices": [
+          {
+            "label": "A",
+            "text": "2/2"
+          },
+          {
+            "label": "B",
+            "text": "7/12"
+          },
+          {
+            "label": "C",
+            "text": "2/10"
+          },
+          {
+            "label": "D",
+            "text": "5/12"
+          }
+        ],
+        "answer": "B",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Fraction subtraction",
+          "steps": [
+            "Use twelfths: 3/4 = 9/12 and 1/6 = 2/12.",
+            "9/12 − 2/12 = 7/12."
+          ]
+        }
+      },
+      {
+        "number": 34,
+        "stem": "6.25 + 0.8 =",
+        "choices": [
+          {
+            "label": "A",
+            "text": "7.05"
+          },
+          {
+            "label": "B",
+            "text": "6.33"
+          },
+          {
+            "label": "C",
+            "text": "6.105"
+          },
+          {
+            "label": "D",
+            "text": "7.5"
+          }
+        ],
+        "answer": "A",
+        "stimulusId": null,
+        "explanation": {
+          "skill": "Decimal addition",
+          "steps": [
+            "Write 0.8 as 0.80.",
+            "6.25 + 0.80 = 7.05."
+          ]
+        }
+      }
+    ]
+  },
+  "stimuli": {
+    "reading": [
+      {
+        "id": "reading-extra-rain",
+        "title": "The Rainy-Day Delivery",
+        "body": "Nora promised to deliver books to the neighborhood reading club. On Saturday, dark clouds gathered. She put the books in a cardboard box and stepped outside. Before she reached the gate, rain began soaking the box. Nora hurried back inside. She dried the covers and moved the books into a waterproof bag. Her brother offered a ride in his bicycle trailer, but the trailer had no cover. Nora thanked him and waited until the rain stopped. At the club, a volunteer smiled at the dry books. Nora was late, but every book could still be read. The next week, she checked the forecast before packing."
+      }
+    ]
+  }
+}

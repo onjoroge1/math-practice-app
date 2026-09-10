@@ -130,4 +130,15 @@ describe("Aden's Grade 5 journey", () => {
     await waitFor(() => expect(mocks.replace).toHaveBeenCalledWith("/topic-select"))
     expect(screen.queryByText(/Question 1 of/)).not.toBeInTheDocument()
   })
+
+  it("lets Amir reach the subtraction drill and learning notebook from topics", async () => {
+    localStorage.setItem("currentStudentId", "amir-row")
+    mocks.getStudentAction.mockResolvedValue({ id: "amir-row", name: "Amir", grade: 2 })
+    render(<TopicSelectPage />)
+    fireEvent.click(await screen.findByText("Subtraction to 100"))
+    expect(screen.getByRole("link", { name: /My learning notebook/ })).toHaveAttribute("href", "/learning-notebook")
+    fireEvent.click(screen.getByText("5-Minute Speed Drill"))
+    fireEvent.click(screen.getByRole("button", { name: /Start Practice/ }))
+    expect(mocks.push).toHaveBeenCalledWith("/grade2-subtraction-drill")
+  })
 })

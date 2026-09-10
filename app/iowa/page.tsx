@@ -14,6 +14,9 @@ import {
   type ProgressStore,
 } from "@/lib/iowa-progress"
 import { ArrowLeft, CheckCircle2 } from "lucide-react"
+import { IowaScoreHistory } from "@/components/iowa-score-history"
+import { readIowaAttempts, type IowaAttempt } from "@/lib/iowa-attempts"
+import { syncIowaProgress, IOWA_SAVE_MESSAGES, type IowaSaveStatus } from "@/lib/iowa-sync"
 
 const UNIT_ICON: Record<string, string> = {
   vocabulary: "📖",
@@ -40,6 +43,9 @@ export default function IowaHubPage() {
   const [progress, setProgress] = useState<ProgressStore>({})
   const [drafts, setDrafts] = useState<DraftStore>({})
   const [ready, setReady] = useState(false)
+  const [attempts, setAttempts] = useState<IowaAttempt[]>([])
+  const [saveStatus, setSaveStatus] = useState<IowaSaveStatus>("syncing")
+  const [retry, setRetry] = useState(0)
 
   useEffect(() => {
     const student = currentStudentContext()
@@ -49,8 +55,22 @@ export default function IowaHubPage() {
     }
     setProgress(getAllProgress(student.id))
     setDrafts(getAllAttemptDrafts(student.id))
+    setAttempts(readIowaAttempts(student.id))
     setReady(true)
-  }, [router])
+    let cancelled = false
+    const refresh = () => {
+      setSaveStatus("syncing")
+      void syncIowaProgress(student.id).then((loaded) => {
+        if (cancelled) return
+        setProgress(loaded.progress)
+        setAttempts(loaded.attempts)
+        setSaveStatus(loaded.status)
+      })
+    }
+    refresh()
+    window.addEventListener("online", refresh)
+    return () => { cancelled = true; window.removeEventListener("online", refresh) }
+  }, [router, retry])
 
   const attempted = Object.keys(progress).length
   const avgBest =
@@ -98,6 +118,12 @@ export default function IowaHubPage() {
           </p>
         </div>
 
+        <div className="rounded-xl border border-indigo-100 bg-white/80 p-4 text-sm text-slate-600">
+          <p role="status">{IOWA_SAVE_MESSAGES[saveStatus]}</p>
+          {saveStatus !== "synced" && saveStatus !== "syncing" && <button className="mt-2 font-semibold text-indigo-700 underline" onClick={() => setRetry((value) => value + 1)}>Retry score sync</button>}
+          <p className="mt-1 text-xs">Earlier browser-only scores stay in your unit totals on this device.</p>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {IOWA_UNITS.map((unit) => {
             const p = progress[unit.id]
@@ -139,6 +165,7 @@ export default function IowaHubPage() {
                         </div>
                       </div>
                     )}
+                    {p && <p className="mt-2 text-xs text-slate-500">Last practiced {new Date(p.lastAt).toLocaleDateString()} · {bandFor(p.last).label}</p>}
                     <div className="flex items-center gap-3 mt-2 text-xs text-slate-500">
                       <span>
                         {target} of {unit.poolSize} questions
@@ -171,6 +198,7 @@ export default function IowaHubPage() {
             )
           })}
         </div>
+        <IowaScoreHistory attempts={attempts} />
       </div>
     </div>
   )

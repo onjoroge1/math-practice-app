@@ -23,6 +23,7 @@ import {
   type QuizSettings,
 } from "@/lib/adaptive-quiz"
 import { saveDrillResult, type DrillResult } from "@/lib/drill-results"
+import { ArithmeticReview } from "@/components/arithmetic-review"
 import { trackDrillCompleted } from "@/lib/analytics"
 
 export interface QuizPageConfig {
@@ -748,6 +749,7 @@ function QuizResults({ config, questions, given, studentId, level, onLevelChange
           </div>
         </div>
 
+        <ArithmeticReview topic={config.title} questions={questions} answers={given} />
         <div className="flex flex-col gap-3">
           <button
             onClick={onAgain}

@@ -131,4 +131,7 @@ public/           # Static assets
 
 ## Current Status
 
-This app was scaffolded with v0 and is in **prototype** stage. See `PRODUCTION_PLAN.md` for the full list of gaps and the roadmap to production readiness.
+See [Learning improvements and current review](docs/LEARNING_IMPROVEMENTS_2026-09-10.md)
+for the saved Iowa scores, arithmetic teaching notebook, release migration, and
+prioritized next improvements. `PRODUCTION_PLAN.md` is the original prototype
+audit; several of its listed gaps have since been addressed.

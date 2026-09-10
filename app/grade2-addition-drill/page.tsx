@@ -5,8 +5,8 @@ import DrillPage, { type DrillQuestion } from "@/components/drill-page"
 function generateQuestions(): DrillQuestion[] {
   return Array.from({ length: 50 }, (_, i) => {
     const max = i < 25 ? 20 : 100
-    const a = Math.floor(Math.random() * max) + 1
-    const b = Math.floor(Math.random() * max) + 1
+    const a = Math.floor(Math.random() * (max - 1)) + 1
+    const b = Math.floor(Math.random() * (max - a)) + 1
     return { id: i, question: `${a} + ${b} =`, answer: a + b }
   })
 }

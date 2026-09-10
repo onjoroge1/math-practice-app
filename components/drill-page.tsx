@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { saveDrillResult, type DrillResult } from "@/lib/drill-results"
 import { trackDrillCompleted } from "@/lib/analytics"
+import { ArithmeticReview } from "@/components/arithmetic-review"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -50,18 +51,17 @@ function GridDrill({ config, questions, onComplete }: {
   useEffect(() => {
     if (submitted) return
     const t = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev <= 1) {
-          clearInterval(t)
-          setSubmitted(true)
-          onComplete(answers)
-          return 0
-        }
-        return prev - 1
-      })
+      setTimeLeft(prev => Math.max(0, prev - 1))
     }, 1000)
     return () => clearInterval(t)
-  }, [submitted, answers, onComplete])
+  }, [submitted])
+
+  useEffect(() => {
+    if (timeLeft === 0 && !submitted) {
+      setSubmitted(true)
+      onComplete(answers)
+    }
+  }, [timeLeft, submitted, answers, onComplete])
 
   const mins = String(Math.floor(timeLeft / 60)).padStart(2, "0")
   const secs = String(timeLeft % 60).padStart(2, "0")
@@ -135,31 +135,32 @@ function SequentialDrill({ config, questions, onComplete }: {
   const [feedback, setFeedback] = useState<"correct" | "wrong" | null>(null)
   const [timeLeft, setTimeLeft] = useState(config.totalTime ?? 300)
   const inputRef = useRef<HTMLInputElement>(null)
+  const nextTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const colors = COLOR_MAP[config.accentColor] ?? COLOR_MAP.indigo
 
   useEffect(() => {
     const t = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev <= 1) {
-          clearInterval(t)
-          onComplete(answers)
-          return 0
-        }
-        return prev - 1
-      })
+      setTimeLeft(prev => Math.max(0, prev - 1))
     }, 1000)
-    return () => clearInterval(t)
-  }, [answers, onComplete])
+    return () => {
+      clearInterval(t)
+      if (nextTimeoutRef.current) clearTimeout(nextTimeoutRef.current)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (timeLeft === 0) onComplete(answers)
+  }, [timeLeft, answers, onComplete])
 
   useEffect(() => { inputRef.current?.focus() }, [current])
 
   function handleSubmit() {
-    if (!inputVal.trim()) return
+    if (!inputVal.trim() || feedback) return
     const q = questions[current]
     const correct = String(q.answer).trim().toLowerCase() === inputVal.trim().toLowerCase()
     setFeedback(correct ? "correct" : "wrong")
     setAnswers(prev => ({ ...prev, [q.id]: inputVal.trim() }))
-    setTimeout(() => {
+    nextTimeoutRef.current = setTimeout(() => {
       setFeedback(null)
       setInputVal("")
       if (current + 1 >= questions.length) {
@@ -325,6 +326,7 @@ function ResultsScreen({ config, questions, answers }: {
           </div>
         )}
 
+        <ArithmeticReview topic={config.title} questions={questions} answers={answers} />
         <div className="flex flex-col gap-3">
           <button
             onClick={() => window.location.reload()}
@@ -356,8 +358,11 @@ export default function DrillPage({ config }: { config: DrillConfig }) {
   const [questions] = useState<DrillQuestion[]>(() => config.generateQuestions())
   const [answers, setAnswers] = useState<Record<number, string> | null>(null)
   const [drillStartTime] = useState(() => Date.now())
+  const completedRef = useRef(false)
 
   const handleComplete = useCallback((ans: Record<number, string>) => {
+    if (completedRef.current) return
+    completedRef.current = true
     const answered = Object.keys(ans).length
     const correct = questions.filter(q =>
       String(q.answer).trim().toLowerCase() === String(ans[q.id] ?? "").trim().toLowerCase()

@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS schema_migrations CASCADE;
 DROP VIEW IF EXISTS parent_dashboard_stats CASCADE;
 DROP VIEW IF EXISTS student_progress_summary CASCADE;
 DROP TABLE IF EXISTS achievements CASCADE;
+DROP TABLE IF EXISTS iowa_attempts CASCADE;
 DROP TABLE IF EXISTS practice_attempts CASCADE;
 DROP TABLE IF EXISTS practice_sessions CASCADE;
 DROP TABLE IF EXISTS mastery_tracking CASCADE;

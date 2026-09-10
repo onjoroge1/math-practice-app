@@ -2,6 +2,8 @@
 // Persists per-student, per-unit results (best/last score, attempts, and which questions have
 // been seen so the sampler can favor fresh material) in localStorage — mirroring how the rest
 // of the app stores streaks/coins client-side.
+import { readIowaAttempts, summarizeIowaAttempts } from "./iowa-attempts"
+import { getIowaUnit } from "./iowa-grade5"
 
 export interface UnitProgress {
   best: number // best percent
@@ -14,6 +16,7 @@ export interface UnitProgress {
 export type ProgressStore = Record<string, UnitProgress>
 
 export interface AttemptDraft {
+  attemptId?: string
   unitId: string
   questionNumbers: number[]
   answers: Record<number, string>
@@ -49,7 +52,13 @@ export function currentStudentContext(): CurrentStudentContext | null {
 function read(studentId: string): ProgressStore {
   if (typeof window === "undefined") return {}
   try {
-    return JSON.parse(localStorage.getItem(key(studentId)) || "{}") as ProgressStore
+    const parsed: unknown = JSON.parse(localStorage.getItem(key(studentId)) || "{}")
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {}
+    return Object.fromEntries(Object.entries(parsed).filter(([id, p]) =>
+      getIowaUnit(id) && p && Number.isFinite(p.best) && p.best >= 0 && p.best <= 100 &&
+      Number.isFinite(p.last) && p.last >= 0 && p.last <= 100 && Number.isInteger(p.attempts) && p.attempts > 0 &&
+      Array.isArray(p.seen) && p.seen.every(Number.isInteger) && Number.isFinite(p.lastAt),
+    ))
   } catch {
     return {}
   }
@@ -100,11 +109,13 @@ function writeDrafts(studentId: string, store: DraftStore): void {
 }
 
 export function getAllProgress(studentId: string): ProgressStore {
-  return read(studentId)
+  return summarizeIowaAttempts(read(studentId), readIowaAttempts(studentId))
 }
 
+export function getLegacyIowaProgress(studentId: string): ProgressStore { return read(studentId) }
+
 export function getUnitProgress(studentId: string, unitId: string): UnitProgress | null {
-  return read(studentId)[unitId] ?? null
+  return getAllProgress(studentId)[unitId] ?? null
 }
 
 export function getAllAttemptDrafts(studentId: string): DraftStore {

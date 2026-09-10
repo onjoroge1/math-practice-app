@@ -16,23 +16,28 @@ export interface DrillResult {
 
 export function saveDrillResultLocal(result: DrillResult) {
   if (typeof window === "undefined") return
-  const studentId = localStorage.getItem("currentStudentId") || "guest"
-  const key = `drillResults_${studentId}`
-  const existing: DrillResult[] = JSON.parse(localStorage.getItem(key) || "[]")
-  existing.unshift(result)
-  localStorage.setItem(key, JSON.stringify(existing.slice(0, 200)))
+  try {
+    const studentId = localStorage.getItem("currentStudentId") || "guest"
+    const key = `drillResults_${studentId}`
+    let existing: DrillResult[] = []
+    try {
+      const parsed: unknown = JSON.parse(localStorage.getItem(key) || "[]")
+      if (Array.isArray(parsed)) existing = parsed
+    } catch { /* Replace a corrupt backup with the current result. */ }
+    localStorage.setItem(key, JSON.stringify([result, ...existing].slice(0, 200)))
+  } catch { /* A full or blocked browser store must not hide the completed review. */ }
 }
 
 export async function saveDrillResultToDB(result: DrillResult, startTime: number) {
   if (typeof window === "undefined") return
-  const studentId = localStorage.getItem("currentStudentId")
-  // Ignore stale offline-profile ids that may remain in a returning browser.
-  if (!studentId || studentId === "guest" || studentId.startsWith("local-")) return
-
-  const gradeStr = localStorage.getItem("currentStudentGrade")
-  const grade = gradeStr ? parseInt(gradeStr, 10) : 1
-
   try {
+    const studentId = localStorage.getItem("currentStudentId")
+    // Ignore stale offline-profile ids that may remain in a returning browser.
+    if (!studentId || studentId === "guest" || studentId.startsWith("local-")) return
+
+    const gradeStr = localStorage.getItem("currentStudentGrade")
+    const grade = gradeStr ? parseInt(gradeStr, 10) : 1
+
     const session = await createSessionAction(studentId, "speed-drill", grade)
     const durationSeconds = Math.floor((Date.now() - startTime) / 1000)
 

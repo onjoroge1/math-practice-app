@@ -54,7 +54,8 @@ const TOPICS_BY_GRADE: Record<Grade, Topic[]> = {
     { id: "g2-subtraction-test", name: "Subtraction Test", description: "50 facts to 20 in a 3-minute worksheet", icon: "➖", category: "subtraction" },
     { id: "g2-multiplication-test", name: "Multiplication Test", description: "50 facts from the 2, 5, and 10 times tables", icon: "✖️", category: "multiplication" },
     { id: "g2-division-test", name: "Division Test", description: "50 exact division facts using 2, 5, and 10", icon: "➗", category: "division" },
-    { id: "add-sub-100", name: "Addition & Subtraction to 100", description: "Add and subtract within 100 with strategies", icon: "➕", category: "addition" },
+    { id: "add-sub-100", name: "Addition to 100", description: "Add within 100, then learn each answer step by step", icon: "➕", category: "addition" },
+    { id: "subtract-100", name: "Subtraction to 100", description: "Subtract within 100, then learn each answer step by step", icon: "➖", category: "subtraction" },
     { id: "place-value-1000", name: "Place Value to 1000", description: "Understand hundreds, tens, and ones", icon: "🔢", category: "place-value" },
     { id: "skip-counting", name: "Skip Counting & Multiplication Intro", description: "Count by 2s, 5s, and 10s", icon: "🔄", category: "multiplication" },
     { id: "measurement", name: "Measurement", description: "Measure using standard units", icon: "📏", category: "measurement" },
@@ -152,6 +153,7 @@ export default function TopicSelectPage() {
         else router.push("/grade1-mode-select")
       } else if (grade === 2) {
         if (selectedTopics.includes("add-sub-100")) router.push("/grade2-addition-drill")
+        else if (selectedTopics.includes("subtract-100")) router.push("/grade2-subtraction-drill")
         else if (selectedTopics.includes("place-value-1000")) router.push("/grade2-place-value-drill")
         else if (selectedTopics.includes("skip-counting")) router.push("/grade2-skip-counting-drill")
         // measurement / time / money are concept topics → adaptive practice
@@ -230,6 +232,11 @@ export default function TopicSelectPage() {
             )}
           </div>
         </div>
+
+        <Link href="/learning-notebook" className="block rounded-2xl border-2 border-sky-200 bg-white p-5 text-slate-800 hover:border-indigo-400">
+          <h2 className="text-lg font-bold">📘 My learning notebook</h2>
+          <p className="text-sm text-slate-600">See how to solve your addition and subtraction problems, one step at a time.</p>
+        </Link>
 
         {grade === 5 && (
           <div className="space-y-4">

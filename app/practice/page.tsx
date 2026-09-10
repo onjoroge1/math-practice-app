@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -14,6 +14,7 @@ import {
   updateStudentStatsAction,
 } from "@/lib/actions"
 import type { Grade, MathItem } from "@/lib/types"
+import { ArithmeticReview } from "@/components/arithmetic-review"
 
 interface PracticeStudent {
   id: string
@@ -50,6 +51,8 @@ export default function PracticePage() {
   const [reloadToken, setReloadToken] = useState(0)
   const [finishing, setFinishing] = useState(false)
   const [saveError, setSaveError] = useState("")
+  const [reviewAnswers, setReviewAnswers] = useState<Record<number, string>>({})
+  const reviewQuestions = useMemo(() => items.map((item, index) => ({ id: index, question: item.question, answer: item.answer })), [items])
 
   useEffect(() => {
     let cancelled = false
@@ -110,6 +113,7 @@ export default function PracticePage() {
     if (!student || !currentItem) return
 
     setSelectedAnswer(answer)
+    setReviewAnswers((previous) => ({ ...previous, [currentIndex]: String(answer) }))
     const correct = String(answer) === String(currentItem.answer)
     setIsCorrect(correct)
     setShowFeedback(true)
@@ -211,6 +215,7 @@ export default function PracticePage() {
             </div>
           </div>
 
+          <div className="text-left"><ArithmeticReview topic="Adaptive math practice" questions={reviewQuestions} answers={reviewAnswers} /></div>
           <Button
             onClick={handleFinish}
             disabled={finishing}

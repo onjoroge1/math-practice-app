@@ -14,6 +14,7 @@ import {
   type Grade2Operation,
 } from "@/lib/grade2-operation-test"
 import type { QuizQuestion } from "@/lib/adaptive-quiz"
+import { ArithmeticReview } from "@/components/arithmetic-review"
 
 type Phase = "ready" | "running" | "results"
 
@@ -245,6 +246,7 @@ export default function Grade2OperationTest({ kind }: { kind: Grade2Operation })
             )}
 
             <section className="bg-slate-50 p-4 sm:p-6">
+              {phase === "results" && (kind === "addition" || kind === "subtraction") && <div className="mx-auto mb-6 max-w-2xl"><ArithmeticReview topic={`Grade 2 ${config.title}`} questions={questions} answers={answers} /></div>}
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
                 {questions.map((question, index) => {
                   const showResult = phase === "results"

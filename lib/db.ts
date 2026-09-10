@@ -1,4 +1,5 @@
 import { neon, type NeonQueryFunction } from "@neondatabase/serverless"
+import type { IowaAttempt } from "./iowa-attempts"
 
 let _sql: NeonQueryFunction<false, false> | null = null
 
@@ -263,6 +264,22 @@ export async function getRecentSessions(studentId: string, limit = 10) {
     LIMIT ${limit}
   `
   return result
+}
+
+/** Insert immutable attempts idempotently, then restore this child's full history. */
+export async function syncIowaAttempts(studentId: string, attempts: IowaAttempt[]) {
+  if (attempts.length) {
+    await sql`
+      INSERT INTO iowa_attempts (student_id, id, payload)
+      SELECT ${studentId}::uuid, (item->>'id')::uuid, item
+      FROM jsonb_array_elements(${JSON.stringify(attempts)}::jsonb) AS item
+      ON CONFLICT (student_id, id) DO NOTHING
+    `
+  }
+  return await sql`
+    SELECT payload FROM iowa_attempts WHERE student_id = ${studentId}
+    ORDER BY (payload->>'completedAt')::bigint DESC, id
+  `
 }
 
 // ─── Practice attempts ────────────────────────────────────────────────────────

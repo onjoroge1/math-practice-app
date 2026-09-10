@@ -18,10 +18,12 @@ import {
   currentStudentContext,
   getAttemptDraft,
   getUnitProgress,
-  recordAttempt,
   saveAttemptDraft,
 } from "@/lib/iowa-progress"
 import { saveDrillResult } from "@/lib/drill-results"
+import { syncIowaProgress, IOWA_SAVE_MESSAGES, type IowaSaveStatus } from "@/lib/iowa-sync"
+import { readIowaAttempts, type IowaAttempt } from "@/lib/iowa-attempts"
+import { IowaScoreHistory } from "@/components/iowa-score-history"
 import { trackDrillCompleted, trackDrillStarted } from "@/lib/analytics"
 import { ArrowLeft, ArrowRight, CheckCircle2, XCircle, RotateCcw, Save } from "lucide-react"
 
@@ -68,6 +70,23 @@ export default function IowaUnitPage() {
   const activeSinceRef = useRef(0)
   const completedRef = useRef(false)
   const launchKeyRef = useRef("")
+  const attemptIdRef = useRef("")
+  const [savedAttempt, setSavedAttempt] = useState<IowaAttempt | null>(null)
+  const [history, setHistory] = useState<IowaAttempt[]>([])
+  const [saveStatus, setSaveStatus] = useState<IowaSaveStatus>("syncing")
+
+  const saveScore = useCallback((attempt: IowaAttempt) => {
+    const studentId = studentIdRef.current
+    setSaveStatus("syncing")
+    void syncIowaProgress(studentId, attempt).then((saved) => {
+      const draft = getAttemptDraft(studentId, attempt.unitId)
+      if (saved.status !== "unavailable" && draft?.attemptId === attempt.id) clearAttemptDraft(studentId, attempt.unitId)
+      if (attemptIdRef.current !== attempt.id) return
+      setSaveStatus(saved.status)
+      setHistory(saved.attempts.filter((entry) => entry.unitId === attempt.unitId))
+    })
+    if (readIowaAttempts(studentId).some((entry) => entry.id === attempt.id)) clearAttemptDraft(studentId, attempt.unitId)
+  }, [])
 
   const startAttempt = useCallback(() => {
     if (!unit) return
@@ -82,6 +101,7 @@ export default function IowaUnitPage() {
     const prev = getUnitProgress(student.id, unit.id)
     const seen = new Set<number>(prev?.seen ?? [])
     const draft = getAttemptDraft(student.id, unit.id)
+    attemptIdRef.current = draft?.attemptId ?? crypto.randomUUID()
     const byNumber = new Map(unit.questions.map((question) => [question.number, question]))
     const savedQuestions = draft?.questionNumbers.map((number) => byNumber.get(number)) ?? []
     const canResume = Boolean(
@@ -110,6 +130,7 @@ export default function IowaUnitPage() {
       activeSinceRef.current = startedAt
       setResumed(false)
       saveAttemptDraft(student.id, {
+        attemptId: attemptIdRef.current,
         unitId: unit.id,
         questionNumbers: freshQuestions.map((question) => question.number),
         answers: {},
@@ -123,6 +144,8 @@ export default function IowaUnitPage() {
     setFinished(false)
     setShowReview(false)
     setResult(null)
+    setSavedAttempt(null)
+    setHistory(readIowaAttempts(student.id).filter((entry) => entry.unitId === unit.id))
     setLoaded(true)
   }, [router, unit])
 
@@ -171,12 +194,15 @@ export default function IowaUnitPage() {
               {result.correct} of {result.total} correct
             </div>
             <p className="text-sm text-slate-500 max-w-md mx-auto">{result.band.guidance}</p>
+            <p role="status" className="text-sm text-slate-600">{IOWA_SAVE_MESSAGES[saveStatus]}</p>
+            {(saveStatus === "local" || saveStatus === "unavailable") && savedAttempt && <Button variant="outline" onClick={() => saveScore(savedAttempt)}>Retry saving score</Button>}
             <div className="flex gap-3 justify-center pt-2 flex-wrap">
               <Button variant="outline" onClick={() => setShowReview((v) => !v)}>
                 {showReview ? "Hide review" : "Review answers"}
               </Button>
               <Button
                 onClick={() => setAttemptKey((k) => k + 1)}
+                disabled={saveStatus === "syncing" || saveStatus === "unavailable"}
                 className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white"
               >
                 <RotateCcw className="w-4 h-4 mr-2" /> Practice again
@@ -187,6 +213,7 @@ export default function IowaUnitPage() {
             </div>
           </Card>
 
+          <IowaScoreHistory attempts={history} />
           {showReview && (
             <div className="space-y-3">
               {questions.map((q, i) => {
@@ -242,6 +269,7 @@ export default function IowaUnitPage() {
     elapsedMsRef.current += Math.max(0, now - activeSinceRef.current)
     activeSinceRef.current = now
     saveAttemptDraft(studentIdRef.current, {
+      attemptId: attemptIdRef.current,
       unitId: unit.id,
       questionNumbers: questions.map((question) => question.number),
       answers: nextAnswers,
@@ -263,8 +291,16 @@ export default function IowaUnitPage() {
     const completedAt = Date.now()
     const totalElapsedMs = elapsedMsRef.current + Math.max(0, completedAt - activeSinceRef.current)
     const outcome = scoreIowaAttempt(questions, answers)
-    recordAttempt(studentIdRef.current, unit.id, outcome.percent, questions.map((question) => question.number))
-    clearAttemptDraft(studentIdRef.current, unit.id)
+    const attempt: IowaAttempt = {
+      id: attemptIdRef.current,
+      unitId: unit.id,
+      questionNumbers: questions.map((question) => question.number),
+      answers,
+      completedAt,
+      durationSeconds: Math.min(86400, Math.floor(totalElapsedMs / 1000)),
+    }
+    setSavedAttempt(attempt)
+    saveScore(attempt)
     saveDrillResult(
       {
         topic: `Iowa ${unit.name}`,

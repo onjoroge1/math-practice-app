@@ -5,7 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { IOWA_UNITS, IOWA_TARGET, bandFor } from "@/lib/iowa-grade5"
+import { IOWA_UNITS, IOWA_TARGET, IOWA_ACTIVE_COUNT, bandFor } from "@/lib/iowa-grade5"
 import {
   currentStudentContext,
   getAllAttemptDrafts,
@@ -105,12 +105,13 @@ export default function IowaHubPage() {
           )}
         </div>
 
+        <Link href="/todays-practice" className="block rounded-xl bg-indigo-600 p-4 text-center font-bold text-white">☀️ Today’s practice — revisit mistakes and try a new question</Link>
         <div className="text-center space-y-3">
           <div className="text-6xl">🦉</div>
           <h1 className="text-4xl font-bold text-slate-800">Iowa Practice Battery</h1>
           <p className="text-lg text-slate-600">
             Grade 5 · pick a unit and answer about {IOWA_TARGET} questions. We choose fresh
-            questions each time and track your progress.
+            questions each time and track your progress. {IOWA_ACTIVE_COUNT} active questions with worked explanations.
           </p>
           <p className="text-xs text-slate-400 max-w-2xl mx-auto">
             Independent practice material — not an official Iowa Assessments test. Scores are
@@ -129,7 +130,8 @@ export default function IowaHubPage() {
             const p = progress[unit.id]
             const draft = drafts[unit.id]
             const band = p ? bandFor(p.best) : null
-            const target = Math.min(IOWA_TARGET, unit.poolSize)
+            const active = unit.questions.filter((q) => !q.retired)
+            const target = Math.min(IOWA_TARGET, active.length)
             return (
               <Card
                 key={unit.id}
@@ -168,12 +170,12 @@ export default function IowaHubPage() {
                     {p && <p className="mt-2 text-xs text-slate-500">Last practiced {new Date(p.lastAt).toLocaleDateString()} · {bandFor(p.last).label}</p>}
                     <div className="flex items-center gap-3 mt-2 text-xs text-slate-500">
                       <span>
-                        {target} of {unit.poolSize} questions
+                        About {target} of {active.length} active questions
                       </span>
                       {p && (
                         <span className="flex items-center gap-1 text-emerald-600">
                           <CheckCircle2 className="w-3.5 h-3.5" />
-                          {p.seen.length}/{unit.poolSize} questions seen
+                          {active.filter((q) => p.seen.includes(q.number)).length}/{active.length} questions seen
                         </span>
                       )}
                       {draft && (

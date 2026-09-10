@@ -1,14 +1,23 @@
 // Iowa-style Grade 5 comprehensive practice battery.
-// Data is extracted from the Iowa_Grade_5_Comprehensive_Practice_Package (361 questions,
+// Original data is extracted from the Iowa_Grade_5_Comprehensive_Practice_Package (361 questions,
 // 10 subtests). This is independent practice material, not an official Iowa Assessments test.
 import rawData from "./data/iowa-grade5.json"
+import explanationData from "./data/iowa-explanations.json"
+import expansionData from "./data/iowa-expansion.json"
 
 export interface IowaChoice {
   label: string // "A" | "B" | "C" | "D" | "E"
   text: string
 }
 
+export interface IowaExplanation {
+  skill: string
+  steps: string[]
+}
+
 export interface IowaQuestion {
+  explanation?: IowaExplanation
+  retired?: boolean
   number: number
   stem: string
   choices: IowaChoice[]
@@ -38,7 +47,22 @@ export interface IowaData {
   units: IowaUnit[]
 }
 
-export const IOWA: IowaData = rawData as IowaData
+const explanations = explanationData as Record<string, Record<string, IowaExplanation>>
+const additions = expansionData as { questions: Record<string, IowaQuestion[]>; stimuli: Record<string, IowaStimulus[]> }
+export const IOWA: IowaData = { units: rawData.units.map((unit) => {
+  const questions: IowaQuestion[] = unit.questions.map((q) => ({ ...q,
+    // Preserve IDs/keys for historical scores, but do not ask ambiguous editing items again.
+    stem: q.stem.replaceAll("&gt;", ">").replaceAll("&lt;", "<"),
+    choices: q.choices.map((c) => ({ ...c, text: c.text.replaceAll("&gt;", ">").replaceAll("&lt;", "<") })),
+    retired: unit.id === "punctuation" && [1, 5, 14].includes(q.number),
+    stimulusId: unit.id === "vocabulary" ? null : q.stimulusId,
+    explanation: explanations[unit.id]?.[q.number],
+  }))
+  questions.push(...(additions.questions[unit.id] ?? []))
+  return { ...unit, questions, poolSize: questions.length,
+    stimuli: [...unit.stimuli, ...(additions.stimuli[unit.id] ?? [])] }
+}) }
+export const IOWA_ACTIVE_COUNT = IOWA.units.reduce((total, unit) => total + unit.questions.filter((q) => !q.retired).length, 0)
 export const IOWA_UNITS: IowaUnit[] = IOWA.units
 
 /** Target number of questions presented per unit attempt. */
@@ -86,7 +110,7 @@ export function sampleUnit(
 ): IowaQuestion[] {
   const groups = new Map<string, IowaQuestion[]>()
   const order: string[] = []
-  unit.questions.forEach((q, i) => {
+  unit.questions.filter((q) => !q.retired).forEach((q, i) => {
     const key = q.stimulusId ?? `__solo_${i}`
     if (!groups.has(key)) {
       groups.set(key, [])

@@ -92,6 +92,7 @@ export function ArithmeticReview({ topic, questions, answers, persist = true }: 
       </div>
       {persist && <p role="status" className="text-sm text-slate-600">
         {saved === true ? "Saved on this device for next time. " : saved === false ? "This review could not be saved on this device. " : "Saving your review… "}
+        <Link href="/todays-practice" className="mr-3 font-semibold text-indigo-700 underline">Today’s practice</Link>
         <Link href="/learning-notebook" className="font-semibold text-indigo-700 underline">My learning notebook</Link>
       </p>}
     </section>

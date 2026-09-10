@@ -1,0 +1,2549 @@
+{
+  "vocabulary": {
+    "1": {
+      "skill": "Word meaning",
+      "steps": [
+        "Scarce describes something in short supply, so it is hard to find.",
+        "Choose the option that keeps that meaning: hard to find."
+      ]
+    },
+    "2": {
+      "skill": "Word meaning",
+      "steps": [
+        "Cautious describes someone avoiding danger by being careful.",
+        "Choose the option that keeps that meaning: careful."
+      ]
+    },
+    "3": {
+      "skill": "Word meaning",
+      "steps": [
+        "Ancient means very old; modern refers to recent times.",
+        "The question asks for an opposite, not a synonym. Ancient contrasts with modern."
+      ]
+    },
+    "4": {
+      "skill": "Word meaning",
+      "steps": [
+        "Climbing a steep trail takes effort, leaving hikers very tired.",
+        "Choose the option that keeps that meaning: very tired."
+      ]
+    },
+    "5": {
+      "skill": "Word meaning",
+      "steps": [
+        "Carrying glass with both hands protects it from breaking; fragile means easily broken.",
+        "Choose the option that keeps that meaning: fragile."
+      ]
+    },
+    "6": {
+      "skill": "Word meaning",
+      "steps": [
+        "A prediction is a statement about what may happen later.",
+        "Choose the option that keeps that meaning: tell what may happen."
+      ]
+    },
+    "7": {
+      "skill": "Word meaning",
+      "steps": [
+        "Enormous, huge, gigantic, and massive all describe great size.",
+        "Choose the option that keeps that meaning: massive."
+      ]
+    },
+    "8": {
+      "skill": "Word meaning",
+      "steps": [
+        "A silent ceremony suggests a serious, respectful mood.",
+        "Choose the option that keeps that meaning: serious."
+      ]
+    },
+    "9": {
+      "skill": "Word meaning",
+      "steps": [
+        "Improve means to make better.",
+        "Choose the option that keeps that meaning: improve."
+      ]
+    },
+    "10": {
+      "skill": "Word meaning",
+      "steps": [
+        "A reluctant person does not want to do something.",
+        "Choose the option that keeps that meaning: unwilling."
+      ]
+    },
+    "11": {
+      "skill": "Word meaning",
+      "steps": [
+        "Expand means get bigger; shrink means get smaller.",
+        "The question asks for an opposite, not a synonym. Expand contrasts with shrink."
+      ]
+    },
+    "12": {
+      "skill": "Word meaning",
+      "steps": [
+        "Precise measurements are exact rather than approximate.",
+        "Choose the option that keeps that meaning: exact."
+      ]
+    },
+    "13": {
+      "skill": "Word meaning",
+      "steps": [
+        "Greeting every visitor suggests a friendly puppy.",
+        "Choose the option that keeps that meaning: friendly."
+      ]
+    },
+    "14": {
+      "skill": "Word meaning",
+      "steps": [
+        "A consequence follows from an action: it is a result.",
+        "Choose the option that keeps that meaning: a result."
+      ]
+    },
+    "15": {
+      "skill": "Word meaning",
+      "steps": [
+        "Inspect means look at something carefully and closely.",
+        "Choose the option that keeps that meaning: inspect."
+      ]
+    },
+    "16": {
+      "skill": "Word meaning",
+      "steps": [
+        "Frequent events occur often.",
+        "Choose the option that keeps that meaning: happening often."
+      ]
+    },
+    "17": {
+      "skill": "Word meaning",
+      "steps": [
+        "Permit means allow; forbid means not allow.",
+        "The question asks for an opposite, not a synonym. Permit contrasts with forbid."
+      ]
+    },
+    "18": {
+      "skill": "Word meaning",
+      "steps": [
+        "An empty cabin left for years has been abandoned.",
+        "Choose the option that keeps that meaning: left behind."
+      ]
+    },
+    "19": {
+      "skill": "Word meaning",
+      "steps": [
+        "When everyone knows what to do, the directions are clear.",
+        "Choose the option that keeps that meaning: clear."
+      ]
+    },
+    "20": {
+      "skill": "Word meaning",
+      "steps": [
+        "Essential things are needed, or necessary.",
+        "Choose the option that keeps that meaning: necessary."
+      ]
+    },
+    "21": {
+      "skill": "Word meaning",
+      "steps": [
+        "Whispering, murmuring, and muttering are ways of speaking quietly.",
+        "Choose the option that keeps that meaning: speak softly."
+      ]
+    },
+    "22": {
+      "skill": "Word meaning",
+      "steps": [
+        "Swift describes quick movement, so a swift current moves fast.",
+        "Choose the option that keeps that meaning: fast."
+      ]
+    },
+    "23": {
+      "skill": "Word meaning",
+      "steps": [
+        "A strategy is a plan of actions to reach a goal.",
+        "Choose the option that keeps that meaning: strategy."
+      ]
+    },
+    "24": {
+      "skill": "Word meaning",
+      "steps": [
+        "Things that resemble each other look alike.",
+        "Choose the option that keeps that meaning: look like."
+      ]
+    },
+    "25": {
+      "skill": "Word meaning",
+      "steps": [
+        "Ordinary means usual; remarkable means unusual enough to notice.",
+        "The question asks for an opposite, not a synonym. Ordinary contrasts with remarkable."
+      ]
+    },
+    "26": {
+      "skill": "Word meaning",
+      "steps": [
+        "Applause suggests the audience found the performance very impressive.",
+        "Choose the option that keeps that meaning: very impressive."
+      ]
+    },
+    "27": {
+      "skill": "Word meaning",
+      "steps": [
+        "Accurate passing requires attention; focus means direct your attention.",
+        "Choose the option that keeps that meaning: focus."
+      ]
+    },
+    "28": {
+      "skill": "Word meaning",
+      "steps": [
+        "Diminish means become smaller or decrease.",
+        "Choose the option that keeps that meaning: decrease."
+      ]
+    },
+    "29": {
+      "skill": "Word meaning",
+      "steps": [
+        "A reliable person or thing can be depended on.",
+        "Choose the option that keeps that meaning: reliable."
+      ]
+    },
+    "30": {
+      "skill": "Word meaning",
+      "steps": [
+        "A brief summary is short rather than lengthy.",
+        "Choose the option that keeps that meaning: short."
+      ]
+    },
+    "31": {
+      "skill": "Word meaning",
+      "steps": [
+        "Generous means willing to give; selfish means mainly concerned with oneself.",
+        "The question asks for an opposite, not a synonym. Generous contrasts with selfish."
+      ]
+    },
+    "32": {
+      "skill": "Word meaning",
+      "steps": [
+        "Distribute means give things out among people or places.",
+        "Choose the option that keeps that meaning: give out to several people."
+      ]
+    },
+    "33": {
+      "skill": "Word meaning",
+      "steps": [
+        "Branches in the way stop hikers: the path is blocked.",
+        "Choose the option that keeps that meaning: blocked."
+      ]
+    },
+    "34": {
+      "skill": "Word meaning",
+      "steps": [
+        "Evident means plain to see or obvious.",
+        "Choose the option that keeps that meaning: obvious."
+      ]
+    },
+    "35": {
+      "skill": "Word meaning",
+      "steps": [
+        "Prevent means stop something before it happens.",
+        "Choose the option that keeps that meaning: prevent."
+      ]
+    },
+    "36": {
+      "skill": "Word meaning",
+      "steps": [
+        "A bridge that stays steady in wind is stable.",
+        "Choose the option that keeps that meaning: steady."
+      ]
+    },
+    "37": {
+      "skill": "Word meaning",
+      "steps": [
+        "Including every important step makes an explanation complete and thorough.",
+        "Choose the option that keeps that meaning: thorough."
+      ]
+    }
+  },
+  "reading": {
+    "1": {
+      "skill": "Reading theme",
+      "steps": [
+        "Lena starts alone, but neighbors join her.",
+        "The ending shows people sharing food and stories: the idea brought them together."
+      ]
+    },
+    "2": {
+      "skill": "Reading inference",
+      "steps": [
+        "Mr. Ortiz says a sign cannot grow tomatoes before he helps.",
+        "His remark shows doubt that Lena's plan will work."
+      ]
+    },
+    "3": {
+      "skill": "Reading sequence",
+      "steps": [
+        "Find Lena's sign near the beginning.",
+        "The rake, garden beds, and harvest all come later."
+      ]
+    },
+    "4": {
+      "skill": "Reading inference",
+      "steps": [
+        "A sign cannot literally grow an idea.",
+        "Here, grow means encourage an idea to spread and inspire action."
+      ]
+    },
+    "5": {
+      "skill": "Reading evidence",
+      "steps": [
+        "The frost and rabbits damage the first crops.",
+        "The neighbors replant instead of quitting; this proves persistence."
+      ]
+    },
+    "6": {
+      "skill": "Reading inference",
+      "steps": [
+        "At first the lot has weeds and wrappers.",
+        "At the end neighbors share tomatoes, baskets, and stories: food and friendship."
+      ]
+    },
+    "7": {
+      "skill": "Reading theme",
+      "steps": [
+        "The passage explains roots, nutrients, and planned burns.",
+        "These details support the purpose of explaining how managed fire can help prairies."
+      ]
+    },
+    "8": {
+      "skill": "Reading evidence",
+      "steps": [
+        "Look for where grasses keep living tissue.",
+        "Their roots are below ground, away from the fast surface fire."
+      ]
+    },
+    "9": {
+      "skill": "Reading evidence",
+      "steps": [
+        "The passage says repeated fires stop many young trees.",
+        "Without fire, trees and shrubs may spread and turn prairie into woodland."
+      ]
+    },
+    "10": {
+      "skill": "Reading evidence",
+      "steps": [
+        "Managers prepare firebreaks and position crews with water.",
+        "These preparations help limit fire spread and respond to trouble."
+      ]
+    },
+    "11": {
+      "skill": "Reading inference",
+      "steps": [
+        "The burn is chosen for a specific area and time.",
+        "That context makes prescribed mean planned and directed."
+      ]
+    },
+    "12": {
+      "skill": "Reading theme",
+      "steps": [
+        "The final paragraph describes both disaster and preservation.",
+        "The effect depends on the place, conditions, and management."
+      ]
+    },
+    "13": {
+      "skill": "Reading evidence",
+      "steps": [
+        "The last line says wheels repeat, repeat.",
+        "That repeated wording points to the turning wheels' sound."
+      ]
+    },
+    "14": {
+      "skill": "Reading inference",
+      "steps": [
+        "Notice sleeping farms, moonlight, and a child watching stars.",
+        "These quiet observations support a peaceful, thoughtful mood."
+      ]
+    },
+    "15": {
+      "skill": "Reading inference",
+      "steps": [
+        "Farms do not literally sleep or fold.",
+        "The image describes farms that are quiet and hidden by nighttime darkness."
+      ]
+    },
+    "16": {
+      "skill": "Reading inference",
+      "steps": [
+        "The train is moving while the child watches.",
+        "The porch light and tower are brief sights that pass the window."
+      ]
+    },
+    "17": {
+      "skill": "Reading theme",
+      "steps": [
+        "Personification gives a nonhuman thing a human action.",
+        "Writing is a human action given to the train."
+      ]
+    },
+    "18": {
+      "skill": "Reading evidence",
+      "steps": [
+        "The instructions state why stones go in the bottom.",
+        "Their weight helps keep the bottle from tipping over."
+      ]
+    },
+    "19": {
+      "skill": "Reading evidence",
+      "steps": [
+        "The stones are covered with starting water.",
+        "Mark zero at that water surface so later rises measure rain only."
+      ]
+    },
+    "20": {
+      "skill": "Reading evidence",
+      "steps": [
+        "The cut-off top is turned upside down.",
+        "Its wide opening collects rain and its narrow opening channels it into the bottle."
+      ]
+    },
+    "21": {
+      "skill": "Reading evidence",
+      "steps": [
+        "Trees and roofs can intercept rain or shed extra water.",
+        "An open area gives a more representative rainfall measurement."
+      ]
+    },
+    "22": {
+      "skill": "Reading evidence",
+      "steps": [
+        "Read the sequence after recording the amount.",
+        "Empty extra water back to zero before setting the gauge outside again."
+      ]
+    },
+    "23": {
+      "skill": "Reading evidence",
+      "steps": [
+        "Eli draws the fork east rather than west.",
+        "That would send travelers the wrong way."
+      ]
+    },
+    "24": {
+      "skill": "Reading inference",
+      "steps": [
+        "Eli notices an inaccurate route and stops printing.",
+        "Correcting the maps matters more to him than meeting the deadline."
+      ]
+    },
+    "25": {
+      "skill": "Reading inference",
+      "steps": [
+        "Paper can be replaced, but a customer may stop trusting a printer.",
+        "The uncle means a damaged reputation is harder to repair."
+      ]
+    },
+    "26": {
+      "skill": "Reading inference",
+      "steps": [
+        "Eli admits his error and shows the spoiled maps.",
+        "Admitting a mistake instead of hiding it demonstrates honesty."
+      ]
+    },
+    "27": {
+      "skill": "Reading inference",
+      "steps": [
+        "Years later, the merchant becomes Eli's customer.",
+        "That later choice shows a lasting benefit of Eli's honesty."
+      ]
+    },
+    "28": {
+      "skill": "Reading theme",
+      "steps": [
+        "Eli tells the truth even though the maps arrive late.",
+        "The merchant later trusts him with business, supporting the theme of honesty building trust."
+      ]
+    },
+    "29": {
+      "skill": "Reading theme",
+      "steps": [
+        "The passage describes pest control, seeds, and pollination.",
+        "It also lists threats, so a main idea must include benefits and threats."
+      ]
+    },
+    "30": {
+      "skill": "Reading evidence",
+      "steps": [
+        "Fruit-eating bats carry fruit and release seeds elsewhere.",
+        "Those seeds can grow into plants in new places."
+      ]
+    },
+    "31": {
+      "skill": "Reading evidence",
+      "steps": [
+        "The passage says bats depend on healthy habitats.",
+        "A sudden decline can therefore signal problems in those habitats."
+      ]
+    },
+    "32": {
+      "skill": "Reading evidence",
+      "steps": [
+        "A shelter is a place where an animal lives or rests.",
+        "Protecting caves directly protects such a place for bats."
+      ]
+    },
+    "33": {
+      "skill": "Reading evidence",
+      "steps": [
+        "The passage says bats eat moths and beetles.",
+        "Eating crop pests can help farming."
+      ]
+    },
+    "34": {
+      "skill": "Reading evidence",
+      "steps": [
+        "Look in the first paragraph at how books were purchased.",
+        "Members' fees paid for the shared collection."
+      ]
+    },
+    "35": {
+      "skill": "Reading evidence",
+      "steps": [
+        "Subscription libraries charged membership fees.",
+        "Public libraries used community support and opened access to residents more broadly."
+      ]
+    },
+    "36": {
+      "skill": "Reading evidence",
+      "steps": [
+        "A building alone cannot run a library.",
+        "Paying staff and maintenance helps keep it operating over time."
+      ]
+    },
+    "37": {
+      "skill": "Reading evidence",
+      "steps": [
+        "Compare the original shared books with modern digital materials.",
+        "Both provide people access to information."
+      ]
+    },
+    "38": {
+      "skill": "Reading sequence",
+      "steps": [
+        "The passage moves from early collections to 1731, the 1800s, and modern libraries.",
+        "An account organized through time uses chronological order."
+      ]
+    },
+    "39": {
+      "skill": "Reading evidence",
+      "steps": [
+        "Passage A describes lessons; Passage B calls a garden useful.",
+        "Both agree a garden could benefit students."
+      ]
+    },
+    "40": {
+      "skill": "Reading evidence",
+      "steps": [
+        "Passage A proposes using the courtyard.",
+        "Passage B proposes two small raised boxes first: the disagreement is starting size."
+      ]
+    },
+    "41": {
+      "skill": "Reading evidence",
+      "steps": [
+        "Passage A names science, math, and language arts activities.",
+        "Those examples support using the garden for several school subjects."
+      ]
+    },
+    "42": {
+      "skill": "Reading evidence",
+      "steps": [
+        "Passage B mentions summer watering, tools, soil, and fencing.",
+        "These are concerns about cost and ongoing maintenance."
+      ]
+    },
+    "43": {
+      "skill": "Reading inference",
+      "steps": [
+        "Keep Passage A's learning goal and Passage B's manageable start.",
+        "Begin with a small garden and expand after it succeeds."
+      ]
+    }
+  },
+  "written-expression": {
+    "1": {
+      "skill": "Paragraph focus",
+      "steps": [
+        "The paragraph describes a science museum trip.",
+        "Sentence 3 about pizza does not support that topic."
+      ]
+    },
+    "2": {
+      "skill": "Transitions",
+      "steps": [
+        "Sentence 2 describes the first room visited.",
+        "First introduces the start of the visit's sequence."
+      ]
+    },
+    "3": {
+      "skill": "Precise writing",
+      "steps": [
+        "Precise writing names who acted and what happened.",
+        "Museum educator and spinning column of air in a clear chamber give specific details."
+      ]
+    },
+    "4": {
+      "skill": "Paragraph focus",
+      "steps": [
+        "Sentence 2 introduces fossils.",
+        "A guide explaining what bones reveal develops that same idea."
+      ]
+    },
+    "5": {
+      "skill": "Paragraph focus",
+      "steps": [
+        "A conclusion should connect back to the museum's effect on learning.",
+        "Hoping to investigate like museum scientists brings the paragraph's ideas together."
+      ]
+    },
+    "6": {
+      "skill": "Sentence structure",
+      "steps": [
+        "Keep both facts: a dog was wandering and it wore a red collar.",
+        "Place with a red collar beside dog so the description attaches to the right noun."
+      ]
+    },
+    "7": {
+      "skill": "Precise writing",
+      "steps": [
+        "Maya moves slowly so she will not frighten the dog.",
+        "Moved closer to keeps the meaning of approached without adding rushing or shouting."
+      ]
+    },
+    "8": {
+      "skill": "Paragraph focus",
+      "steps": [
+        "Sentence 4 mentions a phone number and sentence 5 the owner's arrival.",
+        "Calling the number explains the missing connection."
+      ]
+    },
+    "9": {
+      "skill": "Transitions",
+      "steps": [
+        "Maya approaches the dog before reading its tag.",
+        "After the dog came near gives a logical time connection."
+      ]
+    },
+    "10": {
+      "skill": "Paragraph focus",
+      "steps": [
+        "Maya carefully helps a lost dog find its owner.",
+        "A Responsible Choice describes her actions across the paragraph."
+      ]
+    },
+    "11": {
+      "skill": "Paragraph focus",
+      "steps": [
+        "The topic is ways to save water.",
+        "Water is wet gives no useful way to save it, so remove sentence 5."
+      ]
+    },
+    "12": {
+      "skill": "Transitions",
+      "steps": [
+        "Sentence 2 presents leaking as a problem.",
+        "Sentence 3 follows with fixing leaks as the solution; keep that order."
+      ]
+    },
+    "13": {
+      "skill": "Paragraph focus",
+      "steps": [
+        "A supporting example must show another way to save water.",
+        "Shorter showers reduce the time water runs."
+      ]
+    },
+    "14": {
+      "skill": "Transitions",
+      "steps": [
+        "Fixing leaks is one useful action.",
+        "Another useful habit introduces a second action with the same purpose."
+      ]
+    },
+    "15": {
+      "skill": "Paragraph focus",
+      "steps": [
+        "The conclusion should explain the effect of the habits.",
+        "Small daily choices adding up to savings makes that connection specific."
+      ]
+    },
+    "16": {
+      "skill": "Sentence structure",
+      "steps": [
+        "Keep the audience becoming quiet, the curtain opening, and the narrator's feeling.",
+        "When links those events without changing who feels nervous."
+      ]
+    },
+    "17": {
+      "skill": "Paragraph focus",
+      "steps": [
+        "Sentence 1 says the band practiced.",
+        "Repeating a difficult ending gives a concrete example of that practice."
+      ]
+    },
+    "18": {
+      "skill": "Transitions",
+      "steps": [
+        "The narrator is nervous at first but later stops shaking.",
+        "However signals this contrast."
+      ]
+    },
+    "19": {
+      "skill": "Precise writing",
+      "steps": [
+        "In a concert, a band plays a musical piece.",
+        "Performed is the precise musical verb among the choices."
+      ]
+    },
+    "20": {
+      "skill": "Paragraph focus",
+      "steps": [
+        "The paragraph moves from practice to nerves to a successful finish.",
+        "The central idea should connect all three."
+      ]
+    },
+    "21": {
+      "skill": "Subject–verb agreement",
+      "steps": [
+        "Each is a singular subject, even with players after it.",
+        "Change have to has in line B: Each of the players has a water bottle."
+      ]
+    },
+    "22": {
+      "skill": "Subject pronouns",
+      "steps": [
+        "The people doing the carrying need subject pronouns.",
+        "Change Marcus and me to Marcus and I in line A."
+      ]
+    },
+    "23": {
+      "skill": "Grammar and usage",
+      "steps": [
+        "The kite is the subject and flew is a correct past-tense verb.",
+        "Higher than correctly compares its height with the other kites; no correction is needed."
+      ]
+    },
+    "24": {
+      "skill": "Grammar and usage",
+      "steps": [
+        "Yesterday requires the simple past tense.",
+        "Change we seen to we saw in line A; seen needs a helper such as have."
+      ]
+    },
+    "25": {
+      "skill": "Grammar and usage",
+      "steps": [
+        "It's means it is or it has.",
+        "Ownership needs its: the puppy wagged its tail. Correct line B."
+      ]
+    },
+    "26": {
+      "skill": "Subject–verb agreement",
+      "steps": [
+        "Neither is singular here.",
+        "Change seem to seems in line B to agree with Neither."
+      ]
+    },
+    "27": {
+      "skill": "Grammar and usage",
+      "steps": [
+        "Had already eaten describes an action completed before another past action.",
+        "When Dad brought gives that later action; the sentence is correct."
+      ]
+    },
+    "28": {
+      "skill": "Grammar and usage",
+      "steps": [
+        "The word describes how the guide spoke, so use an adverb.",
+        "Change clear to clearly in line B."
+      ]
+    },
+    "29": {
+      "skill": "Grammar and usage",
+      "steps": [
+        "The comparison is between two cousins.",
+        "Use taller for two, not tallest; correct line B."
+      ]
+    },
+    "30": {
+      "skill": "Subject–verb agreement",
+      "steps": [
+        "The subject is three books, which is plural.",
+        "Change There is to There are in line A."
+      ]
+    },
+    "31": {
+      "skill": "Grammar and usage",
+      "steps": [
+        "This imagines an unreal situation.",
+        "Use If I were the team captain in line A."
+      ]
+    },
+    "32": {
+      "skill": "Grammar and usage",
+      "steps": [
+        "Class is treated as one group here.",
+        "Its correctly shows that the project belongs to the class; no correction is needed."
+      ]
+    },
+    "33": {
+      "skill": "Subject pronouns",
+      "steps": [
+        "The people planting are the subject.",
+        "Replace Her with She in line A: She and Keisha planted."
+      ]
+    },
+    "34": {
+      "skill": "Grammar and usage",
+      "steps": [
+        "The word describes how the storm moved.",
+        "Use the adverb quickly: more quickly than, in line B."
+      ]
+    },
+    "35": {
+      "skill": "Grammar and usage",
+      "steps": [
+        "Shortest already expresses the superlative.",
+        "Remove most in line B; use the shortest."
+      ]
+    },
+    "36": {
+      "skill": "Subject–verb agreement",
+      "steps": [
+        "The subject is basket, not apples.",
+        "A singular basket was sitting; change were to was in line B."
+      ]
+    },
+    "37": {
+      "skill": "Grammar and usage",
+      "steps": [
+        "Carefully correctly describes measured.",
+        "Before he cut it gives a clear sequence; there is no error."
+      ]
+    },
+    "38": {
+      "skill": "Grammar and usage",
+      "steps": [
+        "The snacks are distributed across a group of five students.",
+        "For this group distribution, use among all five students in line B."
+      ]
+    },
+    "39": {
+      "skill": "Grammar and usage",
+      "steps": [
+        "Had brought correctly describes an action before the teacher asked.",
+        "Whether correctly introduces the indirect question; no error is needed."
+      ]
+    },
+    "40": {
+      "skill": "Grammar and usage",
+      "steps": [
+        "Difficult needs more for a comparison.",
+        "Use more difficult than, not difficulter than, in line B."
+      ]
+    }
+  },
+  "mathematics": {
+    "1": {
+      "skill": "Place value",
+      "steps": [
+        "Read places from the right: ones, tens, hundreds, thousands, ten thousands.",
+        "The 7 is in the ten-thousands place: 7 × 10,000 = 70,000."
+      ]
+    },
+    "2": {
+      "skill": "Place value",
+      "steps": [
+        "Compare digits from left to right.",
+        "398,765 beats 389,765 in the thousands and beats the other 398,... choices in the hundreds or tens."
+      ]
+    },
+    "3": {
+      "skill": "Place value",
+      "steps": [
+        "Keep the ten-thousands digit 8 and inspect the thousands digit 4.",
+        "Since 4 < 5, round down to 680,000."
+      ]
+    },
+    "4": {
+      "skill": "Place value",
+      "steps": [
+        "Split each nonzero place value.",
+        "48,306 = 40,000 + 8,000 + 300 + 6."
+      ]
+    },
+    "5": {
+      "skill": "Whole-number addition",
+      "steps": [
+        "Installed seats add to the old total.",
+        "18,745 + 2,000 = 20,745; + 680 = 21,425."
+      ]
+    },
+    "6": {
+      "skill": "Whole-number subtraction",
+      "steps": [
+        "Subtract shipped boxes from the starting supply.",
+        "24,300 − 7,000 = 17,300; − 896 = 16,404."
+      ]
+    },
+    "7": {
+      "skill": "Multiplication",
+      "steps": [
+        "Split 24 into 20 + 4.",
+        "326 × 20 = 6,520 and 326 × 4 = 1,304; add to get 7,824."
+      ]
+    },
+    "8": {
+      "skill": "Division",
+      "steps": [
+        "18 × 300 = 5,400, leaving 144.",
+        "18 × 8 = 144; 300 + 8 = 308."
+      ]
+    },
+    "9": {
+      "skill": "Multiplication",
+      "steps": [
+        "Equal groups mean multiplication.",
+        "36 × 20 = 720 and 36 × 4 = 144; total 864."
+      ]
+    },
+    "10": {
+      "skill": "Division",
+      "steps": [
+        "Divide the total equally among nine buses.",
+        "9 × 40 = 360, leaving 72; 9 × 8 = 72, so each bus has 48."
+      ]
+    },
+    "11": {
+      "skill": "Order of operations",
+      "steps": [
+        "There are no parentheses.",
+        "Do multiplication before addition, so evaluate 6 × 4 first."
+      ]
+    },
+    "12": {
+      "skill": "Order of operations",
+      "steps": [
+        "Start inside parentheses: 12 − 8 = 4.",
+        "Then 3 × 4 = 12; finally 7 + 12 = 19."
+      ]
+    },
+    "13": {
+      "skill": "Factors and multiples",
+      "steps": [
+        "A factor divides 42 with no remainder.",
+        "42 ÷ 6 = 7, so 6 is a factor."
+      ]
+    },
+    "14": {
+      "skill": "Factors and multiples",
+      "steps": [
+        "A prime has exactly two positive factors: 1 and itself.",
+        "21 = 3 × 7, 27 = 3 × 9, and 33 = 3 × 11; 29 has no other positive factors."
+      ]
+    },
+    "15": {
+      "skill": "Factors and multiples",
+      "steps": [
+        "Multiples of 4 begin 4, 8, 12; multiples of 6 begin 6, 12.",
+        "The first shared multiple is 12."
+      ]
+    },
+    "16": {
+      "skill": "Patterns and equations",
+      "steps": [
+        "Find consecutive differences: 11 − 5 = 6 and 17 − 11 = 6.",
+        "23 − 17 is also 6, so add 6 each time."
+      ]
+    },
+    "17": {
+      "skill": "Patterns and equations",
+      "steps": [
+        "Replace n with 8.",
+        "5 × 8 + 3 = 40 + 3 = 43."
+      ]
+    },
+    "18": {
+      "skill": "Patterns and equations",
+      "steps": [
+        "A number is represented by n; decreased by 12 means subtract 12.",
+        "Equals 35 gives n − 12 = 35."
+      ]
+    },
+    "19": {
+      "skill": "Multiplication",
+      "steps": [
+        "Three books cost 3 × $14 = $42.",
+        "Add the $6 notebook: $42 + $6 = $48."
+      ]
+    },
+    "20": {
+      "skill": "Division",
+      "steps": [
+        "8 × 159 = 1,272 apples.",
+        "1,275 − 1,272 = 3 remain, fewer than the 8 needed for another full bag."
+      ]
+    },
+    "21": {
+      "skill": "Equivalent fractions",
+      "steps": [
+        "Multiply numerator and denominator by the same number.",
+        "3/5 = (3 × 3)/(5 × 3) = 9/15."
+      ]
+    },
+    "22": {
+      "skill": "Equivalent fractions",
+      "steps": [
+        "Use denominator 48: 3/8 = 18/48, 1/2 = 24/48, 5/12 = 20/48, 7/16 = 21/48.",
+        "24/48 is greatest, so choose 1/2."
+      ]
+    },
+    "23": {
+      "skill": "Fraction addition",
+      "steps": [
+        "Rename 3/4 as 6/8.",
+        "6/8 + 1/8 = 7/8; the denominator stays 8."
+      ]
+    },
+    "24": {
+      "skill": "Fraction subtraction",
+      "steps": [
+        "Use denominator 12: 5/6 = 10/12 and 1/4 = 3/12.",
+        "10/12 − 3/12 = 7/12."
+      ]
+    },
+    "25": {
+      "skill": "Fraction addition",
+      "steps": [
+        "Rename 1/3 as 2/6; add whole parts: 2 + 1 = 3.",
+        "2/6 + 5/6 = 7/6 = 1 1/6; total 4 1/6."
+      ]
+    },
+    "26": {
+      "skill": "Fraction subtraction",
+      "steps": [
+        "6 1/4 = 6 3/12 = 5 15/12; 2 2/3 = 2 8/12.",
+        "Subtract: (5 − 2) + (15 − 8)/12 = 3 7/12."
+      ]
+    },
+    "27": {
+      "skill": "Fraction multiplication",
+      "steps": [
+        "Four groups of 2/3 make (4 × 2)/3 = 8/3.",
+        "8 ÷ 3 is 2 remainder 2, so 8/3 = 2 2/3."
+      ]
+    },
+    "28": {
+      "skill": "Fraction multiplication",
+      "steps": [
+        "Three batches need three groups of 3/4 cup.",
+        "3 × 3/4 = 9/4 = 2 1/4 cups."
+      ]
+    },
+    "29": {
+      "skill": "Fraction addition",
+      "steps": [
+        "Rename 2/5 mile as 4/10 mile.",
+        "4/10 + 3/10 = 7/10 mile."
+      ]
+    },
+    "30": {
+      "skill": "Fraction division",
+      "steps": [
+        "Each meter contains four quarter-meter pieces.",
+        "Five meters contain 5 × 4 = 20 pieces."
+      ]
+    },
+    "31": {
+      "skill": "Equivalent fractions",
+      "steps": [
+        "Equivalent fractions multiply both parts by the same number.",
+        "7/10 × 2/2 = 14/20; the other inequalities reverse the actual order."
+      ]
+    },
+    "32": {
+      "skill": "Equivalent fractions",
+      "steps": [
+        "Halfway means two equal parts of the interval.",
+        "One of those two parts is 1/2."
+      ]
+    },
+    "33": {
+      "skill": "Fraction subtraction",
+      "steps": [
+        "Both amounts are in eighths: 7/8 − 3/8 = 4/8.",
+        "Divide numerator and denominator by 4: 4/8 = 1/2."
+      ]
+    },
+    "34": {
+      "skill": "Fraction division",
+      "steps": [
+        "One whole contains five fifths.",
+        "Three wholes contain 3 × 5 fifths, so dividing by 1/5 is multiplying by 5."
+      ]
+    },
+    "35": {
+      "skill": "Fraction addition",
+      "steps": [
+        "Rename 2 1/2 as 2 2/4.",
+        "1 3/4 + 2 2/4 = 3 5/4 = 4 1/4."
+      ]
+    },
+    "36": {
+      "skill": "Decimal addition",
+      "steps": [
+        "Line up decimal places: 3.8 = 3.80.",
+        "4.72 + 3.80 = 8.52."
+      ]
+    },
+    "37": {
+      "skill": "Decimal subtraction",
+      "steps": [
+        "Write 12.5 as 12.50 and subtract matching places.",
+        "12.50 − 7.00 = 5.50; − 0.68 = 4.82."
+      ]
+    },
+    "38": {
+      "skill": "Decimal multiplication",
+      "steps": [
+        "Multiplying by 10 makes every digit worth ten times as much.",
+        "6 ones become 6 tens and 4 tenths become 4 ones: 64."
+      ]
+    },
+    "39": {
+      "skill": "Decimal multiplication",
+      "steps": [
+        "0.37 is 37 hundredths.",
+        "37 × 6 = 222 hundredths = 2.22."
+      ]
+    },
+    "40": {
+      "skill": "Decimal addition",
+      "steps": [
+        "Write 3.6 as 3.60 and line up decimal places.",
+        "2.75 + 3.60 = 6.35 miles."
+      ]
+    },
+    "41": {
+      "skill": "Decimal place value",
+      "steps": [
+        "The first place after the decimal is tenths.",
+        "Seven tenths is written 0.7."
+      ]
+    },
+    "42": {
+      "skill": "Decimal place value",
+      "steps": [
+        "Write the choices with equal places: 4.090, 4.900, 4.190, 4.099.",
+        "All have 4 ones; 9 tenths is largest, so 4.9 wins."
+      ]
+    },
+    "43": {
+      "skill": "Decimal place value",
+      "steps": [
+        "The hundredths digit is 4 and the next digit is 6.",
+        "Because 6 ≥ 5, increase the hundredths to 5: 18.75."
+      ]
+    },
+    "44": {
+      "skill": "Decimal multiplication",
+      "steps": [
+        "Multiply the price by four notebooks.",
+        "$2.45 × 4 = $8.00 + $1.80 = $9.80."
+      ]
+    },
+    "45": {
+      "skill": "Decimal subtraction",
+      "steps": [
+        "Start with 5.00 liters and subtract 1.86.",
+        "5.00 − 1.00 = 4.00; − 0.86 = 3.14 liters."
+      ]
+    },
+    "46": {
+      "skill": "Area",
+      "steps": [
+        "Area of a rectangle is length × width.",
+        "12 × 7 = 84 square centimeters."
+      ]
+    },
+    "47": {
+      "skill": "Perimeter",
+      "steps": [
+        "Perimeter is 2 × (length + width), so length + width = 30 ÷ 2 = 15.",
+        "Width = 15 − 9 = 6 meters."
+      ]
+    },
+    "48": {
+      "skill": "Volume",
+      "steps": [
+        "Volume is length × width × height.",
+        "5 × 3 = 15 per layer; 15 × 4 = 60 cubic units."
+      ]
+    },
+    "49": {
+      "skill": "Volume",
+      "steps": [
+        "Volume measures three-dimensional space, so use cubic units.",
+        "A room is large enough that cubic meters are appropriate."
+      ]
+    },
+    "50": {
+      "skill": "Geometry",
+      "steps": [
+        "A right angle is 90° and a straight angle is 180°.",
+        "125° is between them, so it is obtuse."
+      ]
+    },
+    "51": {
+      "skill": "Geometry",
+      "steps": [
+        "A rectangle guarantees four right angles; a rhombus guarantees four equal sides.",
+        "A square guarantees both properties."
+      ]
+    },
+    "52": {
+      "skill": "Geometry",
+      "steps": [
+        "Both points have x = 2, so measure the vertical difference.",
+        "9 − 5 = 4 units."
+      ]
+    },
+    "53": {
+      "skill": "Measurement",
+      "steps": [
+        "One foot is 12 inches.",
+        "3 × 12 = 36 inches."
+      ]
+    },
+    "54": {
+      "skill": "Data interpretation",
+      "steps": [
+        "Ben read 9 and Cara read 5.",
+        "How many more means subtract: 9 − 5 = 4."
+      ]
+    },
+    "55": {
+      "skill": "Data interpretation",
+      "steps": [
+        "Mode means the value occurring most often.",
+        "6 occurs twice; each other number occurs once."
+      ]
+    },
+    "56": {
+      "skill": "Probability",
+      "steps": [
+        "There are 3 + 5 + 2 = 10 marbles, including 2 green.",
+        "Probability = 2/10 = 1/5."
+      ]
+    },
+    "57": {
+      "skill": "Data interpretation",
+      "steps": [
+        "At least 3 includes 3 and anything greater.",
+        "Count 3, 3, 3, 4, 5: five measurements."
+      ]
+    },
+    "58": {
+      "skill": "Patterns and equations",
+      "steps": [
+        "Each time x rises by 1, y rises by 3.",
+        "3 × 1 + 1 = 4; the rule y = 3x + 1 also gives 7, 10, and 13."
+      ]
+    },
+    "59": {
+      "skill": "Data interpretation",
+      "steps": [
+        "Add the daily sales.",
+        "12 + 18 = 30; 15 + 25 = 40; 30 + 40 = 70."
+      ]
+    },
+    "60": {
+      "skill": "Measurement",
+      "steps": [
+        "Add 1 hour to 6:35 p.m. to reach 7:35.",
+        "Add 25 minutes to 8:00, then the remaining 23 minutes: 8:23 p.m."
+      ]
+    }
+  },
+  "science": {
+    "1": {
+      "skill": "Fair tests",
+      "steps": [
+        "Identify the cause being tested: sunlight.",
+        "Change only the amount of sunlight while keeping other growing conditions alike."
+      ]
+    },
+    "2": {
+      "skill": "Fair tests",
+      "steps": [
+        "A single result might reflect a mistake or chance.",
+        "Repeating trials checks whether the result is consistent and more reliable."
+      ]
+    },
+    "3": {
+      "skill": "Fair tests",
+      "steps": [
+        "Volume is the amount of space the water occupies.",
+        "A graduated cylinder has marked volume units for reading liquid amounts."
+      ]
+    },
+    "4": {
+      "skill": "Fair tests",
+      "steps": [
+        "An observation is something measured or directly noticed.",
+        "Growing 2 cm is a measured result, rather than a prediction or explanation."
+      ]
+    },
+    "5": {
+      "skill": "Fair tests",
+      "steps": [
+        "Time changes in a sequence from day to day.",
+        "A line graph connects the temperatures to show that trend."
+      ]
+    },
+    "6": {
+      "skill": "Fair tests",
+      "steps": [
+        "Different methods or measurements can produce different results.",
+        "Compare those first before deciding what the experiment shows."
+      ]
+    },
+    "7": {
+      "skill": "Fair tests",
+      "steps": [
+        "A hypothesis makes a prediction that measurements can check.",
+        "Light amount and plant height over two weeks can both be measured."
+      ]
+    },
+    "8": {
+      "skill": "Plant structures",
+      "steps": [
+        "Water enters through the roots and must move upward.",
+        "The stem contains tissue that carries water toward the leaves."
+      ]
+    },
+    "9": {
+      "skill": "Plant structures",
+      "steps": [
+        "Flowers contain reproductive structures.",
+        "They help plants make seeds, often after pollination."
+      ]
+    },
+    "10": {
+      "skill": "Food chains",
+      "steps": [
+        "A producer makes its own food using an energy source.",
+        "Grass uses sunlight to make food through photosynthesis."
+      ]
+    },
+    "11": {
+      "skill": "Food chains",
+      "steps": [
+        "Follow the chain from grasshopper to frog.",
+        "Frogs eat grasshoppers, so fewer grasshoppers means less frog food."
+      ]
+    },
+    "12": {
+      "skill": "Food chains",
+      "steps": [
+        "Dead organisms contain nutrients.",
+        "Decomposers break them down and return nutrients for reuse."
+      ]
+    },
+    "13": {
+      "skill": "Life science",
+      "steps": [
+        "Inherited traits come through biological parents.",
+        "Natural hair texture is inherited; practiced skills are learned."
+      ]
+    },
+    "14": {
+      "skill": "Life science",
+      "steps": [
+        "Arctic habitats are cold.",
+        "Thick fur traps insulating air and reduces loss of body heat."
+      ]
+    },
+    "15": {
+      "skill": "Life science",
+      "steps": [
+        "Breathing brings air into the lungs.",
+        "The respiratory system transfers oxygen from that air into the body."
+      ]
+    },
+    "16": {
+      "skill": "Life science",
+      "steps": [
+        "Food must be broken into smaller, usable substances.",
+        "That breakdown and nutrient absorption are digestive functions."
+      ]
+    },
+    "17": {
+      "skill": "Life science",
+      "steps": [
+        "Seasons change temperature and food availability.",
+        "A bird migrating south in autumn changes its behavior with the season."
+      ]
+    },
+    "18": {
+      "skill": "States of matter",
+      "steps": [
+        "Compare solids, liquids, and gases.",
+        "A solid keeps both its shape and volume under ordinary conditions."
+      ]
+    },
+    "19": {
+      "skill": "States of matter",
+      "steps": [
+        "Ice is solid water.",
+        "Melting makes liquid water, so the change is solid to liquid."
+      ]
+    },
+    "20": {
+      "skill": "States of matter",
+      "steps": [
+        "A reversible change can be undone.",
+        "Frozen water can melt back into liquid water."
+      ]
+    },
+    "21": {
+      "skill": "Heat transfer",
+      "steps": [
+        "Both spoons can be at the same temperature.",
+        "Metal transfers heat out of your warmer hand faster, making it feel colder."
+      ]
+    },
+    "22": {
+      "skill": "Electricity",
+      "steps": [
+        "A conductor allows electric charge to flow easily.",
+        "Copper is a metal commonly used for conducting wire."
+      ]
+    },
+    "23": {
+      "skill": "Electricity",
+      "steps": [
+        "Electric current needs a complete path.",
+        "A closed circuit provides that path through the bulb."
+      ]
+    },
+    "24": {
+      "skill": "Forces",
+      "steps": [
+        "Objects near Earth are attracted toward it.",
+        "This attractive force is gravity."
+      ]
+    },
+    "25": {
+      "skill": "Forces",
+      "steps": [
+        "Friction opposes relative sliding between surfaces.",
+        "It commonly slows a moving object and transfers energy into heat."
+      ]
+    },
+    "26": {
+      "skill": "Magnetism",
+      "steps": [
+        "Each current-carrying coil contributes a magnetic field.",
+        "With the same current, more turns around the nail strengthen the electromagnet."
+      ]
+    },
+    "27": {
+      "skill": "Sound and light",
+      "steps": [
+        "Sound begins when something moves back and forth.",
+        "Those vibrations create waves through a material such as air."
+      ]
+    },
+    "28": {
+      "skill": "Sound and light",
+      "steps": [
+        "A smooth shiny surface reflects light in an organized direction.",
+        "A mirror fits that description best."
+      ]
+    },
+    "29": {
+      "skill": "Earth and space",
+      "steps": [
+        "Earth turns so a location faces the Sun and then faces away.",
+        "This rotation produces the cycle of day and night."
+      ]
+    },
+    "30": {
+      "skill": "Earth and space",
+      "steps": [
+        "One orbit is one complete trip around the Sun.",
+        "Earth takes approximately one year to make that trip."
+      ]
+    },
+    "31": {
+      "skill": "Earth and space",
+      "steps": [
+        "The Sun usually lights half the Moon.",
+        "As the Moon orbits Earth, we see different amounts of that lit half."
+      ]
+    },
+    "32": {
+      "skill": "Water cycle",
+      "steps": [
+        "Liquid water can gain enough energy to enter the air as gas.",
+        "That liquid-to-gas process is evaporation."
+      ]
+    },
+    "33": {
+      "skill": "Water cycle",
+      "steps": [
+        "Cooling water vapor can form tiny liquid droplets.",
+        "That change is condensation and can form clouds."
+      ]
+    },
+    "34": {
+      "skill": "Weather",
+      "steps": [
+        "Temperature tells how warm or cold the air is.",
+        "A thermometer measures temperature."
+      ]
+    },
+    "35": {
+      "skill": "Earth materials",
+      "steps": [
+        "Sediment settles in layers.",
+        "Pressure and natural cement can bind those layers into sedimentary rock."
+      ]
+    },
+    "36": {
+      "skill": "Earth materials",
+      "steps": [
+        "Moving water, wind, or ice can carry rock material away.",
+        "This removal is erosion; weathering is the related breakdown of rock in place."
+      ]
+    },
+    "37": {
+      "skill": "Earth materials",
+      "steps": [
+        "Fossils are preserved remains or traces of past life.",
+        "They give evidence of ancient organisms and their environments."
+      ]
+    }
+  },
+  "social-studies": {
+    "1": {
+      "skill": "Map reading",
+      "steps": [
+        "Map symbols stand for real features.",
+        "The legend explains what each symbol means."
+      ]
+    },
+    "2": {
+      "skill": "Map reading",
+      "steps": [
+        "A compass rose labels north, south, east, and west.",
+        "These labels show directions on a map."
+      ]
+    },
+    "3": {
+      "skill": "Map reading",
+      "steps": [
+        "The Equator is 0° latitude.",
+        "Latitude describes how far north or south a location is in degrees."
+      ]
+    },
+    "4": {
+      "skill": "Geography",
+      "steps": [
+        "Look for both a flat top and high elevation above nearby land.",
+        "Those features describe a plateau."
+      ]
+    },
+    "5": {
+      "skill": "Geography",
+      "steps": [
+        "People and businesses need water and ways to move goods.",
+        "Rivers provide water and transportation routes that support settlement and trade."
+      ]
+    },
+    "6": {
+      "skill": "Resources",
+      "steps": [
+        "Renewable resources are replenished naturally.",
+        "Wind is renewed by atmospheric processes rather than used up like fossil fuel."
+      ]
+    },
+    "7": {
+      "skill": "Geography",
+      "steps": [
+        "Very little precipitation limits plant growth.",
+        "Those dry conditions describe a desert."
+      ]
+    },
+    "8": {
+      "skill": "Map scale",
+      "steps": [
+        "A scale compares a map length with a real-world length.",
+        "Use it to convert a measured map distance into actual distance."
+      ]
+    },
+    "9": {
+      "skill": "Geography",
+      "steps": [
+        "Adapting means adjusting to local conditions.",
+        "Raising houses on stilts helps people live with floodwater."
+      ]
+    },
+    "10": {
+      "skill": "Map reading",
+      "steps": [
+        "Density describes how many people live in an area.",
+        "A population density map shows concentrations of people."
+      ]
+    },
+    "11": {
+      "skill": "History",
+      "steps": [
+        "Tenochtitlan was the capital of the Aztec Empire.",
+        "Its location was in what is now Mexico City."
+      ]
+    },
+    "12": {
+      "skill": "History",
+      "steps": [
+        "Farming requires water and productive soil.",
+        "River valleys supplied water and often fertile soil for early settlements."
+      ]
+    },
+    "13": {
+      "skill": "History",
+      "steps": [
+        "Renaissance means rebirth.",
+        "The period renewed interest in classical learning and supported art and science."
+      ]
+    },
+    "14": {
+      "skill": "History",
+      "steps": [
+        "Printing could make many copies of a text.",
+        "The printing press spread written ideas faster than copying by hand."
+      ]
+    },
+    "15": {
+      "skill": "History",
+      "steps": [
+        "European merchants wanted access to valuable goods.",
+        "Explorers sought new ocean trade routes."
+      ]
+    },
+    "16": {
+      "skill": "History",
+      "steps": [
+        "The exchange connected the Americas with the Eastern Hemisphere.",
+        "Crops, animals, and diseases moved between them."
+      ]
+    },
+    "17": {
+      "skill": "History",
+      "steps": [
+        "Colonists were taxed by Parliament.",
+        "They objected that they had no elected representatives there."
+      ]
+    },
+    "18": {
+      "skill": "History",
+      "steps": [
+        "The Declaration discusses rights and consent of the governed.",
+        "Government authority should come from the people it governs."
+      ]
+    },
+    "19": {
+      "skill": "History",
+      "steps": [
+        "The Articles of Confederation created a weak national government.",
+        "The convention met to address those weaknesses and produced a new Constitution."
+      ]
+    },
+    "20": {
+      "skill": "History",
+      "steps": [
+        "The purchase added a vast territory west of the Mississippi.",
+        "It greatly expanded the country's land area."
+      ]
+    },
+    "21": {
+      "skill": "Branches of government",
+      "steps": [
+        "Congress is the federal legislative branch.",
+        "Its role includes making laws."
+      ]
+    },
+    "22": {
+      "skill": "Branches of government",
+      "steps": [
+        "Federal courts belong to the judicial branch.",
+        "They interpret and apply laws in cases."
+      ]
+    },
+    "23": {
+      "skill": "Branches of government",
+      "steps": [
+        "Each branch has powers that limit the others.",
+        "These checks help prevent power from concentrating in one branch."
+      ]
+    },
+    "24": {
+      "skill": "Civics",
+      "steps": [
+        "Rights are freedoms; responsibilities are duties.",
+        "Obeying laws is a civic responsibility."
+      ]
+    },
+    "25": {
+      "skill": "Civics",
+      "steps": [
+        "The First Amendment protects several freedoms of expression and belief.",
+        "Freedom of speech is one of them."
+      ]
+    },
+    "26": {
+      "skill": "Civics",
+      "steps": [
+        "Local needs include roads and emergency services.",
+        "Local governments organize and provide many of these services."
+      ]
+    },
+    "27": {
+      "skill": "Civics",
+      "steps": [
+        "Voters express their choices on a ballot.",
+        "Those choices help select leaders or decide public issues."
+      ]
+    },
+    "28": {
+      "skill": "Civics",
+      "steps": [
+        "A constitution defines government structure and basic authority.",
+        "It is a basic governing plan and set of rules."
+      ]
+    },
+    "29": {
+      "skill": "Civics",
+      "steps": [
+        "A mayor is a municipal office.",
+        "Municipal government means city or town government."
+      ]
+    },
+    "30": {
+      "skill": "Economics",
+      "steps": [
+        "Production creates goods or supplies services.",
+        "A producer is the person or business doing that work."
+      ]
+    },
+    "31": {
+      "skill": "Economics",
+      "steps": [
+        "Consumption means using goods or services.",
+        "A consumer buys or uses them."
+      ]
+    },
+    "32": {
+      "skill": "Economics",
+      "steps": [
+        "A good is a physical product; a service is work done for someone.",
+        "A haircut is work provided by a barber or stylist."
+      ]
+    },
+    "33": {
+      "skill": "Economics",
+      "steps": [
+        "Resources cannot meet every possible want.",
+        "That limited availability compared with wants is scarcity."
+      ]
+    },
+    "34": {
+      "skill": "Economics",
+      "steps": [
+        "More buyers want the same available quantity.",
+        "The increased competition to buy tends to raise price."
+      ]
+    },
+    "35": {
+      "skill": "Economics",
+      "steps": [
+        "Saving sets money aside instead of spending it now.",
+        "The money can help meet future needs or goals."
+      ]
+    },
+    "36": {
+      "skill": "Economics",
+      "steps": [
+        "Income is money coming in; spending is money going out.",
+        "A budget plans how those amounts will be managed."
+      ]
+    },
+    "37": {
+      "skill": "Economics",
+      "steps": [
+        "Regions differ in resources and production strengths.",
+        "Trade can give each access to goods that others produce more efficiently."
+      ]
+    }
+  },
+  "spelling": {
+    "1": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "After c, this word uses ei.",
+        "Compare recieve with the correct spelling receive. Select the misspelled version."
+      ]
+    },
+    "2": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Double the final r before adding ed to occur.",
+        "Compare occured with the correct spelling occurred. Select the misspelled version."
+      ]
+    },
+    "3": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Check each word: calendar, grammar, library, address.",
+        "All four spellings are correct, so select No mistakes."
+      ]
+    },
+    "4": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "The suffix ful has one l.",
+        "Compare carefull with the correct spelling careful. Select the misspelled version."
+      ]
+    },
+    "5": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Double the final p before ing in stop.",
+        "Compare stoping with the correct spelling stopping. Select the misspelled version."
+      ]
+    },
+    "6": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Drop the e in true before ly.",
+        "Compare truely with the correct spelling truly. Select the misspelled version."
+      ]
+    },
+    "7": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Drop the silent e from argue before ment.",
+        "Compare arguement with the correct spelling argument. Select the misspelled version."
+      ]
+    },
+    "8": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Check each word: probably, different, interesting, unusual.",
+        "All four spellings are correct, so select No mistakes."
+      ]
+    },
+    "9": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Keep the n in environ before ment.",
+        "Compare enviroment with the correct spelling environment. Select the misspelled version."
+      ]
+    },
+    "10": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Occasion has double c and one s.",
+        "Compare ocassion with the correct spelling occasion. Select the misspelled version."
+      ]
+    },
+    "11": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Knife begins with a silent k.",
+        "Compare nife with the correct spelling knife. Select the misspelled version."
+      ]
+    },
+    "12": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Height uses ei, not ie.",
+        "Compare hieght with the correct spelling height. Select the misspelled version."
+      ]
+    },
+    "13": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "The ending is ician.",
+        "Compare physican with the correct spelling physician. Select the misspelled version."
+      ]
+    },
+    "14": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Change consonant + y to ies for this plural.",
+        "Compare familys with the correct spelling families. Select the misspelled version."
+      ]
+    },
+    "15": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Check each word: wolves, knives, shelves, roofs.",
+        "All four spellings are correct, so select No mistakes."
+      ]
+    },
+    "16": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Check each word: quiet, quite, quit, question.",
+        "All four spellings are correct, so select No mistakes."
+      ]
+    },
+    "17": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "There is no extra s after x.",
+        "Compare exsist with the correct spelling exist. Select the misspelled version."
+      ]
+    },
+    "18": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "The ending is icle, not ical.",
+        "Compare vehical with the correct spelling vehicle. Select the misspelled version."
+      ]
+    },
+    "19": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Keep busi at the start of business.",
+        "Compare buisness with the correct spelling business. Select the misspelled version."
+      ]
+    },
+    "20": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Accomplish has double c.",
+        "Compare acomplish with the correct spelling accomplish. Select the misspelled version."
+      ]
+    },
+    "21": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Friend has ie, not ei.",
+        "Compare freind with the correct spelling friend. Select the misspelled version."
+      ]
+    },
+    "22": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Check each word: surprise, promise, exercise, practice.",
+        "All four spellings are correct, so select No mistakes."
+      ]
+    },
+    "23": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Keep the e in hope before less.",
+        "Compare hopless with the correct spelling hopeless. Select the misspelled version."
+      ]
+    },
+    "24": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Double the n before er.",
+        "Compare runer with the correct spelling runner. Select the misspelled version."
+      ]
+    },
+    "25": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Add ly to real: really.",
+        "Compare realey with the correct spelling really. Select the misspelled version."
+      ]
+    },
+    "26": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Check each word: except, accept, effect, affect.",
+        "All four spellings are correct, so select No mistakes."
+      ]
+    },
+    "27": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "February keeps an r after Feb.",
+        "Compare Febuary with the correct spelling February. Select the misspelled version."
+      ]
+    },
+    "28": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Check each word: mountain, fountain, certain, curtain.",
+        "All four spellings are correct, so select No mistakes."
+      ]
+    },
+    "29": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "Drop the silent e from argue before ment.",
+        "Compare arguement with the correct spelling argument. Select the misspelled version."
+      ]
+    },
+    "30": {
+      "skill": "Spelling patterns",
+      "steps": [
+        "The ending is ent, not ant.",
+        "Compare independant with the correct spelling independent. Select the misspelled version."
+      ]
+    }
+  },
+  "capitalization": {
+    "1": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "Grand Canyon is the name of a specific landmark.",
+        "Capitalize both words in line B: Grand Canyon."
+      ]
+    },
+    "2": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "Denver is a city's proper name.",
+        "Capitalize Denver in line B."
+      ]
+    },
+    "3": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "Charlotte's Web is a book title, and March is a month.",
+        "Both are correctly capitalized; there is no error."
+      ]
+    },
+    "4": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "Days of the week are proper names.",
+        "Capitalize Monday in line A."
+      ]
+    },
+    "5": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "River is part of this river's full name.",
+        "Write Mississippi River in line B."
+      ]
+    },
+    "6": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "After my, mom is a common noun rather than a name.",
+        "Write My mom in line A; the later Mom used as a name can stay capitalized."
+      ]
+    },
+    "7": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "A title used generally without a person's name is normally lowercase.",
+        "Write The president in line A."
+      ]
+    },
+    "8": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "Holiday names use capitals.",
+        "Write Independence Day in line B."
+      ]
+    },
+    "9": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "Both words belong to the ocean's proper name.",
+        "Write Pacific Ocean in line A."
+      ]
+    },
+    "10": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "The Secret Door is a title and Friday is a day.",
+        "The capitalization shown is correct."
+      ]
+    },
+    "11": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "A general school subject is lowercase unless it is a language or named course.",
+        "Write history class in line A."
+      ]
+    },
+    "12": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "Hospital belongs to this institution's proper name.",
+        "Write Mercy Hospital in line B."
+      ]
+    },
+    "13": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "North Star is the conventional proper name of this star.",
+        "Capitalize both words in line A; a general direction north stays lowercase."
+      ]
+    },
+    "14": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "Languages are capitalized.",
+        "Write Spanish in line B."
+      ]
+    },
+    "15": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "West describes a direction, not a named region.",
+        "Kansas and Colorado are proper names; the capitalization is correct."
+      ]
+    },
+    "16": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "Both words belong to the historical event's name.",
+        "Write Civil War in line A."
+      ]
+    },
+    "17": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "Uncle directly precedes David as a family title.",
+        "Canada is also a proper name, so no correction is needed."
+      ]
+    },
+    "18": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "The first word of a title is capitalized even if it is an article.",
+        "Write A Stormy Night in line B."
+      ]
+    },
+    "19": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "Senator is used generally, while Governor directly precedes Kim.",
+        "That capitalization is correct; state capitol is a general building description."
+      ]
+    },
+    "20": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "Winter Olympics is the name of an event.",
+        "Capitalize both words in line B."
+      ]
+    },
+    "21": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "Months are capitalized.",
+        "Write October in line B."
+      ]
+    },
+    "22": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "States is part of the country's name.",
+        "Write United States in line A."
+      ]
+    },
+    "23": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "Yellowstone National Park is an official place name.",
+        "Summer is a season and stays lowercase; there is no error."
+      ]
+    },
+    "24": {
+      "skill": "Capitalization rules",
+      "steps": [
+        "The quotation starts a complete spoken sentence.",
+        "Capitalize Did in line B."
+      ]
+    }
+  },
+  "punctuation": {
+    "1": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "This item uses a comma after its opening time phrase.",
+        "Write After lunch, before the main clause; short introductory phrases can sometimes omit this comma in other styles."
+      ]
+    },
+    "2": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "The sentence lists pencils, paper, and a ruler.",
+        "The commas correctly separate the three items."
+      ]
+    },
+    "3": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "The quoted request has a comma inside its closing quotation mark.",
+        "The sentence then identifies the speaker and ends with a period; it is correct."
+      ]
+    },
+    "4": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "The leash belongs to one dog.",
+        "Dog's correctly uses an apostrophe before s for singular possession."
+      ]
+    },
+    "5": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "A city and state are separated with a comma.",
+        "The keyed line A needs Boston,; in a full correction, also write Massachusetts, before during."
+      ]
+    },
+    "6": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "The colors form a three-item list.",
+        "Separate them with commas: blue, green, and silver."
+      ]
+    },
+    "7": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "Did you remember introduces a direct question.",
+        "Replace the period after book with a question mark in line C."
+      ]
+    },
+    "8": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "Two complete thoughts are linked by however.",
+        "A semicolon before however and a comma after it are correctly used."
+      ]
+    },
+    "9": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "A month-day-year date needs a comma after the day.",
+        "Write April 15, 2026, in line A."
+      ]
+    },
+    "10": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "The uniforms belong to multiple players.",
+        "Write players' uniforms in line A, with the apostrophe after the plural s."
+      ]
+    },
+    "11": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "But joins two complete clauses.",
+        "The comma before but is correct."
+      ]
+    },
+    "12": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "The sentence starts with a dependent clause beginning Before.",
+        "Add a comma after began in line A before the main clause."
+      ]
+    },
+    "13": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "The spoken words end with an exclamation mark inside quotation marks.",
+        "The lowercase speaker tag follows correctly; no change is needed."
+      ]
+    },
+    "14": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "The sign's exact words need quotation marks.",
+        "The keyed line A should introduce the quotation: The sign read, followed by opening quotation marks; close them after Wet Paint!."
+      ]
+    },
+    "15": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "Apples and oranges are separate items in a longer list.",
+        "Line A needs apples, oranges, before the list continues."
+      ]
+    },
+    "16": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "Which was new adds extra, nonessential information.",
+        "The pair of commas correctly sets that phrase apart."
+      ]
+    },
+    "17": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "The backpack belongs to Jamal.",
+        "Write Jamal's backpack in line A."
+      ]
+    },
+    "18": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "The activities form a list.",
+        "Write hiking, swimming, or in line B to separate the activities."
+      ]
+    },
+    "19": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "7:30 correctly separates hours and minutes.",
+        "a.m. is a punctuated abbreviation; the sentence needs no correction."
+      ]
+    },
+    "20": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "Because it was raining is an introductory dependent clause.",
+        "The comma after raining correctly separates it from the main clause."
+      ]
+    },
+    "21": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "A speaker tag introduces the exact spoken question.",
+        "Add a comma after asked in line A before the quotation."
+      ]
+    },
+    "22": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "The colon introduces the list after a complete clause.",
+        "Line B needs commas between items: glue, scissors, and."
+      ]
+    },
+    "23": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "Two complete sentences run together without a joining mark.",
+        "Add a semicolon after soccer in line A, or a period and capitalize My."
+      ]
+    },
+    "24": {
+      "skill": "Punctuation rules",
+      "steps": [
+        "Wow is separated from the rest of the sentence by a comma.",
+        "The exclamation mark fits the expression of surprise; no error is needed."
+      ]
+    }
+  },
+  "computation": {
+    "1": {
+      "skill": "Whole-number addition",
+      "steps": [
+        "Split 2,945 into 2,000 + 900 + 40 + 5.",
+        "4,786 → 6,786 → 7,686 → 7,726 → 7,731."
+      ]
+    },
+    "2": {
+      "skill": "Whole-number subtraction",
+      "steps": [
+        "Subtract 7,000, then 468.",
+        "12,000 − 7,000 = 5,000; 5,000 − 468 = 4,532."
+      ]
+    },
+    "3": {
+      "skill": "Multiplication",
+      "steps": [
+        "Split 384 into 300 + 80 + 4.",
+        "Multiply by 7: 2,100 + 560 + 28 = 2,688."
+      ]
+    },
+    "4": {
+      "skill": "Multiplication",
+      "steps": [
+        "Split 35 into 30 + 5.",
+        "246 × 30 = 7,380; 246 × 5 = 1,230; sum 8,610."
+      ]
+    },
+    "5": {
+      "skill": "Division",
+      "steps": [
+        "24 × 200 = 4,800, leaving 2,112.",
+        "24 × 80 = 1,920, leaving 192; 24 × 8 = 192. Total 288."
+      ]
+    },
+    "6": {
+      "skill": "Division",
+      "steps": [
+        "15 × 300 = 4,500, leaving 1,275.",
+        "15 × 80 = 1,200, leaving 75; 15 × 5 = 75. Total 385."
+      ]
+    },
+    "7": {
+      "skill": "Whole-number addition",
+      "steps": [
+        "Add 8,000 to get 99,304.",
+        "Add the remaining 796: 99,304 + 696 = 100,000; + 100 = 100,100."
+      ]
+    },
+    "8": {
+      "skill": "Whole-number subtraction",
+      "steps": [
+        "Subtract 26,000 from 50,000 to get 24,000.",
+        "Subtract another 789 to get 23,211."
+      ]
+    },
+    "9": {
+      "skill": "Decimal addition",
+      "steps": [
+        "Write 7.6 as 7.60 and line up decimal places.",
+        "4.85 + 7.60 = 12.45."
+      ]
+    },
+    "10": {
+      "skill": "Decimal subtraction",
+      "steps": [
+        "Write 18.2 as 18.20.",
+        "18.20 − 9.00 = 9.20; − 0.74 = 8.46."
+      ]
+    },
+    "11": {
+      "skill": "Decimal multiplication",
+      "steps": [
+        "3.6 is 36 tenths.",
+        "36 × 8 = 288 tenths = 28.8."
+      ]
+    },
+    "12": {
+      "skill": "Decimal multiplication",
+      "steps": [
+        "0.48 is 48 hundredths.",
+        "48 × 5 = 240 hundredths = 2.40 = 2.4."
+      ]
+    },
+    "13": {
+      "skill": "Decimal addition",
+      "steps": [
+        "Write 7.25 as 7.250 to line up thousandths.",
+        "7.250 + 0.809 = 8.059."
+      ]
+    },
+    "14": {
+      "skill": "Decimal subtraction",
+      "steps": [
+        "Write 20 as 20.000.",
+        "20.000 − 6.000 = 14.000; − 0.875 = 13.125."
+      ]
+    },
+    "15": {
+      "skill": "Fraction addition",
+      "steps": [
+        "The denominators already match.",
+        "Add numerators: (2 + 1)/5 = 3/5."
+      ]
+    },
+    "16": {
+      "skill": "Fraction subtraction",
+      "steps": [
+        "Subtract eighths: (7 − 3)/8 = 4/8.",
+        "Simplify 4/8 by dividing both parts by 4 to get 1/2."
+      ]
+    },
+    "17": {
+      "skill": "Fraction addition",
+      "steps": [
+        "Rename 2/3 as 4/6.",
+        "4/6 + 1/6 = 5/6."
+      ]
+    },
+    "18": {
+      "skill": "Fraction subtraction",
+      "steps": [
+        "Use twelfths: 5/6 = 10/12 and 1/4 = 3/12.",
+        "10/12 − 3/12 = 7/12."
+      ]
+    },
+    "19": {
+      "skill": "Fraction multiplication",
+      "steps": [
+        "Three groups of four fifths make twelve fifths.",
+        "3 × 4/5 = (3 × 4)/5 = 12/5."
+      ]
+    },
+    "20": {
+      "skill": "Fraction multiplication",
+      "steps": [
+        "Five groups of two sevenths make ten sevenths.",
+        "5 × 2/7 = (5 × 2)/7 = 10/7."
+      ]
+    },
+    "21": {
+      "skill": "Fraction addition",
+      "steps": [
+        "Rename 2 1/2 as 2 2/4.",
+        "1 3/4 + 2 2/4 = 3 5/4 = 4 1/4."
+      ]
+    },
+    "22": {
+      "skill": "Fraction subtraction",
+      "steps": [
+        "6 1/3 = 6 2/6 = 5 8/6.",
+        "5 8/6 − 2 5/6 = 3 3/6 = 3 1/2."
+      ]
+    },
+    "23": {
+      "skill": "Order of operations",
+      "steps": [
+        "Evaluate the parentheses first: 18 + 6 = 24.",
+        "Then 24 ÷ 3 = 8."
+      ]
+    },
+    "24": {
+      "skill": "Order of operations",
+      "steps": [
+        "Multiply before adding: 5 × 4 = 20.",
+        "Then 7 + 20 = 27."
+      ]
+    },
+    "25": {
+      "skill": "Order of operations",
+      "steps": [
+        "Evaluate the parentheses first: 12 − 7 = 5.",
+        "Then 9 × 5 = 45."
+      ]
+    },
+    "26": {
+      "skill": "Division",
+      "steps": [
+        "9 × 300 = 2,700, leaving 756.",
+        "9 × 80 = 720, leaving 36; 9 × 4 = 36. Total 384."
+      ]
+    },
+    "27": {
+      "skill": "Multiplication",
+      "steps": [
+        "Split 16 into 8 × 2.",
+        "625 × 8 = 5,000; double that to get 10,000."
+      ]
+    },
+    "28": {
+      "skill": "Decimal division",
+      "steps": [
+        "14.4 is 144 tenths.",
+        "144 ÷ 6 = 24 tenths = 2.4."
+      ]
+    },
+    "29": {
+      "skill": "Fraction addition",
+      "steps": [
+        "Rename 4 2/5 as 4 4/10.",
+        "4 4/10 + 3 3/10 = 7 7/10."
+      ]
+    }
+  }
+}

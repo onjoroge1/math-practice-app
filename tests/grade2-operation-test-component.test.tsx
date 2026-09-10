@@ -37,6 +37,8 @@ describe("Grade2OperationTest", () => {
     fireEvent.click(screen.getByRole("button", { name: /submit answers/i }))
 
     expect(screen.getByText("1 / 50")).toBeInTheDocument()
+    expect(screen.getAllByText("Show steps")).toHaveLength(50)
+    expect(screen.getByRole("region", { name: "Learn how to solve it" })).toBeInTheDocument()
     expect(screen.getByText("1 answered • 2% accuracy")).toBeInTheDocument()
     expect(mocks.saveDrillResult).toHaveBeenCalledWith(
       expect.objectContaining({ topic: "Grade 2 Addition Test", correct: 1, total: 50, answered: 1, accuracy: 2 }),

@@ -1,7 +1,7 @@
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import Grade5SocialStudiesTest from "@/components/grade5-social-studies-test"
-import { prepareSocialStudiesTestQuestions } from "@/lib/grade5-social-studies"
+import { prepareSocialStudiesQuestionsByIds, prepareSocialStudiesTestQuestions } from "@/lib/grade5-social-studies"
 import { getAllSocialStudiesProgress } from "@/lib/social-studies-progress"
 
 const mocks = vi.hoisted(() => ({
@@ -57,6 +57,37 @@ describe("Grade 5 Social Studies test runner", () => {
       expect.any(Number),
     )
     expect(mocks.trackDrillCompleted).toHaveBeenCalledTimes(1)
+  })
+
+  it("runs a 25-question random Chapter 9 attempt and resumes the same draw after a reload", async () => {
+    const first = render(<Grade5SocialStudiesTest testId="chapter-9" />)
+    expect(await screen.findByText(/picked at random from a bank of/i)).toBeInTheDocument()
+    fireEvent.click(screen.getByRole("button", { name: /Start practice test/i }))
+    expect(await screen.findByText("Question 1 of 25")).toBeInTheDocument()
+
+    const draft = JSON.parse(localStorage.getItem("social-studies:draft:v1:aden-row:chapter-9") || "null")
+    expect(draft.questionIds).toHaveLength(25)
+    const questions = prepareSocialStudiesQuestionsByIds("chapter-9", draft.questionIds, draft.seed)
+
+    const pick = () => screen.getAllByRole("button").filter((button) => button.hasAttribute("aria-pressed"))
+    fireEvent.click(pick()[questions[0].answer])
+    fireEvent.click(screen.getByRole("button", { name: /Next/i }))
+    expect(screen.getByRole("heading", { name: questions[1].prompt })).toBeInTheDocument()
+
+    // Leave and come back: the same questions, letters, and answers return.
+    first.unmount()
+    render(<Grade5SocialStudiesTest testId="chapter-9" />)
+    expect(await screen.findByText(/Continuing where you left off/i)).toBeInTheDocument()
+    expect(screen.getByRole("heading", { name: questions[1].prompt })).toBeInTheDocument()
+
+    for (let index = 1; index < questions.length; index += 1) {
+      fireEvent.click(pick()[questions[index].answer])
+      fireEvent.click(screen.getByRole("button", { name: index === questions.length - 1 ? "Submit test" : /Next/i }))
+    }
+
+    expect(await screen.findByText("100%")).toBeInTheDocument()
+    expect(screen.getByText("25 of 25 correct")).toBeInTheDocument()
+    expect(getAllSocialStudiesProgress("aden-row")["chapter-9"]).toMatchObject({ best: 100, attempts: 1 })
   })
 
   it("redirects a Grade 2 profile away from Aden's exam prep", async () => {

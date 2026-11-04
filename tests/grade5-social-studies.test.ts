@@ -2,7 +2,10 @@ import { beforeEach, describe, expect, it } from "vitest"
 import {
   SOCIAL_STUDIES_QUESTIONS,
   SOCIAL_STUDIES_TESTS,
+  drawSocialStudiesTestQuestions,
+  getSocialStudiesTest,
   getSocialStudiesTestQuestions,
+  prepareSocialStudiesQuestionsByIds,
   prepareSocialStudiesTestQuestions,
   scoreSocialStudiesTest,
 } from "@/lib/grade5-social-studies"
@@ -12,11 +15,15 @@ describe("Aden's Grade 5 Social Studies exam prep", () => {
   beforeEach(() => localStorage.clear())
 
   it("has a valid, unique, fully referenced question bank", () => {
-    expect(SOCIAL_STUDIES_QUESTIONS).toHaveLength(55)
-    expect(new Set(SOCIAL_STUDIES_QUESTIONS.map((question) => question.id)).size).toBe(55)
+    const byUnit = (unit: string) => SOCIAL_STUDIES_QUESTIONS.filter((question) => question.unit === unit).length
+    expect(byUnit("chapter-7")).toBe(25)
+    expect(byUnit("chapter-8")).toBe(30)
+    expect(byUnit("chapter-9")).toBeGreaterThanOrEqual(150)
+    expect(new Set(SOCIAL_STUDIES_QUESTIONS.map((question) => question.id)).size).toBe(SOCIAL_STUDIES_QUESTIONS.length)
 
     for (const question of SOCIAL_STUDIES_QUESTIONS) {
       expect(question.choices).toHaveLength(4)
+      expect(new Set(question.choices).size).toBe(4)
       expect(question.answer).toBeGreaterThanOrEqual(0)
       expect(question.answer).toBeLessThan(4)
       expect(question.explanation.length).toBeGreaterThan(20)
@@ -37,6 +44,36 @@ describe("Aden's Grade 5 Social Studies exam prep", () => {
     prepared.forEach((question, index) => {
       expect(question.choices[question.answer]).toBe(original[index].choices[original[index].answer])
     })
+  })
+
+  it("draws 25 unique random Chapter 9 questions per attempt from the full bank", () => {
+    const test = getSocialStudiesTest("chapter-9")!
+    expect(test.drawCount).toBe(25)
+    expect(test.questionIds.length).toBeGreaterThanOrEqual(150)
+
+    const first = drawSocialStudiesTestQuestions("chapter-9")
+    const second = drawSocialStudiesTestQuestions("chapter-9")
+    expect(first).toHaveLength(25)
+    expect(new Set(first.map((question) => question.id)).size).toBe(25)
+    expect(first.every((question) => question.unit === "chapter-9")).toBe(true)
+    expect(first.map((question) => question.id)).not.toEqual(second.map((question) => question.id))
+
+    // Over many attempts, every question in the bank gets a turn.
+    const seen = new Set<string>()
+    for (let attempt = 0; attempt < 200; attempt += 1) drawSocialStudiesTestQuestions("chapter-9").forEach((question) => seen.add(question.id))
+    expect(seen.size).toBe(test.questionIds.length)
+  })
+
+  it("varies answer letters per attempt but restores a saved attempt exactly", () => {
+    const ids = getSocialStudiesTest("chapter-9")!.questionIds.slice(0, 40)
+    const original = getSocialStudiesTestQuestions("chapter-9").slice(0, 40)
+    const a = prepareSocialStudiesQuestionsByIds("chapter-9", ids, "seed-a")
+    const b = prepareSocialStudiesQuestionsByIds("chapter-9", ids, "seed-b")
+
+    expect(new Set(a.map((question) => question.answer)).size).toBe(4)
+    expect(a.map((question) => question.answer)).not.toEqual(b.map((question) => question.answer))
+    a.forEach((question, index) => expect(question.choices[question.answer]).toBe(original[index].choices[original[index].answer]))
+    expect(prepareSocialStudiesQuestionsByIds("chapter-9", ids, "seed-a")).toEqual(a)
   })
 
   it("scores a complete attempt", () => {

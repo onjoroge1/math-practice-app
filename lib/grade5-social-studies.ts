@@ -1,6 +1,8 @@
+import { EXAM_BANK_QUESTIONS, EXAM_BANK_TEST } from "@/lib/grade5-social-studies-exam-bank"
+
 export interface SocialStudiesQuestion {
   id: string
-  unit: "chapter-7" | "chapter-8"
+  unit: string
   skill: string
   prompt: string
   choices: readonly [string, string, string, string]
@@ -9,12 +11,14 @@ export interface SocialStudiesQuestion {
 }
 
 export interface SocialStudiesTest {
-  id: "chapter-7" | "chapter-8" | "wednesday-review"
+  id: string
   title: string
   shortTitle: string
   description: string
   icon: string
   questionIds: readonly string[]
+  /** When set, every attempt draws this many random questions from `questionIds`. */
+  drawCount?: number
 }
 
 const q = (
@@ -31,7 +35,7 @@ const q = (
  * Curated from Aden's uploaded Chapter 7 and Chapter 8 class materials.
  * Wording is original so the app teaches the facts without reproducing textbook pages.
  */
-export const SOCIAL_STUDIES_QUESTIONS: readonly SocialStudiesQuestion[] = [
+const CLASS_MATERIAL_QUESTIONS: readonly SocialStudiesQuestion[] = [
   q("c7-01", "chapter-7", "Railroads", "How did many people travel west over land in the 1840s?", ["In automobiles", "In wagons pulled by animals", "On airplanes", "On electric trains"], 1, "Many travelers went overland in wagons pulled by horses, mules, or oxen."),
   q("c7-02", "chapter-7", "Communication", "What did Samuel Morse's telegraph send over wires?", ["Electric signals", "Steam", "Printed newspapers", "Radio waves"], 0, "The telegraph sent electric signals. Morse code used patterns of dots and dashes for letters."),
   q("c7-03", "chapter-7", "Communication", "Why was the telegraph important in the 1800s?", ["It made crops grow faster", "It carried cattle", "It sent messages long distances in seconds", "It built railroad tracks"], 2, "The telegraph changed communication by sending news and messages much faster than mail."),
@@ -90,10 +94,16 @@ export const SOCIAL_STUDIES_QUESTIONS: readonly SocialStudiesQuestion[] = [
   q("c8-30", "chapter-8", "Reform", "What was a goal of the NAACP?", ["Equality for African Americans", "Building cattle trails", "Controlling the oil industry", "Running Ellis Island"], 0, "The NAACP organized to fight discrimination and promote equal rights for African Americans."),
 ]
 
+export const SOCIAL_STUDIES_QUESTIONS: readonly SocialStudiesQuestion[] = [
+  ...CLASS_MATERIAL_QUESTIONS,
+  ...EXAM_BANK_QUESTIONS,
+]
+
 const chapter7Ids = SOCIAL_STUDIES_QUESTIONS.filter((question) => question.unit === "chapter-7").map((question) => question.id)
 const chapter8Ids = SOCIAL_STUDIES_QUESTIONS.filter((question) => question.unit === "chapter-8").map((question) => question.id)
 
 export const SOCIAL_STUDIES_TESTS: readonly SocialStudiesTest[] = [
+  EXAM_BANK_TEST,
   {
     id: "chapter-7",
     title: "Chapter 7: Changes on the Plains",
@@ -112,7 +122,7 @@ export const SOCIAL_STUDIES_TESTS: readonly SocialStudiesTest[] = [
   },
   {
     id: "wednesday-review",
-    title: "Wednesday Exam Review",
+    title: "Chapters 7–8 Mixed Review",
     shortTitle: "Final Review",
     description: "A balanced 30-question practice exam mixing the most important facts from both chapters.",
     icon: "🎯",
@@ -140,14 +150,47 @@ function choiceRotation(questionId: string) {
   return [...questionId].reduce((sum, character) => sum + character.charCodeAt(0), 0) % 4
 }
 
+function prepareQuestion(testId: string, question: SocialStudiesQuestion, seed = ""): SocialStudiesQuestion {
+  const rotation = choiceRotation(`${testId}:${seed}:${question.id}`)
+  if (rotation === 0) return question
+  const choices = [...question.choices.slice(rotation), ...question.choices.slice(0, rotation)] as unknown as SocialStudiesQuestion["choices"]
+  return { ...question, choices, answer: (question.answer - rotation + 4) % 4 }
+}
+
 /** Rotate answer positions so a source-authored question bank cannot teach an A/B/C/D pattern. */
 export function prepareSocialStudiesTestQuestions(testId: string): SocialStudiesQuestion[] {
-  return getSocialStudiesTestQuestions(testId).map((question) => {
-    const rotation = choiceRotation(`${testId}:${question.id}`)
-    if (rotation === 0) return question
-    const choices = [...question.choices.slice(rotation), ...question.choices.slice(0, rotation)] as unknown as SocialStudiesQuestion["choices"]
-    return { ...question, choices, answer: (question.answer - rotation + 4) % 4 }
-  })
+  return getSocialStudiesTestQuestions(testId).map((question) => prepareQuestion(testId, question))
+}
+
+/**
+ * Rebuild an attempt from its question ids, in the given order. `seed` varies the answer-letter
+ * positions per attempt; pass the same seed to restore a saved attempt exactly.
+ */
+export function prepareSocialStudiesQuestionsByIds(testId: string, questionIds: readonly string[], seed = ""): SocialStudiesQuestion[] {
+  const test = getSocialStudiesTest(testId)
+  if (!test) return []
+  const allowed = new Set(test.questionIds)
+  return questionIds
+    .filter((id) => allowed.has(id))
+    .map((id) => questionById.get(id))
+    .filter((question): question is SocialStudiesQuestion => Boolean(question))
+    .map((question) => prepareQuestion(testId, question, seed))
+}
+
+/**
+ * Questions for a new attempt. Tests with `drawCount` get a fresh random sample
+ * (in random order) each time; fixed tests return their full list in order.
+ */
+export function drawSocialStudiesTestQuestions(testId: string, random: () => number = Math.random, seed = ""): SocialStudiesQuestion[] {
+  const test = getSocialStudiesTest(testId)
+  if (!test) return []
+  if (!test.drawCount) return prepareSocialStudiesTestQuestions(testId)
+  const pool = [...test.questionIds]
+  for (let i = pool.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(random() * (i + 1))
+    ;[pool[i], pool[j]] = [pool[j], pool[i]]
+  }
+  return prepareSocialStudiesQuestionsByIds(testId, pool.slice(0, test.drawCount), seed)
 }
 
 export function scoreSocialStudiesTest(questions: readonly SocialStudiesQuestion[], answers: Record<string, number>) {

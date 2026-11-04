@@ -249,9 +249,9 @@ export default function TopicSelectPage() {
                 <div className="flex items-center gap-4">
                   <div className="text-4xl flex-shrink-0">📚</div>
                   <div className="flex-1 min-w-0">
-                    <div className="mb-1 inline-flex rounded-full bg-white/20 px-2 py-0.5 text-[10px] font-black uppercase tracking-wide">New • Exam Wednesday</div>
+                    <div className="mb-1 inline-flex rounded-full bg-white/20 px-2 py-0.5 text-[10px] font-black uppercase tracking-wide">New • Chapter 9 Exam</div>
                     <h3 className="font-bold text-lg">Social Studies Exam Prep</h3>
-                    <p className="text-sm text-orange-50">Chapter 7, Chapter 8, and a mixed final review built from Aden&apos;s class materials</p>
+                    <p className="text-sm text-orange-50">Chapter 9 practice: Alaska &amp; Hawaii, the Spanish-American War, the Panama Canal, and World War I</p>
                   </div>
                   <ArrowRight className="w-6 h-6 flex-shrink-0" />
                 </div>

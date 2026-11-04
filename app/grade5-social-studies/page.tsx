@@ -41,9 +41,9 @@ export default function Grade5SocialStudiesPage() {
             <div className="text-7xl" aria-hidden="true">📚</div>
             <div>
               <p className="text-xs font-black uppercase tracking-[0.22em] text-amber-100">Aden • Grade 5</p>
-              <h1 className="mt-2 text-4xl font-black sm:text-5xl">Wednesday Social Studies Exam Prep</h1>
+              <h1 className="mt-2 text-4xl font-black sm:text-5xl">Chapter 9 Social Studies Exam Prep</h1>
               <p className="mt-3 max-w-3xl text-base font-medium text-orange-50 sm:text-lg">
-                Practice built directly from the Chapter 7 and Chapter 8 class materials. Every completed test saves Aden&apos;s best score and explains missed answers.
+                Practice built from Aden&apos;s Chapter 9 textbook pages, study guide, and review game. Each try draws 25 new random questions, saves Aden&apos;s best score, and explains every missed answer.
               </p>
             </div>
           </div>
@@ -56,16 +56,16 @@ export default function Grade5SocialStudiesPage() {
               <div>
                 <h2 id="study-plan-heading" className="text-xl font-black text-indigo-950">Simple study plan</h2>
                 <ol className="mt-3 grid gap-3 text-sm text-indigo-900 sm:grid-cols-3">
-                  <li className="rounded-2xl bg-white/80 p-4"><strong>1. Chapter 7:</strong> complete the test and read every missed explanation.</li>
-                  <li className="rounded-2xl bg-white/80 p-4"><strong>2. Chapter 8:</strong> aim for at least 80%, then retry the missed areas.</li>
-                  <li className="rounded-2xl bg-white/80 p-4"><strong>3. Final review:</strong> take the mixed test without notes before Wednesday.</li>
+                  <li className="rounded-2xl bg-white/80 p-4"><strong>1. First try:</strong> take the Chapter 9 test without notes and read every missed explanation.</li>
+                  <li className="rounded-2xl bg-white/80 p-4"><strong>2. Keep going:</strong> retake it. Each try picks 25 different questions from the full bank.</li>
+                  <li className="rounded-2xl bg-white/80 p-4"><strong>3. Exam ready:</strong> score 85% or better on three tries in a row.</li>
                 </ol>
               </div>
             </div>
           </Card>
         </section>
 
-        <section className="grid gap-5 md:grid-cols-3" aria-label="Social studies practice tests">
+        <section className="grid gap-5 md:grid-cols-2" aria-label="Social studies practice tests">
           {SOCIAL_STUDIES_TESTS.map((test) => {
             const testProgress = progress[test.id]
             return (
@@ -102,7 +102,7 @@ export default function Grade5SocialStudiesPage() {
             <div>
               <h2 className="text-xl font-black text-emerald-950">Aden&apos;s target</h2>
               <p className="mt-1 text-sm leading-relaxed text-emerald-900">
-                Aim for 80% or better on both chapter tests, then 85% or better on the mixed review. The goal is understanding—not memorizing the A/B/C/D position.
+                Aim for 85% or better on Chapter 9 several times in a row. The earlier Chapter 7 and 8 tests are still here for extra review. The goal is understanding, not memorizing the A/B/C/D position.
               </p>
             </div>
           </div>

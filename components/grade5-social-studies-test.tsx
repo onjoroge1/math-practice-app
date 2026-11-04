@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { ArrowLeft, ArrowRight, CheckCircle2, RotateCcw, Target, XCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -9,9 +9,11 @@ import { Progress } from "@/components/ui/progress"
 import { trackDrillCompleted, trackDrillStarted } from "@/lib/analytics"
 import { saveDrillResult } from "@/lib/drill-results"
 import {
+  drawSocialStudiesTestQuestions,
   getSocialStudiesTest,
-  prepareSocialStudiesTestQuestions,
+  prepareSocialStudiesQuestionsByIds,
   scoreSocialStudiesTest,
+  type SocialStudiesQuestion,
 } from "@/lib/grade5-social-studies"
 import { currentStudentContext } from "@/lib/iowa-progress"
 import { recordSocialStudiesAttempt } from "@/lib/social-studies-progress"
@@ -20,6 +22,8 @@ type Phase = "ready" | "running" | "results"
 
 interface SavedAttempt {
   questionIds: string[]
+  /** Answer-position seed for random-draw tests, so a resumed attempt shows the same letters. */
+  seed?: string
   answers: Record<string, number>
   index: number
   startedAt: number
@@ -40,7 +44,8 @@ function readDraft(studentId: string, testId: string): SavedAttempt | null {
 export default function Grade5SocialStudiesTest({ testId }: { testId: string }) {
   const router = useRouter()
   const test = getSocialStudiesTest(testId)
-  const questions = useMemo(() => prepareSocialStudiesTestQuestions(testId), [testId])
+  const [questions, setQuestions] = useState<SocialStudiesQuestion[]>(() => drawSocialStudiesTestQuestions(testId))
+  const seedRef = useRef("")
   const [ready, setReady] = useState(false)
   const [phase, setPhase] = useState<Phase>("ready")
   const [index, setIndex] = useState(0)
@@ -60,27 +65,32 @@ export default function Grade5SocialStudiesTest({ testId }: { testId: string }) 
 
     studentIdRef.current = student.id
     const draft = readDraft(student.id, testId)
-    const questionIds = questions.map((question) => question.id)
+    const draftQuestions = draft ? prepareSocialStudiesQuestionsByIds(testId, draft.questionIds, draft.seed ?? "") : []
+    const expectedCount = drawSocialStudiesTestQuestions(testId).length
     const canResume = Boolean(
       draft &&
-      draft.questionIds.length === questionIds.length &&
-      draft.questionIds.every((questionId, questionIndex) => questionId === questionIds[questionIndex]),
+      draftQuestions.length > 0 &&
+      draftQuestions.length === draft.questionIds.length &&
+      draftQuestions.length === expectedCount,
     )
 
     if (draft && canResume) {
+      seedRef.current = draft.seed ?? ""
+      setQuestions(draftQuestions)
       setAnswers(draft.answers)
-      setIndex(Math.min(Math.max(0, draft.index), Math.max(0, questions.length - 1)))
+      setIndex(Math.min(Math.max(0, draft.index), Math.max(0, draftQuestions.length - 1)))
       startedAtRef.current = draft.startedAt
       setPhase("running")
       setResumed(true)
     }
     setReady(true)
-  }, [questions, router, testId])
+  }, [router, testId])
 
   useEffect(() => {
     if (phase !== "running" || !studentIdRef.current) return
     const draft: SavedAttempt = {
       questionIds: questions.map((question) => question.id),
+      seed: seedRef.current,
       answers,
       index,
       startedAt: startedAtRef.current,
@@ -114,6 +124,10 @@ export default function Grade5SocialStudiesTest({ testId }: { testId: string }) 
   const reviewQuestions = showAllReview ? questions : missedQuestions
 
   function startTest() {
+    if (test?.drawCount) {
+      seedRef.current = Math.random().toString(36).slice(2)
+      setQuestions(drawSocialStudiesTestQuestions(testId, Math.random, seedRef.current))
+    }
     startedAtRef.current = Date.now()
     submittedRef.current = false
     setAnswers({})
@@ -132,7 +146,7 @@ export default function Grade5SocialStudiesTest({ testId }: { testId: string }) 
     saveDrillResult(
       {
         topic: `Social Studies: ${test!.shortTitle}`,
-        subject: "Grade 5 • Wednesday Exam Prep",
+        subject: "Grade 5 • Social Studies Exam Prep",
         correct: result.correct,
         total: questions.length,
         answered: result.answered,
@@ -169,7 +183,7 @@ export default function Grade5SocialStudiesTest({ testId }: { testId: string }) 
         <header className="rounded-3xl bg-gradient-to-r from-amber-500 to-orange-500 p-6 text-white shadow-lg sm:p-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-amber-100">Aden • Grade 5 • Wednesday exam prep</p>
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-amber-100">Aden • Grade 5 • Social studies exam prep</p>
               <h1 className="mt-2 text-3xl font-black sm:text-4xl">{test.icon} {test.title}</h1>
               <p className="mt-2 max-w-2xl text-sm font-medium text-orange-50">{test.description}</p>
             </div>
@@ -186,6 +200,11 @@ export default function Grade5SocialStudiesTest({ testId }: { testId: string }) 
             <p className="mx-auto mt-3 max-w-xl text-slate-600">
               Answer every question without notes first. After submitting, Aden will get a clear explanation for every missed answer.
             </p>
+            {test.drawCount && (
+              <p className="mx-auto mt-3 max-w-xl text-sm font-bold text-orange-700">
+                Questions are picked at random from a bank of {test.questionIds.length}, so every attempt is different. Take it several times!
+              </p>
+            )}
             <Button onClick={startTest} size="lg" className="mt-7 min-h-14 rounded-2xl bg-orange-500 px-8 text-lg font-black text-white hover:bg-orange-600">
               Start practice test <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
